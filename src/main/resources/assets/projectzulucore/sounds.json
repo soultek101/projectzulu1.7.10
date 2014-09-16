@@ -1,0 +1,3 @@
+{
+  "misc.summonwhispers": { "category": "ambient", "sounds": [{"name": "misc/summonwhispers","stream": true}] } 
+}

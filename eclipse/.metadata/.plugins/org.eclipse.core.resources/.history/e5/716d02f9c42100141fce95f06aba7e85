@@ -1,0 +1,130 @@
+package com.ngb.projectzulu.common.mobs.entityai;
+
+import java.util.Random;
+
+import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.Vec3;
+import com.ngb.projectzulu.common.mobs.entity.EntityGenericCreature;
+import net.minecraft.entity.ai.RandomPositionGenerator;
+import net.minecraft.util.MathHelper;
+
+public class EntityAIFlyingWander extends EntityAIBase{
+	private EntityGenericCreature entity;
+	private double xPosition;
+	private double yPosition;
+	private double zPosition;
+	private float speed;
+	private static Vec3 staticVector = Vec3.createVectorHelper(0.0D, 0.0D, 0.0D);
+
+	public EntityAIFlyingWander(EntityGenericCreature par1EntityCreature, float speed) {
+		this.entity = par1EntityCreature;
+		this.speed = speed;
+		this.setMutexBits(1);
+	}
+	
+    public static Vec3 flyRandomlyTowardHeightLevel(EntityGenericCreature par0EntityCreature, int par1, int par2, int heightLevel) {
+        return flyToRandomTargetBlockAtHeight(par0EntityCreature, par1, par2, (Vec3)null, heightLevel);
+    }
+	
+	private static Vec3 flyToRandomTargetBlockAtHeight(EntityGenericCreature entity, int par1, int par2, Vec3 par3Vec3, int heightLevel) {
+        Random var4 = entity.getRNG();
+        boolean var5 = false;
+        int var6 = 0;
+        int var7 = 0;
+        int var8 = 0;
+        float var9 = -99999.0F;
+        boolean var10;
+
+        if (entity.hasHome()) {
+            double var11 = (double)(entity.getHomePosition().getDistanceSquared(MathHelper.floor_double(entity.posX), MathHelper.floor_double(entity.posY), MathHelper.floor_double(entity.posZ)) + 4.0F);
+            double var13 = (double)(entity.getMaximumHomeDistance() + (float)par1);
+            var10 = var11 < var13 * var13;
+        }
+        else {
+            var10 = false;
+        }
+
+        for (int var16 = 0; var16 < 10; ++var16) {
+            int var12 = var4.nextInt(2 * par1) - par1;
+            int var17;
+            if(entity.posY > entity.worldObj.getPrecipitationHeight( (int)entity.posX, (int)entity.posZ) + heightLevel*1.25){
+                var17 = var4.nextInt(2 * par2) - par2*3/2;
+            }else if(entity.posY < entity.worldObj.getPrecipitationHeight( (int)entity.posX, (int)entity.posZ) + heightLevel){
+                var17 = var4.nextInt(2 * par2) - par2/2;
+            }else{
+                var17 = var4.nextInt(2 * par2) - par2;
+            }
+            
+            int var14 = var4.nextInt(2 * par1) - par1;
+
+            if (par3Vec3 == null || (double)var12 * par3Vec3.xCoord + (double)var14 * par3Vec3.zCoord >= 0.0D) {
+                var12 += MathHelper.floor_double(entity.posX);
+                var17 += MathHelper.floor_double(entity.posY);
+                var14 += MathHelper.floor_double(entity.posZ);
+
+                if (!var10 || entity.isWithinHomeDistance(var12, var17, var14)) {
+                    float var15 = entity.getBlockPathWeight(var12, var17, var14);
+                    
+                    if (var15 > var9) {
+                        var9 = var15;
+                        var6 = var12;
+                        var7 = var17;
+                        var8 = var14;
+                        var5 = true;
+                    }
+                }
+            }
+        }
+
+        if (var5) {
+            //return entity.worldObj.getWorldVec3Pool().getVecFromPool((double)var6, (double)var7, (double)var8);
+            return Vec3.createVectorHelper((double)var6, (double)var7, (double)var8);
+        }
+        else {
+            return null;
+        }
+    }
+
+	/**
+	 * Returns whether the EntityAIBase should begin execution.
+	 */
+	public boolean shouldExecute() {
+		if (this.entity.getAge() >= 100 && entity.isEntityGrounded()) {
+			return false;
+		}
+		else {
+			Vec3 var1 = flyRandomlyTowardHeightLevel(this.entity, 10, 7, entity.getMaxFlightHeight());
+
+			if (var1 == null) {
+				return false;
+			}
+			else {
+				this.xPosition = var1.xCoord;
+				this.yPosition = var1.yCoord;
+				this.zPosition = var1.zCoord;
+				return entity.isTargetPositionValid(new ChunkCoordinates( (int)xPosition, (int)yPosition, (int)zPosition));
+			}
+		}
+	}
+
+	/**
+	 * Returns whether an in-progress EntityAIBase should continue executing
+	 */
+	public boolean continueExecuting() {
+		/* Continue if I'm not at Target Position or if its invalid block */
+		/* If Target Position is not an Air Block, Target Position = null (i.e. Don't try to go there) */
+		return entity.getRNG().nextInt(100) != 0 && !entity.atTargetPosition() && entity.isTargetPositionValid();
+//		return !this.entity.getNavigator().noPath();
+	}
+
+	/**
+	 * Execute a one shot task or start executing a continuous task
+	 */
+	public void startExecuting() {
+		/* Set Target Postion */
+		entity.setTargetPosition(new ChunkCoordinates((int)xPosition, (int)yPosition, (int)zPosition));
+//		this.entity.getNavigator().tryMoveToXYZ(this.xPosition, this.yPosition, this.zPosition, this.speed);
+	}
+
+}
