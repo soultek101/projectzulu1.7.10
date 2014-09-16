@@ -44,6 +44,6 @@ public class MinotaurDeclaration extends EggableDeclaration {
     @Override
     @SideOnly(Side.CLIENT)
     public RenderWrapper getEntityrender(Class<? extends EntityLivingBase> entityClass) {
-        return new RenderGenericLiving(new ModelMinotaur(), 0.5f, new ResourceLocation(DefaultProps.mobKey, "/textures/minotaur.png"));
+        return new RenderGenericLiving(new ModelMinotaur(), 0.5f, new ResourceLocation(DefaultProps.mobKey, "textures/minotaur.png"));
     }
 }

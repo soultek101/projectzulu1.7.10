@@ -53,7 +53,7 @@ public class SandwormDeclaration extends SpawnableDeclaration {
     @SideOnly(Side.CLIENT)
     public RenderWrapper getEntityrender(Class<? extends EntityLivingBase> entityClass) {
         return new RenderGenericIdle(new ModelSandWorm(), 0.5f, new ResourceLocation(DefaultProps.mobKey,
-                "textures/sandworm.png"), new ResourceLocation(DefaultProps.mobKey, "/textures/sandworm_hidden.png"));
+                "textures/sandworm.png"), new ResourceLocation(DefaultProps.mobKey, "textures/sandworm_hidden.png"));
     }
 
     @Override
