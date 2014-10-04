@@ -4,9 +4,9 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import com.stek101.projectzulu.common.ProjectZulu_Core;
 
 public class BlockPalmTreeLog extends Block {

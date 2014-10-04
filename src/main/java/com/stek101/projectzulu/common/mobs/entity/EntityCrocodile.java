@@ -8,7 +8,6 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -83,6 +82,11 @@ public class EntityCrocodile extends EntityGenericAnimal {
     protected String getHurtSound() {
         return DefaultProps.mobKey + ":" + DefaultProps.entitySounds + "crocoodileliving";
     }
+    
+    @Override
+    public int getTalkInterval() {
+        return 120;
+    }
 
     @Override
     public float getAIMoveSpeed() {
@@ -99,7 +103,7 @@ public class EntityCrocodile extends EntityGenericAnimal {
     public void onLivingUpdate() {
     	super.onLivingUpdate();
     	
-   	 if (aggroRange != 0 && aggroLevel != 0) {  /** 0 and 0 means deactivate FoF behaviour **/
+   	 if  (Math.round(this.aggroRange) != 0) {  /** 0 deactivate FoF behaviour **/
    		    if (this.inWater){
    		    	tmp_aggroRange = aggroRange + 6D;
    		    }
@@ -137,13 +141,7 @@ public class EntityCrocodile extends EntityGenericAnimal {
    	         	 this.setFleeTick(0);
    	           }          
    	          }
-   	        
-   	        /* A wounded animal is a very dangerous animal */
-   	     	if (this.getMaxHealth() > this.getHealth() && isHurt == false){
-   	     		aggroLevel = aggroLevel + 25;
-   	     		isHurt = true;
-   	     	}
-   	      }
+   	        }
     }
 
     @Override

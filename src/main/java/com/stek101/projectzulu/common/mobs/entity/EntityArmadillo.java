@@ -8,10 +8,11 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
 import com.stek101.projectzulu.common.api.BlockList;
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
@@ -23,8 +24,8 @@ import com.stek101.projectzulu.common.mobs.entityai.EntityAIPanic;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIStayStill;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAITempt;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIWander;
+
 import cpw.mods.fml.common.Loader;
-import net.minecraft.util.Vec3;
 
 public class EntityArmadillo extends EntityGenericAnimal implements IAnimals {
 
@@ -113,6 +114,11 @@ public class EntityArmadillo extends EntityGenericAnimal implements IAnimals {
     @Override
     protected String getLivingSound() {
         return DefaultProps.mobKey + ":" + DefaultProps.entitySounds + "armadilloliving";
+    }
+    
+    @Override
+    public int getTalkInterval() {
+        return 160;
     }
 
     @Override

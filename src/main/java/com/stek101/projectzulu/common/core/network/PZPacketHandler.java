@@ -1,5 +1,7 @@
 package com.stek101.projectzulu.common.core.network;
 
+import net.minecraft.entity.player.EntityPlayerMP;
+
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.core.packets.PZPacketPlaySound;
 import com.stek101.projectzulu.common.core.packets.PZPacketStreamSound;
@@ -10,7 +12,6 @@ import com.stek101.projectzulu.common.mobs.packets.PZPacketFollowerMasterData;
 import com.stek101.projectzulu.common.mobs.packets.PZPacketNameSync;
 import com.stek101.projectzulu.common.mobs.packets.PZPacketTileText;
 
-import net.minecraft.entity.player.EntityPlayerMP;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;

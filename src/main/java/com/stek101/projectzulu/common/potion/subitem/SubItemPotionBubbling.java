@@ -3,14 +3,13 @@ package com.stek101.projectzulu.common.potion.subitem;
 import java.util.Collections;
 import java.util.List;
 
-import com.google.common.base.Optional;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+
 import com.stek101.projectzulu.common.api.ItemList;
 import com.stek101.projectzulu.common.api.SubItemPotionList;
 import com.stek101.projectzulu.common.core.ItemGenerics.Properties;

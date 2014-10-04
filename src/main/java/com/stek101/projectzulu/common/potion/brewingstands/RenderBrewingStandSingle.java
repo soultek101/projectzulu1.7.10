@@ -11,8 +11,10 @@ import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+
 import com.stek101.projectzulu.common.core.RenderHelper;
 import com.stek101.projectzulu.common.core.RenderHelper.Surface;
+
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderBrewingStandSingle implements ISimpleBlockRenderingHandler {

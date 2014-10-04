@@ -9,6 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.config.Configuration;
+
 import com.stek101.projectzulu.common.api.CustomMobData;
 import com.stek101.projectzulu.common.api.ItemList;
 import com.stek101.projectzulu.common.core.ConfigHelper;
@@ -20,6 +21,7 @@ import com.stek101.projectzulu.common.mobs.entity.EntityBoar;
 import com.stek101.projectzulu.common.mobs.models.ModelBoar;
 import com.stek101.projectzulu.common.mobs.renders.RenderGenericLiving;
 import com.stek101.projectzulu.common.mobs.renders.RenderWrapper;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -44,7 +46,7 @@ public class BoarDeclaration extends SpawnableDeclaration {
                 ItemList.genericCraftingItems, ItemGenerics.Properties.Tusk.meta(), 10);
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData,
                 ItemList.genericCraftingItems, ItemGenerics.Properties.SmallHeart.meta(), 5);
-        customMobData.entityProperties = new EntityProperties(15f, 3.0f, 0.3f, 0.0f, 0.0f, 32.0f, 60f, 16D).createFromConfig(config, mobName);
+        customMobData.entityProperties = new EntityProperties(15f, 3.0f, 0.3f, 0.0f, 0.0f, 32.0f, 50f, 16D).createFromConfig(config, mobName);
         super.outputDataToList(config, customMobData);
     }
 

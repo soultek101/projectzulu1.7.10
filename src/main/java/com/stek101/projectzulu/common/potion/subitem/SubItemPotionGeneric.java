@@ -15,12 +15,12 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import com.google.common.base.Optional;
 import com.stek101.projectzulu.common.api.ItemList;
 import com.stek101.projectzulu.common.core.ItemGenerics.Properties;
 import com.stek101.projectzulu.common.potion.EntityPZPotion;
 import com.stek101.projectzulu.common.potion.PotionParser;
-
-import com.google.common.base.Optional;
 
 public abstract class SubItemPotionGeneric extends SubItemPotion {
 

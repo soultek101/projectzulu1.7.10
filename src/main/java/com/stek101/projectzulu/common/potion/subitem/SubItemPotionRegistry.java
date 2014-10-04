@@ -5,11 +5,11 @@ import java.util.Collection;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
-import com.stek101.projectzulu.common.core.ProjectZuluLog;
-import com.stek101.projectzulu.common.potion.PotionParser;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
+import com.stek101.projectzulu.common.core.ProjectZuluLog;
+import com.stek101.projectzulu.common.potion.PotionParser;
 
 /**
  * This allows Registry of PotionItem readers.

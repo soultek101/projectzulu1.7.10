@@ -7,7 +7,9 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+
 import com.stek101.projectzulu.common.core.ProjectZuluLog;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class EventHandleNullPotions {

@@ -5,6 +5,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+
 import com.stek101.projectzulu.common.ProjectZulu_Core;
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.temperature.ITempArmor;

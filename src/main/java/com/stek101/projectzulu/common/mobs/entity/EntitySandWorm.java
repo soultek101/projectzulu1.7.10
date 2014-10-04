@@ -8,6 +8,7 @@ import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIMoveTowardsRestriction;
@@ -22,10 +23,8 @@ public class EntitySandWorm extends EntityGenericAnimal implements IMob {
         setSize(1.5f, 1.0f);
         getNavigator().setAvoidsWater(false);
         tasks.addTask(2, new EntityAIStayStill(this, EntityStates.idle));
-
         tasks.addTask(3, new EntityAIAttackOnCollide(this, 1.0f, true));
         tasks.addTask(4, new EntityAIMoveTowardsTarget(this, 1.0f, 32.0F));
-
         tasks.addTask(6, new EntityAIMoveTowardsRestriction(this, 1.0f));
 
         // targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));

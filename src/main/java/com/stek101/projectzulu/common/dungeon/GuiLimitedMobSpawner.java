@@ -19,7 +19,6 @@ import org.lwjgl.util.Point;
 
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.core.ObfuscationHelper;
-import com.stek101.projectzulu.common.core.ProjectZuluLog;
 
 //TODO: Implement Try Write / Read to Test if Saving Would Cause a Crash
 public class GuiLimitedMobSpawner extends GuiScreen {

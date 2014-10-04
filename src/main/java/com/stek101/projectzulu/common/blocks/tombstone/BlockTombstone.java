@@ -12,6 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import com.stek101.projectzulu.common.ProjectZulu_Core;
 
 public class BlockTombstone extends BlockContainer {
@@ -98,10 +99,13 @@ public class BlockTombstone extends BlockContainer {
     @Override
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer,
             int par6, float par7, float par8, float par9) {
+
         if (par5EntityPlayer instanceof EntityPlayer) {
             if (par5EntityPlayer.inventory.getCurrentItem() == null) {
                 TileEntity tileEntity = par1World.getTileEntity(par2, par3, par4);
+
                 if (tileEntity != null && tileEntity instanceof TileEntityTombstone) {
+
                     ((TileEntityTombstone) tileEntity).giveItemsToPlayer(par5EntityPlayer);
                 }
                 return true;

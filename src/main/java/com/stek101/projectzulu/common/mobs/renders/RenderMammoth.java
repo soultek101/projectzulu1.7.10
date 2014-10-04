@@ -4,6 +4,7 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
+
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.mobs.entity.EntityGenericRideable;
 

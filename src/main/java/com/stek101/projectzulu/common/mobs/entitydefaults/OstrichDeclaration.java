@@ -5,11 +5,11 @@ import java.util.HashSet;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.config.Configuration;
+
 import com.stek101.projectzulu.common.api.CustomMobData;
 import com.stek101.projectzulu.common.api.ItemList;
 import com.stek101.projectzulu.common.core.ConfigHelper;
@@ -21,6 +21,7 @@ import com.stek101.projectzulu.common.mobs.entity.EntityOstrich;
 import com.stek101.projectzulu.common.mobs.models.ModelOstrich;
 import com.stek101.projectzulu.common.mobs.renders.RenderGenericLiving;
 import com.stek101.projectzulu.common.mobs.renders.RenderWrapper;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -47,7 +48,7 @@ public class OstrichDeclaration extends SpawnableDeclaration {
                 ItemList.genericCraftingItems, ItemGenerics.Properties.Talon.meta(), 4);
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData,
                 ItemList.genericCraftingItems, ItemGenerics.Properties.SmallHeart.meta(), 4);
-        customMobData.entityProperties = new EntityProperties(15f, 3.0f, 0.32f, 0.0f, 0.0f, 32.0f, 30.0f, 16D).createFromConfig(config, mobName);
+        customMobData.entityProperties = new EntityProperties(15f, 3.0f, 0.32f, 0.0f, 0.0f, 32.0f, 20.0f, 16D).createFromConfig(config, mobName);
         super.outputDataToList(config, customMobData);
     }
 

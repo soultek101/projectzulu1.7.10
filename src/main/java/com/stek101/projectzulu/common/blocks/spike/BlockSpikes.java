@@ -17,9 +17,11 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import com.stek101.projectzulu.common.ProjectZulu_Core;
 import com.stek101.projectzulu.common.api.ItemList;
 import com.stek101.projectzulu.common.core.ItemGenerics;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

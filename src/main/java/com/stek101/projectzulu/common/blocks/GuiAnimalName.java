@@ -3,21 +3,14 @@ package com.stek101.projectzulu.common.blocks;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatAllowedCharacters;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
 
-import scala.swing.event.Key;
-
 import com.stek101.projectzulu.common.ProjectZulu_Core;
-import com.stek101.projectzulu.common.core.network.PZPacketHandler;
 import com.stek101.projectzulu.common.mobs.entity.EntityGenericTameable;
 import com.stek101.projectzulu.common.mobs.packets.PZPacketNameSync;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 //@SideOnly(Side.CLIENT)
 public class GuiAnimalName extends GuiScreen {

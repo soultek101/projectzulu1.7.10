@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.ChunkCoordinates;
+
 import com.stek101.projectzulu.common.ProjectZulu_Core;
 import com.stek101.projectzulu.common.core.ProjectZuluLog;
 import com.stek101.projectzulu.common.world.CellIndexDirection;

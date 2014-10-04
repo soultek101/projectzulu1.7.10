@@ -1,13 +1,8 @@
 package com.stek101.projectzulu.common.mobs.packets;
 
-import java.io.IOException;
-
 import io.netty.buffer.ByteBuf;
 
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import cpw.mods.fml.relauncher.Side;
+import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
@@ -15,6 +10,11 @@ import net.minecraft.tileentity.TileEntity;
 
 import com.stek101.projectzulu.common.blocks.tombstone.TileEntityTombstone;
 import com.stek101.projectzulu.common.core.ProjectZuluLog;
+
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import cpw.mods.fml.relauncher.Side;
 
 public class PZPacketTileText implements IMessage, IMessageHandler<PZPacketTileText, IMessage> {
     private int tileLocationX;

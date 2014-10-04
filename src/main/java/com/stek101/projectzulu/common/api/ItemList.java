@@ -1,6 +1,5 @@
 package com.stek101.projectzulu.common.api;
 
-import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
 import com.google.common.base.Optional;
@@ -29,6 +28,7 @@ public enum ItemList {
     public static Optional<? extends Item> customPotions = Optional.absent();
     public static Optional<? extends Item> vanillaPotions = Optional.absent();
     public static Optional<? extends Item> duckEgg = Optional.absent();
+    public static Optional<? extends Item> ostrichEgg = Optional.absent();
 
     /* Armor */
     public static Optional<? extends Item> scaleArmorHead = Optional.absent();

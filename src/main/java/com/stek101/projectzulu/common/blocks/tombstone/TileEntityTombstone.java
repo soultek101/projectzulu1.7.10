@@ -50,6 +50,7 @@ public class TileEntityTombstone extends TileEntity {
         while (unSortIterator.hasNext() && itemAdded) {
             ItemStack deathItem = unSortIterator.next();
             itemAdded = player.inventory.addItemStackToInventory(deathItem);
+            
             if (itemAdded) {
                 unSortIterator.remove();
             }

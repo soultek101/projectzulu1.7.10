@@ -6,7 +6,7 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import com.stek101.projectzulu.common.core.DefaultProps;
+
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAINearestAttackableTarget;

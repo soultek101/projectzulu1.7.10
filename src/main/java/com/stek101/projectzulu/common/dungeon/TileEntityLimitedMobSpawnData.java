@@ -2,6 +2,7 @@ package com.stek101.projectzulu.common.dungeon;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.WeightedRandom;
+
 import com.stek101.projectzulu.common.dungeon.spawner.tag.settings.OptionalSettingsSpawning;
 
 public class TileEntityLimitedMobSpawnData extends WeightedRandom.Item {

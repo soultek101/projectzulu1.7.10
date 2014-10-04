@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,11 +17,12 @@ import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
+
 import com.stek101.projectzulu.common.api.ItemList;
 import com.stek101.projectzulu.common.mobs.entity.EntityTreeEnt;
+
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import net.minecraft.util.Vec3;
 
 public class EventHookContainerClass {
     // zLevel is protected float copied from GUI along with drawTexturedModelRect

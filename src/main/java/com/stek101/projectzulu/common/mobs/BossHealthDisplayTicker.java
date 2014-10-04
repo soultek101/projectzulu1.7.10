@@ -1,20 +1,15 @@
 package com.stek101.projectzulu.common.mobs;
 
-import java.util.EnumSet;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 
 import org.lwjgl.opengl.GL11;
 
 import com.stek101.projectzulu.common.mobs.entity.EntityGenericAnimal;
-import com.stek101.projectzulu.common.mobs.entity.EntityMummyPharaoh;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.Phase;

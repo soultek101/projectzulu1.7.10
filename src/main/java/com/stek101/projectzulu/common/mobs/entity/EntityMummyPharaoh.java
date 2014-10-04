@@ -18,19 +18,22 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
 import com.stek101.projectzulu.common.api.ItemList;
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAINearestAttackableTarget;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIWander;
+
 import cpw.mods.fml.common.Loader;
 
 public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 
     Vec3 startingPosition;
     int stage = 1;
-
+    int maxMummySpawned = 6;
+    int mummySpawned = 0;
     boolean spawnMummy = false;
     // Time To Wait after spawning to spawn another
     int spawnCooldown = 4 * 20;
@@ -89,15 +92,6 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
     }
 
     /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    @Override
-    protected String getHurtSound() {
-        return DefaultProps.mobKey + ":" + DefaultProps.entitySounds + "mummyshortroar";
-    	
-    }
-
-    /**
      * Called frequently so the entity can update its state every tick as required. For example, zombies and skeletons
      * use this to react to sunlight and start to burn.
      */
@@ -134,8 +128,10 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
         case 3:
             /* Stage Three Ability */
             if (spawnMummy == true && !worldObj.isRemote) {
-                spawnMummy();
-                spawnMummy = false;
+            	if (mummySpawned <= maxMummySpawned){
+	                spawnMummy();
+	                spawnMummy = false;
+                }            	
             }
 
             /* Stage Three Update: If Condition Valid Change Stage */
@@ -148,8 +144,10 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
         case 4:
             /* Stage Three Ability */
             if (spawnMummy == true && !worldObj.isRemote) {
-                spawnMummy();
-                spawnMummy = false;
+            	if (mummySpawned <= maxMummySpawned){
+	                spawnMummy();
+	                spawnMummy = false;
+                }            	
             }
 
             /* Stage Three Ability */
@@ -167,6 +165,7 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
             spawnMummy = true;
             spawnTimer = spawnCooldown;
         }
+        
         spawnTimer = Math.max(spawnTimer - 1, 0);
 
         /* If Shoot Timer is 0, tell Entity its Allowed to Shoot a Fireball */
@@ -213,6 +212,7 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 
         // These "hold" are here because putting Rand.nextint without assigning to variable first
         // caused minecraft to get angry at me (/shrug)
+        
         int hold = rand.nextInt(2);
         int hold2 = rand.nextInt(Max_Distance - Min_Distance) + Min_Distance;
         ;
@@ -247,6 +247,7 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
 
         EntityMummy var17 = new EntityMummy(this.worldObj, desX, desY, desZ);
         this.worldObj.spawnEntityInWorld(var17);
+        mummySpawned ++;
     }
 
     private void shootFireballAtTarget() {
@@ -401,5 +402,25 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
             ItemStack var2 = new ItemStack(ItemList.ankh.get());
             this.entityDropItem(var2, 5.0F);
         }
+    }
+    
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+    @Override
+    protected String getLivingSound() {
+        return DefaultProps.mobKey + ":" + DefaultProps.entitySounds + "mummymoan";
+    }
+
+    /**
+     * Returns the sound this mob makes when it is hurt.
+     */
+    protected String getHurtSound() {
+        return DefaultProps.mobKey + ":" + DefaultProps.entitySounds + "mummyroar";
+    }
+    
+    @Override
+    public int getTalkInterval() {
+        return 160;
     }
 }

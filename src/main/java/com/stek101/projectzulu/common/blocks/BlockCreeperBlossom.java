@@ -10,6 +10,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
 import com.stek101.projectzulu.common.ProjectZulu_Core;
 
 public class BlockCreeperBlossom extends BlockBush {

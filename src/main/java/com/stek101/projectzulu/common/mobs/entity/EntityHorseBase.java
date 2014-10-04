@@ -5,10 +5,10 @@ import java.util.EnumSet;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIControlledByPlayer;
@@ -76,6 +76,11 @@ public class EntityHorseBase extends EntityGenericAnimal {
     @Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
         return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
+    }
+    
+    @Override
+    public int getTalkInterval() {
+        return 160;
     }
 
     @Override

@@ -11,6 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+
 import com.stek101.projectzulu.common.api.BlockList;
 import com.stek101.projectzulu.common.api.CustomEntityList;
 import com.stek101.projectzulu.common.core.DefaultProps;
@@ -19,6 +20,7 @@ import com.stek101.projectzulu.common.mobs.entityai.EntityAIFlyingWander;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAINearestAttackableTarget;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIVultureFollow;
+
 import cpw.mods.fml.common.Loader;
 
 public class EntityVulture extends EntityGenericAnimal {
@@ -93,6 +95,11 @@ public class EntityVulture extends EntityGenericAnimal {
     @Override
     protected String getLivingSound() {
         return DefaultProps.mobKey + ":" + DefaultProps.entitySounds + "vulturehurt";
+    }
+    
+    @Override
+    public int getTalkInterval() {
+        return 160;
     }
 
     /**

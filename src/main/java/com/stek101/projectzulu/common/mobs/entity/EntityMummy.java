@@ -11,6 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
+
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
@@ -82,12 +83,25 @@ public class EntityMummy extends EntityGenericAnimal implements IMob {
         this.setBesideClimbableBlock(this.isCollidedHorizontally);
         super.updateAITick();
     }
+    
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+    @Override
+    protected String getLivingSound() {
+        return DefaultProps.mobKey + ":" + DefaultProps.entitySounds + "mummymoan";
+    }
 
     /**
      * Returns the sound this mob makes when it is hurt.
      */
     protected String getHurtSound() {
         return DefaultProps.mobKey + ":" + DefaultProps.entitySounds + "mummyroar";
+    }
+    
+    @Override
+    public int getTalkInterval() {
+        return 160;
     }
 
     /**

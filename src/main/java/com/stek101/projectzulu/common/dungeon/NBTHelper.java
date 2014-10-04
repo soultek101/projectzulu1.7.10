@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import com.stek101.projectzulu.common.core.ObfuscationHelper;
-import com.stek101.projectzulu.common.core.ProjectZuluLog;
-import com.stek101.projectzulu.common.dungeon.spawner.tag.ParsingHelper;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagByte;
 import net.minecraft.nbt.NBTTagByteArray;
@@ -19,6 +16,10 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagLong;
 import net.minecraft.nbt.NBTTagShort;
 import net.minecraft.nbt.NBTTagString;
+
+import com.stek101.projectzulu.common.core.ObfuscationHelper;
+import com.stek101.projectzulu.common.core.ProjectZuluLog;
+import com.stek101.projectzulu.common.dungeon.spawner.tag.ParsingHelper;
 
 /**
  * Helper NBT Enum for proccessing NBTTagCompounds. Functions are recursive, due to the linked nature of NBTtags, they

@@ -3,6 +3,7 @@ package com.stek101.projectzulu.common.mobs.entityai;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.Vec3;
+
 import com.stek101.projectzulu.common.mobs.entity.EntityGenericCreature;
 
 public class EntityAIFlyingWander extends EntityAIBase{

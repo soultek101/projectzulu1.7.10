@@ -6,6 +6,7 @@ import java.util.List;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+
 import com.stek101.projectzulu.common.api.CustomEntityList;
 
 public class EntityHorseRandom extends EntityHorseBase{

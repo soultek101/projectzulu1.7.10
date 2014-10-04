@@ -29,7 +29,7 @@ public class DuckDeclaration extends SpawnableDeclaration {
 
     public DuckDeclaration() {
         super("Duck", 47, EntityDuck.class, EnumCreatureType.creature);
-        setSpawnProperties(10, 100, 1, 3);
+        setSpawnProperties(10, 100, 1, 4);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 2);
 

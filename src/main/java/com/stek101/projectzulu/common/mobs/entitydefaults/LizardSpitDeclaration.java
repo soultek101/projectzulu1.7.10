@@ -2,11 +2,13 @@ package com.stek101.projectzulu.common.mobs.entitydefaults;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraftforge.common.config.Configuration;
+
 import com.stek101.projectzulu.common.api.CustomMobData;
 import com.stek101.projectzulu.common.core.entitydeclaration.CreatureDeclaration;
 import com.stek101.projectzulu.common.mobs.entity.EntityLizardSpit;
 import com.stek101.projectzulu.common.mobs.renders.RenderLizardSpit;
 import com.stek101.projectzulu.common.mobs.renders.RenderWrapper;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

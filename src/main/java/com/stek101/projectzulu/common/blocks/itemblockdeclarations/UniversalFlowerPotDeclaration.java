@@ -1,9 +1,9 @@
 package com.stek101.projectzulu.common.blocks.itemblockdeclarations;
 
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraftforge.common.config.Configuration;
-import com.stek101.projectzulu.common.Properties;
+
+import com.google.common.base.Optional;
 import com.stek101.projectzulu.common.api.BlockList;
 import com.stek101.projectzulu.common.blocks.ItemUniversalFlowerPot;
 import com.stek101.projectzulu.common.blocks.universalpot.BlockUniversalFlowerPot;
@@ -12,8 +12,6 @@ import com.stek101.projectzulu.common.blocks.universalpot.TileEntityUniversalFlo
 import com.stek101.projectzulu.common.blocks.universalpot.TileEntityUniversalFlowerPotRenderer;
 import com.stek101.projectzulu.common.core.ProjectZuluLog;
 import com.stek101.projectzulu.common.core.itemblockdeclaration.BlockDeclaration;
-
-import com.google.common.base.Optional;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;

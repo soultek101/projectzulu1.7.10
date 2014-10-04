@@ -1,10 +1,8 @@
 package com.stek101.projectzulu.common.blocks;
 
 import net.minecraft.item.Item;
+
 import com.stek101.projectzulu.common.ProjectZulu_Core;
-import com.stek101.projectzulu.common.core.DefaultProps;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemCoconutMilk extends Item {
 

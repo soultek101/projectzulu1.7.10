@@ -4,7 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 
 import net.minecraftforge.common.config.Configuration;
+
 import com.stek101.projectzulu.common.core.entitydeclaration.EntityDeclaration;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

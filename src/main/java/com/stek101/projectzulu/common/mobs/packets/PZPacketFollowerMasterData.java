@@ -1,16 +1,13 @@
 package com.stek101.projectzulu.common.mobs.packets;
 
-import java.io.IOException;
-
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.world.World;
-import io.netty.buffer.ByteBuf;
 
 import com.stek101.projectzulu.common.ProjectZulu_Core;
 import com.stek101.projectzulu.common.core.ProjectZuluLog;
-import com.stek101.projectzulu.common.core.packets.PZPacketStreamSound;
 import com.stek101.projectzulu.common.mobs.entity.EntityFollower;
 import com.stek101.projectzulu.common.mobs.entity.EntityMaster;
 

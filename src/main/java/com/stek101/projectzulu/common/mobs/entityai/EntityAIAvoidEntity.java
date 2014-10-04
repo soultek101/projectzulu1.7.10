@@ -1,18 +1,17 @@
 package com.stek101.projectzulu.common.mobs.entityai;
 
-import net.minecraft.entity.ai.EntityAIBase;
-import com.stek101.projectzulu.common.mobs.entity.EntityGenericCreature;
-import com.stek101.projectzulu.common.mobs.entity.EntityGenericTameable;
-
-
 import java.util.List;
+
 import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
-
+import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.util.Vec3;
+
+import com.stek101.projectzulu.common.mobs.entity.EntityGenericCreature;
+import com.stek101.projectzulu.common.mobs.entity.EntityGenericTameable;
 
 public class EntityAIAvoidEntity extends EntityAIBase{
 

@@ -5,6 +5,8 @@ import java.io.File;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraftforge.common.config.Configuration;
+
+import com.google.common.base.Optional;
 import com.stek101.projectzulu.common.ProjectZulu_Core;
 import com.stek101.projectzulu.common.api.CustomEntityList;
 import com.stek101.projectzulu.common.api.CustomMobData;
@@ -12,8 +14,6 @@ import com.stek101.projectzulu.common.core.ConfigHelper;
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.core.ProjectZuluLog;
 import com.stek101.projectzulu.common.mobs.renders.RenderWrapper;
-
-import com.google.common.base.Optional;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;

@@ -3,7 +3,6 @@ package com.stek101.projectzulu.common.dungeon.spawner.tag;
 import java.util.IllegalFormatException;
 import java.util.List;
 
-import net.minecraft.client.audio.SoundRegistry;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagByte;
 import net.minecraft.nbt.NBTTagByteArray;
@@ -16,6 +15,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagLong;
 import net.minecraft.nbt.NBTTagShort;
 import net.minecraft.nbt.NBTTagString;
+
 import com.stek101.projectzulu.common.core.ObfuscationHelper;
 import com.stek101.projectzulu.common.core.ProjectZuluLog;
 

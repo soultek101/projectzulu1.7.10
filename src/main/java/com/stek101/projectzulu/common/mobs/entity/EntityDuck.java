@@ -1,15 +1,12 @@
 package com.stek101.projectzulu.common.mobs.entity;
 
 import java.util.EnumSet;
-import java.util.Random;
 
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,8 +20,8 @@ import com.stek101.projectzulu.common.api.BlockList;
 import com.stek101.projectzulu.common.api.CustomEntityList;
 import com.stek101.projectzulu.common.api.ItemList;
 import com.stek101.projectzulu.common.core.DefaultProps;
+import com.stek101.projectzulu.common.mobs.EntityAFightorFlight;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
-import com.stek101.projectzulu.common.mobs.entityai.EntityAIAvoidEntity;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIFollowParent;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIMate;
@@ -37,11 +34,10 @@ import cpw.mods.fml.common.Loader;
 
 public class EntityDuck extends EntityGenericAnimal implements IAnimals {
 	
-	private boolean isHurt = false;
+	private EntityAFightorFlight EAFF;
+	private CustomEntityList entityEntry;
 	private float aggroLevel;
 	private double aggroRange;
-	private EntityAIAvoidEntity aiEntityAvoidEntity = new EntityAIAvoidEntity(this, EntityPlayer.class, 16.0f, 1.3D, 1.2D);
-
     private int timeUntilNextEgg;
     private int timeUntilNextFeather;
     int stayStillTimer = 0;
@@ -52,12 +48,17 @@ public class EntityDuck extends EntityGenericAnimal implements IAnimals {
         this.timeUntilNextEgg = this.rand.nextInt(6000) + 6000;
         this.timeUntilNextFeather = this.rand.nextInt(6000) + 6000;
         
-        /*Get Aggression rank of entity and range*/
-        CustomEntityList entityEntry = CustomEntityList.getByName(EntityList.getEntityString(this));
-         if (entityEntry != null && entityEntry.modData.get().entityProperties != null) {
-             aggroLevel = entityEntry.modData.get().entityProperties.aggroLevel;
-             aggroRange = entityEntry.modData.get().entityProperties.aggroRange;
-         }
+        this.entityEntry = CustomEntityList.getByName(EntityList.getEntityString(this));
+        
+        /* Check if aggroLevel and aggroRange have valid values to activate AFoF */
+    	  if (entityEntry != null && entityEntry.modData.get().entityProperties != null) {
+            this.aggroLevel = entityEntry.modData.get().entityProperties.aggroLevel;
+            this.aggroRange = entityEntry.modData.get().entityProperties.aggroRange;                    
+          }
+    	  
+    	  if (Math.round(this.aggroRange) != 0) {
+    		  EAFF = new EntityAFightorFlight().setEntity(this, worldObj, this.aggroLevel, this.aggroRange);
+    	  }
            
         getNavigator().setAvoidsWater(false);
         this.tasks.addTask(0, new EntityAISwimming(this));
@@ -88,42 +89,10 @@ public class EntityDuck extends EntityGenericAnimal implements IAnimals {
     public void onLivingUpdate() {
     	super.onLivingUpdate();
     	
-     	  if (aggroRange != 0 && aggroLevel != 0) {  /** 0 and 0 means deactivate FoF behaviour **/
-     	        EntityPlayer entityplayer = worldObj.getClosestPlayerToEntity(this, aggroRange);
-     	        
-     	        /* Check if target can be detected, then entity will decide whether to fight or flee, ignore if tamed */
-     	        if (!((EntityGenericTameable)this).isTamed()){
-     	          if(entityplayer != null && canEntityBeSeen(entityplayer)) {
-     	          	
-     	          	Random rand = new Random();         	
-     	          	int dieRoll = rand.nextInt(100);    	
-     	          	
-     	             if ((aggroLevel) >= dieRoll){
-     	          		if (this.getAngerLevel() == 0 && this.getFleeTick() == 0){
-     	          		  this.tasks.removeTask(this.aiEntityAvoidEntity);
-     	          		  this.angerLevel = 400;  //make it angry!!!   	        
-     	          		  //System.out.println("Attack Mode!");
-     	          		  }
-     	          	} else {
-     	          		if (this.getAngerLevel() == 0 && this.getFleeTick() == 0){ 
-     	          		 this.tasks.addTask(1, this.aiEntityAvoidEntity );
-     	          		 this.setFleeTick(400);  
-     	          		 //System.out.println("Flee Mode!");
-     	          		 }
-     	          	}
-     	           } else {
-     	         	 this.angerLevel = 0; // calm down and move on with life
-     	         	 this.setFleeTick(0);
-     	           }          
-     	          }
-     	        
-     	        /* A wounded animal is a very dangerous animal */
-     	     	if (this.getMaxHealth() > this.getHealth() && isHurt == false){
-     	     		aggroLevel = aggroLevel + 25;
-     	     		isHurt = true;
-     	     	}
-     	      }
-     	  
+    	if (Math.round(this.aggroRange) != 0) {
+    		EAFF.updateEntityAFF(worldObj);
+    	}
+    	
      	if (!this.worldObj.isRemote && !this.isChild() &&  --this.timeUntilNextEgg <= 0)
          {
      		 Optional<?> itemBlock = ItemList.duckEgg;
@@ -180,6 +149,11 @@ public class EntityDuck extends EntityGenericAnimal implements IAnimals {
     protected String getHurtSound() {
         return DefaultProps.mobKey + ":" + DefaultProps.entitySounds + "duckliving";
     }   
+    
+    @Override
+    public int getTalkInterval() {
+        return 160;
+    }
     
 
     /**

@@ -1,6 +1,7 @@
 package com.stek101.projectzulu.common.blocks;
 
 import net.minecraft.item.ItemArmor;
+
 import com.stek101.projectzulu.common.ProjectZulu_Core;
 
 public class ItemScaleArmor extends ItemArmor {

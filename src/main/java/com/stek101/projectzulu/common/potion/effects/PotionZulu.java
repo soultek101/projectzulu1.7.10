@@ -3,7 +3,9 @@ package com.stek101.projectzulu.common.potion.effects;
 import net.minecraft.client.Minecraft;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
+
 import com.stek101.projectzulu.common.core.DefaultProps;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

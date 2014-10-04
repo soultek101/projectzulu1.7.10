@@ -34,6 +34,7 @@ import com.stek101.projectzulu.common.blocks.itemblockdeclarations.IronScaleArmo
 import com.stek101.projectzulu.common.blocks.itemblockdeclarations.JasperDeclaration;
 import com.stek101.projectzulu.common.blocks.itemblockdeclarations.MobSkullsDeclaration;
 import com.stek101.projectzulu.common.blocks.itemblockdeclarations.NightBloomDeclaration;
+import com.stek101.projectzulu.common.blocks.itemblockdeclarations.OstrichEggDeclaration;
 import com.stek101.projectzulu.common.blocks.itemblockdeclarations.PalmTreeDoubleSlabDeclaration;
 import com.stek101.projectzulu.common.blocks.itemblockdeclarations.PalmTreeLeavesDeclaration;
 import com.stek101.projectzulu.common.blocks.itemblockdeclarations.PalmTreeLogDeclaration;
@@ -69,13 +70,8 @@ import com.stek101.projectzulu.common.potion.PZExtraPotionDeclaration;
 import com.stek101.projectzulu.common.potion.PZVanillaPotionDeclaration;
 import com.stek101.projectzulu.common.potion.PotionManager;
 
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
 public class ProjectZulu_Blocks extends BaseModule {
@@ -102,7 +98,7 @@ public class ProjectZulu_Blocks extends BaseModule {
                 new CoconutMilkFragmentDeclaration(), new CoconutSeedDeclaration(), new CoconutShellDeclaration(),
                 new ScaleItemDeclaration(), new FurPeltDeclaration(), new GenericCraftingItemsDeclaration(),
                 new CoconutItem(), new ScrapMeatDeclaration(), new RawMuttonDeclaration(), new CookedMuttonDeclaration(),
-                new DuckEggDeclaration());
+                new DuckEggDeclaration(), new OstrichEggDeclaration());
 
         manager.addItemBlock(new ScaleArmorDeclaration(ProjectZulu_Core.proxy.addArmor("scaleArmor")),
                 new GoldScaleArmorDeclaration(ProjectZulu_Core.proxy.addArmor("goldscale")),

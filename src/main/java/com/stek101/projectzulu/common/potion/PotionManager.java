@@ -5,6 +5,8 @@ import java.lang.reflect.Array;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
+
+import com.google.common.base.Optional;
 import com.stek101.projectzulu.common.api.PotionList;
 import com.stek101.projectzulu.common.core.ObfuscationHelper;
 import com.stek101.projectzulu.common.potion.effects.PotionCleansing;
@@ -15,8 +17,6 @@ import com.stek101.projectzulu.common.potion.effects.PotionIncendiary;
 import com.stek101.projectzulu.common.potion.effects.PotionSlowFall;
 import com.stek101.projectzulu.common.potion.effects.PotionThorns;
 import com.stek101.projectzulu.common.potion.effects.PotionZulu;
-
-import com.google.common.base.Optional;
 
 public enum PotionManager {
     bubbling(21) {

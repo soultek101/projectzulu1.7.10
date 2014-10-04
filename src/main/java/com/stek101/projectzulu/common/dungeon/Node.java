@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import scala.annotation.meta.param;
-
 public class Node implements Comparable<Node> {
     private Node parent;
     private String name;

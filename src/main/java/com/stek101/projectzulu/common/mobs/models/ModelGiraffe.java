@@ -5,6 +5,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
+
 import com.stek101.projectzulu.common.core.ModelHelper;
 import com.stek101.projectzulu.common.mobs.entity.EntityGiraffe;
 

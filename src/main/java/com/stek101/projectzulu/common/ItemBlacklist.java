@@ -7,6 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
+
 import com.stek101.projectzulu.common.blocks.util.StringHelper;
 
 public class ItemBlacklist {

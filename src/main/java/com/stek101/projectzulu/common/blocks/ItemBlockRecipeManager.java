@@ -1,10 +1,8 @@
 package com.stek101.projectzulu.common.blocks;
 
 import static net.minecraftforge.common.ChestGenHooks.DUNGEON_CHEST;
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.util.WeightedRandomChestContent;
@@ -12,11 +10,13 @@ import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+
 import com.stek101.projectzulu.common.Properties;
 import com.stek101.projectzulu.common.api.BlockList;
 import com.stek101.projectzulu.common.api.ItemList;
 import com.stek101.projectzulu.common.core.ItemGenerics;
 import com.stek101.projectzulu.common.core.OptionalItemStack;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -87,6 +87,12 @@ public class ItemBlockRecipeManager {
                 new OptionalItemStack(ItemList.coconutItem));
 
         /* Aloe Vera */
+        //addRecipe(new OptionalItemStack(Items.potionitem, 1, 0 ), new String[] { "X", "X", "Y" }, new char[] { 'X',
+        //'Y' }, new OptionalItemStack(ItemList.waterDroplets), new OptionalItemStack(Items.glass_bottle));
+        
+        addShapelessRecipe(new OptionalItemStack(Items.potionitem, 1, 0 ), new OptionalItemStack(ItemList.waterDroplets),
+        new OptionalItemStack(Items.glass_bottle), new OptionalItemStack(ItemList.waterDroplets));
+        
         addRecipe(new OptionalItemStack(Items.string, 6), new String[] { "C  ", "C  ", "C  " }, 'C',
                 new OptionalItemStack(BlockList.tumbleweed));
         addRecipe(new OptionalItemStack(Items.string, 6), new String[] { " C ", " C ", " C " }, 'C',

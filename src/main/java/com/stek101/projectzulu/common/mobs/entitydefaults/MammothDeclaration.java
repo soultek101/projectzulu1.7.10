@@ -7,6 +7,7 @@ import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.config.Configuration;
+
 import com.stek101.projectzulu.common.api.CustomMobData;
 import com.stek101.projectzulu.common.api.ItemList;
 import com.stek101.projectzulu.common.core.ConfigHelper;
@@ -17,6 +18,7 @@ import com.stek101.projectzulu.common.mobs.entity.EntityMammoth;
 import com.stek101.projectzulu.common.mobs.models.ModelMammoth;
 import com.stek101.projectzulu.common.mobs.renders.RenderMammoth;
 import com.stek101.projectzulu.common.mobs.renders.RenderWrapper;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

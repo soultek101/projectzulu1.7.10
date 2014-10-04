@@ -2,7 +2,6 @@ package com.stek101.projectzulu.common.core.itemblockdeclaration;
 
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
-import com.stek101.projectzulu.common.ProjectZulu_Core;
 import cpw.mods.fml.relauncher.Side;
 
 public abstract class ItemSetDeclaration implements ItemBlockDeclaration {

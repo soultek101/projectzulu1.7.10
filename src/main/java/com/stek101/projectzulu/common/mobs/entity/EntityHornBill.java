@@ -5,6 +5,7 @@ import java.util.EnumSet;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+
 import com.stek101.projectzulu.common.api.CustomEntityList;
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
@@ -75,5 +76,10 @@ public class EntityHornBill extends EntityGenericAnimal {
     @Override
     protected String getHurtSound() {
         return DefaultProps.mobKey + ":" + DefaultProps.entitySounds + "hornbillhurt";
+    }
+    
+    @Override
+    public int getTalkInterval() {
+        return 160;
     }
 }

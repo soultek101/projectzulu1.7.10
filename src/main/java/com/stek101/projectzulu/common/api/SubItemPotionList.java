@@ -1,8 +1,7 @@
 package com.stek101.projectzulu.common.api;
 
-import com.stek101.projectzulu.common.potion.subitem.SubItemPotion;
-
 import com.google.common.base.Optional;
+import com.stek101.projectzulu.common.potion.subitem.SubItemPotion;
 
 public enum SubItemPotionList {
     /* Vanilla Alternates */

@@ -4,6 +4,7 @@ import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
 import com.stek101.projectzulu.common.mobs.entity.EntityGenericCreature;
 
 public class EntityAITempt extends EntityAIBase{

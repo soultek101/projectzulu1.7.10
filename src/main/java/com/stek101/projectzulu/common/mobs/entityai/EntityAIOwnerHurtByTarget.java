@@ -1,7 +1,7 @@
 package com.stek101.projectzulu.common.mobs.entityai;
 
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+
 import com.stek101.projectzulu.common.mobs.entity.EntityGenericTameable;
 
 public class EntityAIOwnerHurtByTarget extends EntityAITarget{

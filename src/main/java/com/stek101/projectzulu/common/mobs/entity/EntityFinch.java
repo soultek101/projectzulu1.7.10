@@ -7,11 +7,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
+
 import com.stek101.projectzulu.common.api.BlockList;
 import com.stek101.projectzulu.common.api.CustomEntityList;
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIFlyingWander;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIStayStill;
+
 import cpw.mods.fml.common.Loader;
 
 public class EntityFinch extends EntityGenericAnimal implements IAnimals {
@@ -74,6 +76,11 @@ public class EntityFinch extends EntityGenericAnimal implements IAnimals {
     @Override
     protected String getHurtSound() {
         return DefaultProps.mobKey + ":" + DefaultProps.entitySounds + "bird";
+    }
+    
+    @Override
+    public int getTalkInterval() {
+        return 120;
     }
 
     /**

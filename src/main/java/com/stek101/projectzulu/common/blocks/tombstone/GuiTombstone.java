@@ -9,7 +9,6 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 import com.stek101.projectzulu.common.ProjectZulu_Core;
-import com.stek101.projectzulu.common.core.network.PZPacketHandler;
 import com.stek101.projectzulu.common.mobs.packets.PZPacketTileText;
 
 import cpw.mods.fml.relauncher.Side;

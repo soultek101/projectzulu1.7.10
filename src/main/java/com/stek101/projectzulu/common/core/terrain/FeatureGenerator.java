@@ -7,8 +7,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
+
 import com.stek101.projectzulu.common.core.terrain.TerrainFeature.FeatureDirection;
 import com.stek101.projectzulu.common.core.terrain.TerrainFeature.Size;
+
 import cpw.mods.fml.common.IWorldGenerator;
 
 public class FeatureGenerator implements IWorldGenerator {

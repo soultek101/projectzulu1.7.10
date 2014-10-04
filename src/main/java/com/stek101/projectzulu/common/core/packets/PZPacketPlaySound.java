@@ -1,8 +1,12 @@
 package com.stek101.projectzulu.common.core.packets;
 
+import io.netty.buffer.ByteBuf;
+
 import java.io.IOException;
 
-import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.world.World;
 
 import com.stek101.projectzulu.common.ProjectZulu_Core;
 import com.stek101.projectzulu.common.core.ProjectZuluLog;
@@ -11,9 +15,6 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.world.World;
 
 public class PZPacketPlaySound implements IMessage, IMessageHandler<PZPacketPlaySound, IMessage>{
 	private int posX;

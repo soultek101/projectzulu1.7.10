@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.world.World;
+
 import com.stek101.projectzulu.common.dungeon.spawner.tag.TypeValuePair;
 
 public class KeyParserOrigin extends KeyParserRange {

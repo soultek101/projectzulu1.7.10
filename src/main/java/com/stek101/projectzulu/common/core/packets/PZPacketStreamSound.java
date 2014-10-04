@@ -1,14 +1,16 @@
 package com.stek101.projectzulu.common.core.packets;
 
-import java.io.IOException;
+import io.netty.buffer.ByteBuf;
 
-import com.stek101.projectzulu.common.ProjectZulu_Core;
-import com.stek101.projectzulu.common.core.ProjectZuluLog;
+import java.io.IOException;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.world.World;
-import io.netty.buffer.ByteBuf;
+
+import com.stek101.projectzulu.common.ProjectZulu_Core;
+import com.stek101.projectzulu.common.core.ProjectZuluLog;
+
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;

@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.AxisAlignedBB;
+
 import com.stek101.projectzulu.common.mobs.entity.EntityGenericCreature;
 
 public class EntityAIHurtByTarget extends EntityAITarget {

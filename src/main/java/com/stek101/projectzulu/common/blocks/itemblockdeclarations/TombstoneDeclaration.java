@@ -5,6 +5,8 @@ import java.io.File;
 import net.minecraft.block.Block;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
+
+import com.google.common.base.Optional;
 import com.stek101.projectzulu.common.ProjectZulu_Core;
 import com.stek101.projectzulu.common.api.BlockList;
 import com.stek101.projectzulu.common.blocks.tombstone.BlockTombstone;
@@ -12,8 +14,6 @@ import com.stek101.projectzulu.common.blocks.tombstone.TileEntityTombstone;
 import com.stek101.projectzulu.common.blocks.tombstone.TileEntityTombstoneRenderer;
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.core.itemblockdeclaration.BlockDeclaration;
-
-import com.google.common.base.Optional;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;

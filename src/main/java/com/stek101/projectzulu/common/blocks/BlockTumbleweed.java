@@ -1,14 +1,10 @@
 package com.stek101.projectzulu.common.blocks;
 
-import java.util.Random;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
+
 import com.stek101.projectzulu.common.ProjectZulu_Core;
-import com.stek101.projectzulu.common.core.DefaultProps;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockTumbleweed extends Block {
 

@@ -10,7 +10,9 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+
 import com.stek101.projectzulu.common.api.PotionList;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class PotionEventHookContainerClass {

@@ -1,14 +1,13 @@
 package com.stek101.projectzulu.common.blocks;
 
-import com.stek101.projectzulu.common.ProjectZulu_Core;
-import com.stek101.projectzulu.common.core.DefaultProps;
-import com.stek101.projectzulu.common.mobs.entity.EntityDuckEgg;
-
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import com.stek101.projectzulu.common.ProjectZulu_Core;
+import com.stek101.projectzulu.common.core.DefaultProps;
+import com.stek101.projectzulu.common.mobs.entity.EntityDuckEgg;
 
 public class ItemDuckEgg extends Item{
 	

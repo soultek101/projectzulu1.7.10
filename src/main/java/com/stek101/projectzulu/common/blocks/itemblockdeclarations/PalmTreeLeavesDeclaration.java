@@ -3,12 +3,12 @@ package com.stek101.projectzulu.common.blocks.itemblockdeclarations;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+
+import com.google.common.base.Optional;
 import com.stek101.projectzulu.common.api.BlockList;
 import com.stek101.projectzulu.common.blocks.BlockPalmTreeLeaves;
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.core.itemblockdeclaration.BlockDeclaration;
-
-import com.google.common.base.Optional;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 

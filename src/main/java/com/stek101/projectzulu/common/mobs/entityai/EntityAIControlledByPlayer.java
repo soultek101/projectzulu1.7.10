@@ -4,11 +4,11 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathFinder;
 import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.util.MathHelper;
+
 import com.stek101.projectzulu.common.mobs.entity.EntityGenericRideable;
 
 public class EntityAIControlledByPlayer extends EntityAIBase {

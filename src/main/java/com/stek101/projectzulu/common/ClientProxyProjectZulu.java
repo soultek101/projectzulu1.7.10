@@ -1,14 +1,10 @@
 package com.stek101.projectzulu.common;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.entity.player.EntityPlayer;
 
-import com.stek101.projectzulu.common.blocks.EntityCreeperBlossomPrimed;
-import com.stek101.projectzulu.common.blocks.RenderCreeperBlossomPrimed;
 import com.stek101.projectzulu.common.core.CustomEntityManager;
 import com.stek101.projectzulu.common.mobs.BossHealthDisplayTicker;
-import com.stek101.projectzulu.common.mobs.EntityGenericEgg;
 
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
