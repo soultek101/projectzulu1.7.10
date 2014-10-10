@@ -43,7 +43,7 @@ public class CreatureFields implements DataFields {
     Point backgroundSize;
 
     public static final ResourceLocation CREATURE_LIST = new ResourceLocation(DefaultProps.dungeonKey,
-            "/textures/creaturelistgui.png");
+            "textures/creaturelistgui.png");
 
     CreatureFields(Minecraft mc) {
         this.mc = mc;

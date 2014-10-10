@@ -16,6 +16,7 @@ public enum EntityStates {
 	stayStill(11),
 	posture(5),
 	inCover(10),
+	isTempted(12),
 	unknown(-1);
 
 	public final int index;

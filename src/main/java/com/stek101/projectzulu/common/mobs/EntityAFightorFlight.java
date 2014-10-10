@@ -3,6 +3,8 @@ package com.stek101.projectzulu.common.mobs;
 import java.util.Random;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import com.stek101.projectzulu.common.api.CustomEntityList;
@@ -20,6 +22,7 @@ public class EntityAFightorFlight {
 	private World worldObj;
 	private CustomEntityList entityEntry;
 	private EntityPlayer entityplayer;
+	private boolean temptingItem;
 	
 	public float angerLevel;
 	public float fleeLevel;	
@@ -29,17 +32,30 @@ public class EntityAFightorFlight {
 	  this.worldObj = par2;
 	  this.aggroLevel = par3;
 	  this.aggroRange = par4;	  
-	  this.aiEntityAvoidEntity = new EntityAIAvoidEntity(entity, EntityPlayer.class, 16.0f, 1.3D, 1.2D);
-	  
+	  this.aiEntityAvoidEntity = new EntityAIAvoidEntity(entity, EntityPlayer.class, 16.0f, 1.3D, 1.2D);	  
 	  return this;	
 	}
 	
-	public void updateEntityAFF(World worldobj){
-			
+	public void updateEntityAFF(World worldobj, Item temptItem){
+		ItemStack var1 = null;
+		//ItemStack var1 = this.entityplayer.getCurrentEquippedItem();
         entityplayer = worldObj.getClosestPlayerToEntity(this.entity, this.aggroRange);
-		
-        if (this.aggroRange != 0){  /** 0 means deactivate FoF behavior **/
-
+        temptingItem = false;
+        
+        if (entityplayer != null) {
+          var1 = this.entityplayer.getCurrentEquippedItem();
+          //var1 == null ? false : entityplayer.equals(var1.getItem());
+          if (var1 != null && temptItem != null) {        	  
+           	  if (temptItem.equals(var1.getItem())){
+ 	         	entity.setAngerLevel(0); // calm down and move on with life
+ 	         	entity.setFleeTick(0);
+        		temptingItem = true;
+        	  }
+          }
+        }
+        
+        if (this.aggroRange != 0 && temptingItem == false ){  /** 0 means deactivate FoF behavior or entity player is too far**/
+ 
         	/* Check if target can be detected, then entity will decide whether to fight or flee, ignore if tamed */
 	        //if (!(this instanceof EntityGenericTameable) && !((EntityGenericTameable)this).isTamed()){
    
@@ -99,5 +115,10 @@ public class EntityAFightorFlight {
 	     	
 	      }
 	}
+	
+	public void updateEntityAFF(World worldobj){
+		updateEntityAFF(worldobj, null);
+	}
+
 
 }

@@ -90,7 +90,7 @@ public class EntityElephant extends EntityGenericAnimal {
     	super.onLivingUpdate();    	
     	
     	if (Math.round(this.aggroRange) != 0) {
-    		EAFF.updateEntityAFF(worldObj);
+    		EAFF.updateEntityAFF(worldObj, Item.getItemFromBlock(Blocks.leaves));
     	}
     }
 

@@ -232,7 +232,7 @@ public class ModelRipperFin extends ModelBase
   public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
   {
     super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-    this.backFinBase.rotateAngleY = MathHelper.cos(f3 * 0.5553F) * 0.8F * f;
+    this.backFinBase.rotateAngleY = MathHelper.cos(f * 0.4443F) * 0.8F * f1; 
   }
 
 }

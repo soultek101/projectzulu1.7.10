@@ -40,7 +40,6 @@ public class EntityFox extends EntityGenericAnimal implements IAnimals {
     public EntityFox(World par1World) {
         super(par1World);
         setSize(0.6f, 1.0f);
-        
         this.entityEntry = CustomEntityList.getByName(EntityList.getEntityString(this));
         
         /* Check if aggroLevel and aggroRange have valid values to activate AFoF */
@@ -114,10 +113,9 @@ public class EntityFox extends EntityGenericAnimal implements IAnimals {
     @Override
     public void onLivingUpdate() {
       super.onLivingUpdate();
-    	
       if (Math.round(this.aggroRange) != 0) {
-  		EAFF.updateEntityAFF(worldObj);
-  		}
+    	  EAFF.updateEntityAFF(worldObj, Items.chicken);
+      }
     }
 
     @Override
@@ -126,7 +124,7 @@ public class EntityFox extends EntityGenericAnimal implements IAnimals {
             return false;
         }
 
-        if (itemStack.getItem() == Items.cooked_chicken) {
+        if (itemStack.getItem() == Items.chicken) {
             return true;
         }
         return super.isValidTamingItem(itemStack);
@@ -158,7 +156,7 @@ public class EntityFox extends EntityGenericAnimal implements IAnimals {
             return 0;
         }
 
-        if (itemStack.getItem() == Items.cooked_chicken) {
+        if (itemStack.getItem() == Items.chicken) {
             return ((ItemFood) Items.melon).func_150905_g(itemStack);
         }
 

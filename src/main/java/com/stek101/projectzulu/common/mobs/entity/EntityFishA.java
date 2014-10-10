@@ -19,8 +19,8 @@ public class EntityFishA extends EntityGenericWaterMob {
 	private double aggroRange;
 
 	public EntityFishA(World par1World) {
-        super(par1World);       
-
+        super(par1World); 
+        setSize(1.2f, 0.9f);
         Random rand1 = new Random();
         this.textureID = rand1.nextInt(3);
 
@@ -36,10 +36,9 @@ public class EntityFishA extends EntityGenericWaterMob {
    	  		EAFF = new EntityAFightorFlight().setEntity(this, worldObj, this.aggroLevel, this.aggroRange);
    	  	}
    	 
-        this.maxFlightHeight = 5;
-        this.getNavigator().setCanSwim(true);
+        this.maxFlightHeight =5;
         this.tasks.addTask(1, new EntityAIWanderSwim(this, 0.3f, 60D));
-        this.tasks.addTask(2, new EntityAIPanicSwim(this, 1.25f, 60D));
+        //this.tasks.addTask(2, new EntityAIPanicSwim(this, 1.25f, 60D));
     }
 	
     @Override
@@ -67,7 +66,7 @@ public class EntityFishA extends EntityGenericWaterMob {
     protected void updateFallState(double par1, boolean par3) {
     }
 
-    @Override
+   @Override
     protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
         return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
     }
@@ -78,7 +77,7 @@ public class EntityFishA extends EntityGenericWaterMob {
     	if (Math.round(this.aggroRange) != 0) {
     		EAFF.updateEntityAFF(worldObj);
     	}
-    }
+    } 
     
     /**
      * Returns the sound this mob makes while it's alive.
@@ -107,11 +106,8 @@ public class EntityFishA extends EntityGenericWaterMob {
         return null;
     }
     
-    /**
-     * Checks if the entity's current position is a valid location to spawn this entity.
-     */
-    @Override
-    public boolean getCanSpawnHere()
+   // @Override
+  /*  public boolean getCanSpawnHere()
     {
 		int var1 = MathHelper.floor_double(this.posX);
 		int var2 = MathHelper.floor_double(this.boundingBox.minY);
@@ -120,7 +116,15 @@ public class EntityFishA extends EntityGenericWaterMob {
         return this.posY > 45.0D && this.posY < 63.0D && worldObj.canBlockSeeTheSky(var1, var2, var3)
         		&& this.worldObj.getSavedLightValue(EnumSkyBlock.Block, var1, var2, var3) < 1
         		&& super.getCanSpawnHere();
+    }*/
+    
+    /**
+     * Checks if the entity's current position is a valid location to spawn this entity.
+     */
+    public boolean getCanSpawnHere()
+    {
+        return this.posY > 45.0D && this.posY < 63.0D && super.getCanSpawnHere();
     }
-	   
+
 	   
 }

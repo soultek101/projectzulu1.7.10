@@ -13,7 +13,7 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 public class ExperienceRedistributor {
     private ConcurrentHashMap<Integer, Integer> entityIdToExperience = new ConcurrentHashMap<Integer, Integer>();
 
-    public void addExpereince(EntityPlayer player, int experience) {
+    public void addExperience(EntityPlayer player, int experience) {
         entityIdToExperience.put(player.getEntityId(), experience);
     }
 

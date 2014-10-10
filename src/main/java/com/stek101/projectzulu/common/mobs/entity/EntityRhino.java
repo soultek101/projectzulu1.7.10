@@ -83,7 +83,7 @@ public class EntityRhino extends EntityGenericAnimal implements IAnimals {
     public void onLivingUpdate() {
     	super.onLivingUpdate();
     	if (Math.round(this.aggroRange) != 0) {
-    		EAFF.updateEntityAFF(worldObj);
+    		EAFF.updateEntityAFF(worldObj, Item.getItemFromBlock(Blocks.tallgrass));
     	}
     }
     

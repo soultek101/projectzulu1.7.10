@@ -8,13 +8,10 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
-import com.stek101.projectzulu.common.api.BlockList;
 import com.stek101.projectzulu.common.api.CustomEntityList;
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIFlyingWander;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIStayStill;
-
-import cpw.mods.fml.common.Loader;
 
 public class EntityCrow extends EntityGenericAnimal implements IAnimals {
     int stayStillTimer = 0;

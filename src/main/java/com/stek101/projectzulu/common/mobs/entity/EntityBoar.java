@@ -81,7 +81,7 @@ public class EntityBoar extends EntityGenericAnimal implements IAnimals {
     public void onLivingUpdate() {
     	super.onLivingUpdate();
     	if (Math.round(this.aggroRange) != 0) {
-    		EAFF.updateEntityAFF(worldObj);
+    		EAFF.updateEntityAFF(worldObj, Items.apple);
     	}
     }
 

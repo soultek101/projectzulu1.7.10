@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
@@ -88,7 +89,7 @@ public class DeathGamerules {
         tombstoneAbsorbDrops = config.get("General Controls", "Tombstone Absorb Drops", tombstoneAbsorbDrops)
                 .getBoolean(tombstoneAbsorbDrops);
         doDropEvent = config.get("General Controls", "doDropEvent", doDropEvent).getBoolean(doDropEvent);
-
+        
         String category = "General Controls.gamerule_settings";
         maxDropXP = config
                 .get(category + ".Experience", "maxDropXP", 100,
@@ -166,7 +167,6 @@ public class DeathGamerules {
         //createGameruleIfAbsent(gameRule, "dropHotbar", dropHotbarDefault);
         //createGameruleIfAbsent(gameRule, "dropArmor", dropArmorDefault);
         //createGameruleIfAbsent(gameRule, "dropXP", dropXPDefault);
-        
         gameRule.setOrCreateGameRule("dropInventory", String.valueOf(dropInventoryDefault));
         gameRule.setOrCreateGameRule("dropHotbar", String.valueOf(dropHotbarDefault));
         gameRule.setOrCreateGameRule("dropArmor", String.valueOf(dropArmorDefault));
@@ -185,8 +185,8 @@ public class DeathGamerules {
     
     @SubscribeEvent
     public void onPlayerDeath(PlayerDropsEvent event) {
-    	
     	ArrayList<EntityItem> drops = event.drops;   	
+    	int minDistance = 0;
     	
         if (event.entity instanceof EntityPlayerMP) {
             GameRules gameRules = event.entity.worldObj.getGameRules();
@@ -197,10 +197,14 @@ public class DeathGamerules {
              boolean dropXP = gameRules.getGameRuleBooleanValue("dropXP");
              
              String tombmsg ="";
+             EntityPlayer player = (EntityPlayer) event.entity;
              
-            EntityPlayer player = (EntityPlayer) event.entity;
+             if (event.source.isExplosion()) {
+            	 minDistance = 10;
+             }
+             
+             TileEntityTombstone tombstone = tombstoneOnDeath ? placeTombstone(player, minDistance) : null;
 
-            TileEntityTombstone tombstone = tombstoneOnDeath ? placeTombstone(player) : null;
             if (tombstone != null) {
             	//tombstone.setSignString(event.source.func_151519_b((EntityPlayer) event.entity).toString());
             	tombstone.setSignString("HERE LIES " + event.source.func_151519_b((EntityPlayer) event.entity).getUnformattedTextForChat().toUpperCase());
@@ -218,10 +222,13 @@ public class DeathGamerules {
             int xpDropped = 0;
             if (dropXP) {
                 if (!player.worldObj.isRemote) {
-                    xpDropped = player.experienceTotal;
+                    //xpDropped = player.experienceTotal;
+                    xpDropped = player.experienceTotal * (maxDropXP/100);
+                    int keptXp = (player.experienceTotal - xpDropped) * (percKeptXp / 100);
+                    
                     xpDropped = xpDropped > maxDropXP ? maxDropXP : xpDropped;
-                    int keptXp = (player.experienceTotal - xpDropped) * percKeptXp / 100;
-                    redistributor.addExpereince(player, keptXp >= 0 ? keptXp : 0);
+                    
+                    redistributor.addExperience(player, keptXp >= 0 ? keptXp : 0);
                     player.experienceLevel = 0;
                     player.experienceTotal = 0;
                     player.experience = 0;
@@ -303,8 +310,8 @@ public class DeathGamerules {
         return new PlayerDropsEvent(player, damageSource, player.capturedDrops, recentlyHit > 0);
     }
 
-    private TileEntityTombstone placeTombstone(EntityPlayer player) {
-        Optional<ChunkCoordinates> chunkCoordinate = findValidTombstoneLocation(player);
+    private TileEntityTombstone placeTombstone(EntityPlayer player, int minDistance) {
+        Optional<ChunkCoordinates> chunkCoordinate = findValidTombstoneLocation(player, minDistance);
         if (chunkCoordinate.isPresent()) {
             /* Place a Tombstone */
             player.worldObj.setBlock(chunkCoordinate.get().posX, chunkCoordinate.get().posY,
@@ -327,10 +334,11 @@ public class DeathGamerules {
         return null;
     }
 
-    private Optional<ChunkCoordinates> findValidTombstoneLocation(EntityPlayer player) {
+    private Optional<ChunkCoordinates> findValidTombstoneLocation(EntityPlayer player, int minDistance) {
         final int maxRadius = 100;
+        
         /** Search an increasing square box (only check edge) for a valid location */
-        for (int radius = 0; radius < maxRadius; radius++) {
+        for (int radius = minDistance; radius < maxRadius; radius++) {
             List<ChunkCoordinates> validLocations = new ArrayList<ChunkCoordinates>();
             validLocations.addAll(searchXPlaneAt(-radius, radius, player));
             validLocations.addAll(searchXPlaneAt(radius, radius, player));
@@ -339,7 +347,9 @@ public class DeathGamerules {
             validLocations.addAll(searchYPlaneAt(-radius, radius, player));
             validLocations.addAll(searchYPlaneAt(radius, radius, player));
             ChunkCoordinates closestPoint = null;
+            
             float bestDistance = 0;
+            
             for (ChunkCoordinates chunkCoordinates : validLocations) {
                 if (closestPoint != null) {
                     float distance = chunkCoordinates.getDistanceSquared((int) player.posX, (int) player.posY,
@@ -404,7 +414,9 @@ public class DeathGamerules {
     }
 
     private boolean isLocationValid(EntityPlayer player, int posX, int posY, int posZ) {
-        if (player.worldObj.isAirBlock(posX, posY, posZ) && player.worldObj.getBlock(posX, posY - 1, posZ).isOpaqueCube()) {
+        if ((player.worldObj.isAirBlock(posX, posY, posZ) || player.worldObj.getBlock(posX, posY, posZ).getMaterial().isReplaceable()) && player.worldObj.getBlock(posX, posY - 1, posZ).isOpaqueCube()
+        		&& !player.worldObj.getBlock(posX, posY, posZ).getMaterial().equals(Material.water))
+    	{
             return true;
         }
         return false;

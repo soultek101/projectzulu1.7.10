@@ -34,7 +34,7 @@ public abstract class GuiScrollingList {
     private boolean field_27262_q;
     private int field_27261_r;
     public static ResourceLocation background = new ResourceLocation(DefaultProps.dungeonKey, 
-    		"/textures/customspawnerbackground.png");
+    		"textures/customspawnerbackground.png");
 
     public GuiScrollingList(Minecraft client, int width, int height, int top, int bottom, int left, int entryHeight) {
         this.client = client;

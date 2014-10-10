@@ -140,7 +140,6 @@ public class EntityAITempt extends EntityAIBase{
      * Updates the task
      */
     public void updateTask() {
-    	
         this.temptedEntity.getLookHelper().setLookPositionWithEntity(this.temptingPlayer, 30.0F, (float)this.temptedEntity.getVerticalFaceSpeed());
 
         if (this.temptedEntity.getDistanceSqToEntity(this.temptingPlayer) < 6.25D) {
@@ -149,7 +148,7 @@ public class EntityAITempt extends EntityAIBase{
         else {
             this.temptedEntity.getNavigator().tryMoveToEntityLiving(this.temptingPlayer, this.speed);
         }
-        
+    	
         if(shouldHop){
             tryToHop();
         }

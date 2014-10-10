@@ -20,7 +20,7 @@ public class GUISelectionList extends GuiScrollingList {
     Node currentNode;
     GuiButton previous;
     public static final ResourceLocation CREATURE_GUI = new ResourceLocation(DefaultProps.dungeonKey,
-            "creaturelistgui.png");
+            "textures/creaturelistgui.png");
 
     public GUISelectionList(GuiLimitedMobSpawner parent, Node rootSoundNode, ListType listType, int listWidth,
             Point screenSize, Point backgroundSize) {

@@ -11,12 +11,10 @@ import java.io.IOException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import com.stek101.projectzulu.common.ProjectZulu_Core;
-import com.stek101.projectzulu.common.core.ProjectZuluLog;
 import com.stek101.projectzulu.common.dungeon.TileEntityLimitedMobSpawner;
 
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
@@ -66,8 +64,8 @@ public class PZPacketMobSpawner implements IMessage, IMessageHandler<PZPacketMob
 		return null;
 	}
 
-	@Override
-	public void fromBytes(ByteBuf buf) {
+//	@Override
+/*	public void fromBytes(ByteBuf buf) {
 	  PacketBuffer buffer = new PacketBuffer(buf);
 	   try {		
 		   
@@ -80,10 +78,11 @@ public class PZPacketMobSpawner implements IMessage, IMessageHandler<PZPacketMob
 			ProjectZuluLog.severe("There was a problem decoding the packet in PZPacketMobSpawner : " + buffer + ".", this);
          e.printStackTrace();
 		}
-	}
+	}*/
 
-	@Override
-	public void toBytes(ByteBuf buf) {
+
+//	@Override
+/*	public void toBytes(ByteBuf buf) {
       PacketBuffer buffer = new PacketBuffer(buf);
 		try {		
 			
@@ -96,7 +95,51 @@ public class PZPacketMobSpawner implements IMessage, IMessageHandler<PZPacketMob
 			ProjectZuluLog.severe("There was a problem encoding the packet in PZPacketMobSpawner : " + buffer + ".", this);
           e.printStackTrace();
 		}
-	}
+	}*/
+	@Override
+    public void toBytes(ByteBuf buffer) {
+        ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
+        DataOutputStream data = new DataOutputStream(byteArray);
+        try {
+            writeData(data);
+        } catch (Exception e) {
+            // TODO: log exception
+        }
+        byte[] bytes = byteArray.toByteArray();
+        buffer.writeInt(bytes.length);
+        buffer.writeBytes(bytes);
+    }
+	
+	 protected void writeData(DataOutputStream buffer) throws IOException {
+	        buffer.writeInt(posX);
+	        buffer.writeInt(posY);
+	        buffer.writeInt(posZ);
+	        writeNBTTagCompound(customData, buffer);
+	    }
+	 
+	    @Override
+	    public void fromBytes(ByteBuf buffer) {
+	        int byteLength = buffer.readInt();
+	        byte[] dataBytes = new byte[byteLength];
+	        buffer.readBytes(dataBytes);
+
+	        ByteArrayInputStream byteArray = new ByteArrayInputStream(dataBytes);
+	        DataInputStream data = new DataInputStream(byteArray);
+	        try {
+	            readData(data);
+	        } catch (Exception e) {
+	            // TODO: log exception
+	        }
+	    }
+	 
+	    protected void readData(DataInputStream buffer) throws IOException {
+	        posX = buffer.readInt();
+	        posY = buffer.readInt();
+	        posZ = buffer.readInt();
+	        customData = readNBTTagCompound(buffer);
+	    }
+
+	    
 	
 	public DataInputStream decodeInto( ByteBuf buffer) {
         int byteLength = buffer.readInt();

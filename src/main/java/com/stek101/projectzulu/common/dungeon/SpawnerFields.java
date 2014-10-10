@@ -41,7 +41,7 @@ public class SpawnerFields implements DataFields {
     }
 
     public static final ResourceLocation CREATURE_GUI = new ResourceLocation(DefaultProps.dungeonKey,
-            "creaturelistgui.png");
+            "textures/creaturelistgui.png");
 
     @Override
     public DataFields createFields(Minecraft mc, int screenWidth, int screenHeight, Point backgroundSize) {

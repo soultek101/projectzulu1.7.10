@@ -39,6 +39,18 @@ public class TileEntityTombstone extends TileEntity {
     public boolean hasDrops() {
         return !deathItems.isEmpty() || experience > 0;
     }
+    
+    public int getSizeInventory(){
+        return deathItems.size();	
+      }
+    
+    /**
+     * Returns the stack in slot i
+     */
+    public ItemStack getStackInSlot(int slotNum)
+    {
+        return this.deathItems.get(slotNum);
+    } 
 
     /* Give items in Tombstone to Player */
     public void giveItemsToPlayer(EntityPlayer player) {

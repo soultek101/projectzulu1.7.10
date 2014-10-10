@@ -84,7 +84,7 @@ public class EntityGoat extends EntityGenericAnimal implements IAnimals {
     public void onLivingUpdate() {
     	super.onLivingUpdate();
     	if (Math.round(this.aggroRange) != 0) {
-    		EAFF.updateEntityAFF(worldObj);
+    		EAFF.updateEntityAFF(worldObj, Items.apple);
     	}
     	
     	/* Basic timer to determine whether entity can be milked or not */

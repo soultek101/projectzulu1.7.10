@@ -94,7 +94,7 @@ public class EntityOstrich extends EntityGenericAnimal implements IAnimals {
     public void onLivingUpdate() {
     	super.onLivingUpdate();
     	if (Math.round(this.aggroRange) != 0) {
-    		EAFF.updateEntityAFF(worldObj);
+    		EAFF.updateEntityAFF(worldObj, Items.wheat_seeds);
     	}
     	
     	if (!this.worldObj.isRemote && !this.isChild() &&  --this.timeUntilNextEgg <= 0)

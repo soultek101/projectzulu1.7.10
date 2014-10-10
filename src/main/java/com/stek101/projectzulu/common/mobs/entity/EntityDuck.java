@@ -90,7 +90,7 @@ public class EntityDuck extends EntityGenericAnimal implements IAnimals {
     	super.onLivingUpdate();
     	
     	if (Math.round(this.aggroRange) != 0) {
-    		EAFF.updateEntityAFF(worldObj);
+    		EAFF.updateEntityAFF(worldObj, Items.fish);
     	}
     	
      	if (!this.worldObj.isRemote && !this.isChild() &&  --this.timeUntilNextEgg <= 0)

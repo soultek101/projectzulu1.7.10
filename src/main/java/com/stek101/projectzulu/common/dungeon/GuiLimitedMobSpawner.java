@@ -29,7 +29,7 @@ public class GuiLimitedMobSpawner extends GuiScreen {
     int currentDataField = 0;
     private List<DataFields> dataFields = new ArrayList<DataFields>();
     public static final ResourceLocation SPAWNER_GUI = new ResourceLocation(DefaultProps.dungeonKey,
-            "/textures/mobspawnergui.png");
+            "textures/mobspawnergui.png");
 
     public DataFields getDataField(int index) {
         return dataFields.get(index);

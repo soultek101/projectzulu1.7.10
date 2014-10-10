@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 
 import com.stek101.projectzulu.common.api.CustomEntityList;
 import com.stek101.projectzulu.common.mobs.EntityAFightorFlight;
-import com.stek101.projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
+import com.stek101.projectzulu.common.mobs.entityai.EntityAIAttackOnCollideWater;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAINearestAttackableTarget;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIPanicSwim;
@@ -41,19 +41,18 @@ public class EntityRipperFin extends EntityGenericWaterMob  {
           EAFF = new EntityAFightorFlight().setEntity(this, worldObj, this.aggroLevel, this.aggroRange);
     	 }
     	  
-        this.maxFlightHeight = 5;
+        this.maxFlightHeight = -3;
         this.getNavigator().setCanSwim(true);
         this.tasks.addTask(1, new EntityAIWanderSwim(this, 0.3f, 60D));
-        this.tasks.addTask(2, new EntityAIPanicSwim(this, 1.25f, 60D));
-        this.tasks.addTask(3, new EntityAIAttackOnCollide(this, 1.0f, false));
+        this.tasks.addTask(2, new EntityAIAttackOnCollideWater(this, 1.0f, false));
         
         targetTasks.addTask(3, new EntityAIHurtByTarget(this, false, false));
         targetTasks.addTask(4,
                 new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking),
                         EntityPlayer.class, 16.0F, 0, true));
-        targetTasks.addTask(5,
-                new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking),
-                        EntityLiving.class, 16.0F, 0, false, true, IMob.mobSelector));
+        //targetTasks.addTask(5,
+        //        new EntityAINearestAttackableTarget(this, EnumSet.of(EntityStates.attacking, EntityStates.looking),
+        //                EntityLiving.class, 16.0F, 0, false, true, IMob.mobSelector));
 
     }	
 	
@@ -126,33 +125,9 @@ public class EntityRipperFin extends EntityGenericWaterMob  {
     /**
      * Checks if the entity's current position is a valid location to spawn this entity.
      */
-    @Override
     public boolean getCanSpawnHere()
     {
-		int var1 = MathHelper.floor_double(this.posX);
-		int var2 = MathHelper.floor_double(this.boundingBox.minY);
-		int var3 = MathHelper.floor_double(this.posZ);
-		
-        return this.posY > 45.0D && this.posY < 63.0D && worldObj.canBlockSeeTheSky(var1, var2, var3)
-        		&& this.worldObj.getSavedLightValue(EnumSkyBlock.Block, var1, var2, var3) < 1
-        		&& super.getCanSpawnHere();
+        return this.posY > 45.0D && this.posY < 63.0D && super.getCanSpawnHere();
     }
 	
-     /*Retained from old code, for improvement */
-	   protected boolean canAttackEntity(Entity entity) 
-	   {
-		   if((entity instanceof EntityPlayer) && this.getAngerLevel() > 0)
-		   {
-			   return entity instanceof EntityLiving || super.canAttackEntity(entity) || entity instanceof EntityPlayer;
-		   }
-		   else
-		   {
-			   return false;
-		   }
-	   }	   
-	   
-       @Override
-	   protected int getAttackStrength() {    	  
-	 	      return 1;
-	   }
 }
