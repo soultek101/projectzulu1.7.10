@@ -1,0 +1,7 @@
+tile.limitedmobspawner.name=Ограниченный спаунер мобов
+
+commands.playsound.usage=/playsound [target: игрок] [file: имя] <range> <x> <y> <z>
+commands.streamsound.usage=/streamsound [target: игрок] [file: имя] <range> <x> <y> <z>
+commands.spawnentity.usage=/spawnentity [target: игрок] [entity: имя] <yaw> <pitch> <x> <y> <z>
+commands.placeblock.usage=/placeblock [target: игрок] [blockID] <meta> <x> <y> <z>
+commands.placeblock.noblock=/placeblock blockID does not exist
