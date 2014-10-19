@@ -3,6 +3,7 @@ package com.stek101.projectzulu.common.world2.architect;
 import java.awt.Point;
 
 import net.minecraft.util.ChunkCoordinates;
+
 import com.stek101.projectzulu.common.world.dataobjects.BlockWithMeta;
 import com.stek101.projectzulu.common.world2.MazeCell;
 

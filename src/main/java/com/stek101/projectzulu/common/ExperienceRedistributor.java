@@ -3,7 +3,9 @@ package com.stek101.projectzulu.common;
 import java.util.concurrent.ConcurrentHashMap;
 
 import net.minecraft.entity.player.EntityPlayer;
+
 import com.stek101.projectzulu.common.core.ProjectZuluLog;
+
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
@@ -11,7 +13,7 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent;
 public class ExperienceRedistributor {
     private ConcurrentHashMap<Integer, Integer> entityIdToExperience = new ConcurrentHashMap<Integer, Integer>();
 
-    public void addExpereince(EntityPlayer player, int experience) {
+    public void addExperience(EntityPlayer player, int experience) {
         entityIdToExperience.put(player.getEntityId(), experience);
     }
 

@@ -3,14 +3,13 @@ package com.stek101.projectzulu.common.potion.subitem;
 import java.util.Collections;
 import java.util.List;
 
-import com.google.common.base.Optional;
-
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+
 import com.stek101.projectzulu.common.api.ItemList;
 import com.stek101.projectzulu.common.api.SubItemPotionList;
 import com.stek101.projectzulu.common.core.ItemGenerics.Properties;
@@ -33,9 +32,13 @@ public class SubItemPotionBubbling extends SubItemPotion {
         recipies.addResultPotion(Items.spider_eye, SubItemPotionList.POISON);
         recipies.addResultPotion(Items.ghast_tear, SubItemPotionList.REGENERATION);
         recipies.addResultPotion(Items.fermented_spider_eye, SubItemPotionList.WEAKNESS);
+        
+        recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.DuckEgg.meta, SubItemPotionList.WEAKNESS);
+        
         if (ItemList.genericCraftingItems.isPresent()) {
-            recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.Talon.meta,
+            recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.Talon.meta(),
                     SubItemPotionList.STRENGTH);
+
             recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.LargeHeart.meta,
                     SubItemPotionList.STRENGTH);
             recipies.addResultPotion(ItemList.genericCraftingItems.get(), Properties.RabbitsFoot.meta,

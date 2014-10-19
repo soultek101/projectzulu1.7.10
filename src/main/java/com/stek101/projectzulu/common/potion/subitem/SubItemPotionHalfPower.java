@@ -2,6 +2,7 @@ package com.stek101.projectzulu.common.potion.subitem;
 
 import net.minecraft.item.Item;
 import net.minecraft.util.MathHelper;
+
 import com.stek101.projectzulu.common.potion.PotionParser;
 
 public abstract class SubItemPotionHalfPower extends SubItemPotionGeneric {

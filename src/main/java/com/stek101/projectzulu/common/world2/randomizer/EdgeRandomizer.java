@@ -2,9 +2,9 @@ package com.stek101.projectzulu.common.world2.randomizer;
 
 import java.util.Random;
 
-import com.stek101.projectzulu.common.world2.MazeCell;
-
 import net.minecraft.world.World;
+
+import com.stek101.projectzulu.common.world2.MazeCell;
 
 public class EdgeRandomizer extends Randomizer {
     Random random;

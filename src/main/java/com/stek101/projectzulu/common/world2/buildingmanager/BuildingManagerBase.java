@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
+
 import com.stek101.projectzulu.common.core.terrain.TerrainFeature.FeatureDirection;
 import com.stek101.projectzulu.common.world.dataobjects.BlockWithMeta;
 import com.stek101.projectzulu.common.world2.MazeCell;

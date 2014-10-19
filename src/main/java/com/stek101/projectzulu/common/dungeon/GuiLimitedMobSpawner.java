@@ -19,7 +19,6 @@ import org.lwjgl.util.Point;
 
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.core.ObfuscationHelper;
-import com.stek101.projectzulu.common.core.ProjectZuluLog;
 
 //TODO: Implement Try Write / Read to Test if Saving Would Cause a Crash
 public class GuiLimitedMobSpawner extends GuiScreen {
@@ -30,7 +29,7 @@ public class GuiLimitedMobSpawner extends GuiScreen {
     int currentDataField = 0;
     private List<DataFields> dataFields = new ArrayList<DataFields>();
     public static final ResourceLocation SPAWNER_GUI = new ResourceLocation(DefaultProps.dungeonKey,
-            "/textures/mobspawnergui.png");
+            "textures/mobspawnergui.png");
 
     public DataFields getDataField(int index) {
         return dataFields.get(index);

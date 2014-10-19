@@ -1,13 +1,13 @@
 package com.stek101.projectzulu.common.dungeon.itemblockdeclaration;
 
 import net.minecraft.block.Block;
+
+import com.google.common.base.Optional;
 import com.stek101.projectzulu.common.api.BlockList;
 import com.stek101.projectzulu.common.core.itemblockdeclaration.BlockDeclaration;
 import com.stek101.projectzulu.common.dungeon.BlockLimitedMobSpawner;
 import com.stek101.projectzulu.common.dungeon.TileEntityLimitedMobSpawner;
 import com.stek101.projectzulu.common.dungeon.TileEntityLimitedMobSpawnerRenderer;
-
-import com.google.common.base.Optional;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;

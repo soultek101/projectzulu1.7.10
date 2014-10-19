@@ -1,12 +1,12 @@
 package com.stek101.projectzulu.common.blocks.itemblockdeclarations;
 
 import net.minecraft.block.Block;
+
+import com.google.common.base.Optional;
 import com.stek101.projectzulu.common.api.BlockList;
 import com.stek101.projectzulu.common.blocks.BlockCreeperBlossom;
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.core.itemblockdeclaration.BlockDeclaration;
-
-import com.google.common.base.Optional;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 

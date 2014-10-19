@@ -54,7 +54,6 @@ public class CommandSpawnEntity extends CommandBase{
 			
 			Entity spawnableEntity = EntityList.createEntityByName(stringArgs[1], targetPlayer.worldObj);
 			if(spawnableEntity == null){
-				System.out.println("Entity is Null");
 				 throw new WrongUsageException("commands.spawnentity.noentity", new Object[0]);
 			}
 			

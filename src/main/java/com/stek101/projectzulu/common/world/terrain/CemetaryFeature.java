@@ -8,13 +8,14 @@ import net.minecraft.block.material.Material;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+
 import com.stek101.projectzulu.common.core.ProjectZuluLog;
 import com.stek101.projectzulu.common.core.TerrainFeatureHelper;
 import com.stek101.projectzulu.common.core.terrain.BiomeFeature;
 import com.stek101.projectzulu.common.world2.buildingmanager.BuildingManagerCemetary;
 
 public class CemetaryFeature extends BiomeFeature {
-    public static final String CEMETARY = "Cemetary";
+    public static final String CEMETARY = "Cemetery";
 
     public CemetaryFeature() {
         super(CEMETARY, Size.MEDIUM);

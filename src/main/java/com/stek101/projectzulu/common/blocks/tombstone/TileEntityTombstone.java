@@ -3,7 +3,11 @@ package com.stek101.projectzulu.common.blocks.tombstone;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
+import com.stek101.projectzulu.common.ProjectZulu_Core;
+
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -13,6 +17,8 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -39,6 +45,18 @@ public class TileEntityTombstone extends TileEntity {
     public boolean hasDrops() {
         return !deathItems.isEmpty() || experience > 0;
     }
+    
+    public int getSizeInventory(){
+        return deathItems.size();	
+      }
+    
+    /**
+     * Returns the stack in slot i
+     */
+    public ItemStack getStackInSlot(int slotNum)
+    {
+        return this.deathItems.get(slotNum);
+    } 
 
     /* Give items in Tombstone to Player */
     public void giveItemsToPlayer(EntityPlayer player) {
@@ -50,9 +68,35 @@ public class TileEntityTombstone extends TileEntity {
         while (unSortIterator.hasNext() && itemAdded) {
             ItemStack deathItem = unSortIterator.next();
             itemAdded = player.inventory.addItemStackToInventory(deathItem);
+            
             if (itemAdded) {
                 unSortIterator.remove();
             }
+        }
+    }
+    
+    /* Spawn items in Tombstone near Player */
+    public void spawnItemsNearPlayer(World world, int par1, int par2, int par3) {
+    	Random rand = new Random();
+    	EntityPlayer player = ProjectZulu_Core.proxy.getClientPlayer();
+    	Side side = FMLCommonHandler.instance().getEffectiveSide();
+        player.addExperience(experience);
+        experience = 0;
+
+        Iterator<ItemStack> unSortIterator = deathItems.iterator();
+        
+        while (unSortIterator.hasNext()) {
+            ItemStack deathItem = unSortIterator.next();
+            
+        	if (side == Side.SERVER) {
+            double xrand = (double) (world.rand.nextFloat() * 0.7F) + (double) (0.3F) * 0.5D;
+	    	double yrand = (double) (world.rand.nextFloat() * 0.7F) + (double) (0.3F) * 0.5D;
+	    	double zrand = (double) (world.rand.nextFloat() * 0.7F) + (double) (0.3F) * 0.5D;
+    		EntityItem itemDrop = new EntityItem(world, (double) par1 + xrand, (double) par2 + yrand, (double) par3 + zrand, deathItem);
+    		itemDrop.delayBeforeCanPickup = 10;	    	
+    		world.spawnEntityInWorld(itemDrop);    	 
+            unSortIterator.remove();
+          }
         }
     }
 

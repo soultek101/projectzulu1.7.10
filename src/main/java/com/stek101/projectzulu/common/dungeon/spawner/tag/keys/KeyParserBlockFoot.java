@@ -3,16 +3,15 @@ package com.stek101.projectzulu.common.dungeon.spawner.tag.keys;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map.Entry;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.world.World;
+
+import com.google.common.collect.ListMultimap;
 import com.stek101.projectzulu.common.dungeon.spawner.tag.OptionalParser;
 import com.stek101.projectzulu.common.dungeon.spawner.tag.TypeValuePair;
 import com.stek101.projectzulu.common.dungeon.spawner.tag.settings.OptionalSettings.Operand;
-
-import com.google.common.collect.ListMultimap;
 
 public class KeyParserBlockFoot extends KeyParserBase {
 

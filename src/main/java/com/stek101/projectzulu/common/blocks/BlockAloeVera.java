@@ -5,7 +5,6 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
-import net.minecraft.block.BlockFlower;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
@@ -14,8 +13,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
 import com.stek101.projectzulu.common.api.BlockList;
 import com.stek101.projectzulu.common.api.ItemList;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -53,7 +54,7 @@ public class BlockAloeVera extends BlockBush {
     @Override
     public void updateTick(World par1World, int par2, int par3, int par4, Random par5Random) {
         // See if Aloe Vera Should Grow
-        // Control Bottom Alor Vera
+        // Control Bottom Aloe Vera
         int tempAVMeta = par1World.getBlockMetadata(par2, par3, par4);
         int waterRate = waterGrowthRate(par1World, par2, par3, par4);
         int weedRate = weedGrowthRate(par1World, par2, par3, par4);

@@ -49,13 +49,14 @@ tile.watereddirt.sand_2.name=Moist Sand
 tile.watereddirt.sand_3.name=Saturated Sand 
 tile.watereddirt.sand_4.name=Drenched Soaked Sand
 
-item.ankh.name.name=Ankh
+item.ankh.name=Ankh
 item.tile.uniFlowerPot.name=Universal Flower Pot
 item.waterdroplet.name=Water Droplets
 item.aloeveraseeds.name=Aloe Vera Seeds
 item.coconutmilkfragment.name=Coconut Milk Fragment
 item.coconutseed.name=Coconut Seed
 item.coconutshell.name=Coconut Shell
+item.coconutshellfuel.name=Coconut Shell Fuel
 item.scaleitem.name=Scale
 item.furpelt.name=Fur Pelt
 item.coconutitem.name=Whole Coconut
@@ -86,6 +87,7 @@ item.glowinggoo.name=Glowing Goo
 item.smallunhealthyheart.name=Small Unhealthy Heart
 item.largeunhealthyheart.name=Large Unhealthy Heart
 item.duckegg.name=Duck Egg
+item.ostrichegg.name=Ostrich Egg
 
 item.scalehelmet.name=Scale Helmet
 item.scalechest.name=Scale Chest
@@ -128,6 +130,11 @@ item.furhelmet.name=Fur Helmet
 item.furchest.name=Fur Chest
 item.furlegs.name=Fur Legs
 item.furboots.name=Fur Boots
+item.hammertoolwood.name=Wooden Hammer Tool
+item.hammertoolstone.name=Stone Hammer Tool
+item.hammertooliron.name=Iron Hammer Tool
+item.hammertoolgold.name=Gold Hammer Tool
+item.hammertooldiamond.name=Diamond Hammer Tool
 
 potion.shining=Bubbling
 potion.incendiary=Incendiary

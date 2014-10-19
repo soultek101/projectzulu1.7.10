@@ -11,6 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.pathfinding.PathPoint;
 import net.minecraft.util.MathHelper;
+
 import com.stek101.projectzulu.common.mobs.entity.EntityGenericCreature;
 import com.stek101.projectzulu.common.mobs.entity.EntityGenericTameable;
 

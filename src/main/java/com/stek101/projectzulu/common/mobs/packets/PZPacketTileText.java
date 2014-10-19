@@ -1,20 +1,21 @@
 package com.stek101.projectzulu.common.mobs.packets;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufInputStream;
+import io.netty.buffer.ByteBufOutputStream;
+
 import java.io.IOException;
 
-import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+
+import com.stek101.projectzulu.common.blocks.tombstone.TileEntityTombstone;
+import com.stek101.projectzulu.common.core.ProjectZuluLog;
 
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tileentity.TileEntity;
-
-import com.stek101.projectzulu.common.blocks.tombstone.TileEntityTombstone;
-import com.stek101.projectzulu.common.core.ProjectZuluLog;
 
 public class PZPacketTileText implements IMessage, IMessageHandler<PZPacketTileText, IMessage> {
     private int tileLocationX;
@@ -30,29 +31,41 @@ public class PZPacketTileText implements IMessage, IMessageHandler<PZPacketTileT
         return this;
     }
     
-	@Override
-	public void toBytes(ByteBuf buf) {
-		PacketBuffer buffer = new PacketBuffer(buf);
-		try {	
-		    buffer.writeInt(tileLocationX);
-	        buffer.writeInt(tileLocationY);
-	        buffer.writeInt(tileLocationZ);
-	        buffer.writeInt(text.length);
-	       
-	         for (String string : text) {
-	            buffer.writeInt(string.length());
-	            buffer.writeStringToBuffer(string);
-	        }
-		} catch (IOException e) {
-			ProjectZuluLog.severe("There was a problem encoding the packet in PZPacketTileText : " + buffer + ".", this);
+    @Override
+    public void toBytes(ByteBuf buffer) {
+        ByteBufOutputStream data = new ByteBufOutputStream(buffer);
+        try {
+            writeData(data);
+        } catch (Exception e) {
+            ProjectZuluLog.severe("Error writing packet %s to ByteBufOutputStream", this);
             e.printStackTrace();
-		} 
-	}
+        }
+    }
 
-	@Override
-	public void fromBytes(ByteBuf buf) {
-		PacketBuffer buffer = new PacketBuffer(buf);
-		try {
+
+    @Override
+    public void fromBytes(ByteBuf buffer) {
+        ByteBufInputStream byteStream = new ByteBufInputStream(buffer);
+        try {
+            readData(byteStream);
+        } catch (Exception e) {
+            ProjectZuluLog.severe("Error reading packet %s from ByteBufInputStream", this);
+            e.printStackTrace();
+        }
+    }
+    
+    protected void writeData(ByteBufOutputStream buffer) throws IOException {
+        buffer.writeInt(tileLocationX);
+        buffer.writeInt(tileLocationY);
+        buffer.writeInt(tileLocationZ);
+        buffer.writeInt(text.length);
+        for (String string : text) {
+            buffer.writeInt(string.length());
+            buffer.writeChars(string);
+        }
+    }
+
+    protected void readData(ByteBufInputStream buffer) throws IOException {
         tileLocationX = buffer.readInt();
         tileLocationY = buffer.readInt();
         tileLocationZ = buffer.readInt();
@@ -65,15 +78,12 @@ public class PZPacketTileText implements IMessage, IMessageHandler<PZPacketTileT
                 stringChars[j] = buffer.readChar();
             }
             text[i] = new String(stringChars);
-         }
-		} catch (Exception e) {
-			ProjectZuluLog.severe("There was a problem decoding the packet in PZPacketTileText : " + buffer + ".", this);
-            e.printStackTrace();
-		}
-	}
+        }
+    }
 
 	@Override
 	public IMessage onMessage(PZPacketTileText message, MessageContext ctx) {
+		
 		if(ctx.side != Side.SERVER) return null;
 		 EntityPlayer player = ctx.getServerHandler().playerEntity;
 		 
@@ -85,7 +95,7 @@ public class PZPacketTileText implements IMessage, IMessageHandler<PZPacketTileT
 	                player.worldObj.markBlockForUpdate(message.tileLocationX, message.tileLocationY, message.tileLocationZ);
 	            }
 	        }
-		return null;
+		 return null;
 	}
 
 }

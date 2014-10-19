@@ -14,9 +14,10 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import com.stek101.projectzulu.common.api.BlockList;
 import com.stek101.projectzulu.common.api.ItemList;
-import com.stek101.projectzulu.common.core.DefaultProps;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

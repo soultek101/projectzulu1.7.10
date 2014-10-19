@@ -1,6 +1,7 @@
 package com.stek101.projectzulu.common.mobs.entityai;
 
 import net.minecraft.entity.ai.EntityAIBase;
+
 import com.stek101.projectzulu.common.mobs.entity.EntityGenericAnimal;
 import com.stek101.projectzulu.common.mobs.entity.EntityStates;
 

@@ -5,6 +5,7 @@ import java.util.Random;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
+
 import com.stek101.projectzulu.common.mobs.entity.EntityMimic;
 
 public class MimicWithMeta extends BlockWithMeta {

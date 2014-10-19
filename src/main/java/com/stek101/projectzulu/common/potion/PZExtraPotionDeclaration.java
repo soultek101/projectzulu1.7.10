@@ -5,9 +5,10 @@ import java.util.Collection;
 import java.util.List;
 
 import net.minecraft.item.Item;
+
+import com.google.common.base.Optional;
 import com.stek101.projectzulu.common.api.ItemList;
 import com.stek101.projectzulu.common.api.SubItemPotionList;
-import com.stek101.projectzulu.common.core.ProjectZuluLog;
 import com.stek101.projectzulu.common.core.itemblockdeclaration.ItemDeclaration;
 import com.stek101.projectzulu.common.potion.subitem.SubItemPotion;
 import com.stek101.projectzulu.common.potion.subitem.SubItemPotionBlindness;
@@ -23,8 +24,6 @@ import com.stek101.projectzulu.common.potion.subitem.SubItemPotionResistance;
 import com.stek101.projectzulu.common.potion.subitem.SubItemPotionSlowfall;
 import com.stek101.projectzulu.common.potion.subitem.SubItemPotionThorns;
 import com.stek101.projectzulu.common.potion.subitem.SubItemPotionWaterBreathing;
-
-import com.google.common.base.Optional;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 

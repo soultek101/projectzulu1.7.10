@@ -4,8 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
@@ -25,11 +23,6 @@ import com.stek101.projectzulu.common.core.ProjectZuluLog;
 import com.stek101.projectzulu.common.core.ZuluGuiHandler;
 import com.stek101.projectzulu.common.core.network.PZPacketHandler;
 import com.stek101.projectzulu.common.core.terrain.FeatureGenerator;
-import com.stek101.projectzulu.common.dungeon.commands.CommandPlaceBlock;
-import com.stek101.projectzulu.common.dungeon.commands.CommandPlaySound;
-import com.stek101.projectzulu.common.dungeon.commands.CommandSpawnEntity;
-import com.stek101.projectzulu.common.dungeon.commands.CommandStreamSound;
-import com.stek101.projectzulu.common.mobs.EntityGenericEgg;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -41,7 +34,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 /*Useful OpenSource reference to Look at: ExtrabiomesXL, Gaurdsman*/
@@ -171,7 +163,8 @@ public class ProjectZulu_Core {
 
         ProjectZuluLog.info("Starting ItemBlock Registration");
         ItemBlockManager.INSTANCE.registerBlocks();
-
+        ProjectZuluLog.info("Completed ItemBlock Registration");
+        
         ProjectZuluLog.info("Registering Entites");
         CustomEntityManager.INSTANCE.registerEntities(modConfigDirectoryFile);      
         

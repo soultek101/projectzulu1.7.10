@@ -3,7 +3,6 @@ package com.stek101.projectzulu.common.mobs.entity;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
@@ -49,6 +48,7 @@ public class EntityAerial extends EntityLiving {
 	public boolean isEntityGrounded() {
 		return this.dataWatcher.getWatchableObjectByte(17) != 0;
 	}
+	
 	protected void setEntityGrounded(Boolean par1) {
 		if(par1){
 			this.dataWatcher.updateObject(17, Byte.valueOf((byte)1));

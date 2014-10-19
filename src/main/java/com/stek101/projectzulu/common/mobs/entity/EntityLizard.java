@@ -14,12 +14,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
+
 import com.stek101.projectzulu.common.api.BlockList;
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIMoveTowardsTarget;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAINearestAttackableTarget;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIWander;
+
 import cpw.mods.fml.common.Loader;
 
 public class EntityLizard extends EntityGenericAnimal implements IRangedAttackMob, IMob {
@@ -142,6 +144,11 @@ public class EntityLizard extends EntityGenericAnimal implements IRangedAttackMo
     @Override
     protected String getHurtSound() {
         return DefaultProps.mobKey + ":" + DefaultProps.entitySounds + "lizardhurt";
+    }
+    
+    @Override
+    public int getTalkInterval() {
+        return 160;
     }
 
     /**

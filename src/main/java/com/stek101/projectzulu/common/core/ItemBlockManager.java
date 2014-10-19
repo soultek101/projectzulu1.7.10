@@ -4,7 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 
 import net.minecraftforge.common.config.Configuration;
+
 import com.stek101.projectzulu.common.core.itemblockdeclaration.ItemBlockDeclaration;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 
 public enum ItemBlockManager {

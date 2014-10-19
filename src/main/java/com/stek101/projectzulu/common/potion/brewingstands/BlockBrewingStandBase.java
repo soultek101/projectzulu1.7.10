@@ -1,6 +1,7 @@
 package com.stek101.projectzulu.common.potion.brewingstands;
 
 import java.util.List;
+import java.util.Random;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -11,9 +12,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+
 import com.stek101.projectzulu.common.ProjectZulu_Core;
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.core.GuiID;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -76,6 +79,17 @@ public abstract class BlockBrewingStandBase extends BlockContainer {
         player.openGui(ProjectZulu_Core.modInstance, GuiID.BrewingStand.getID(), world, x, y, z);
         return true;
     }
+    
+    /**
+     * A randomly called display update to be able to add particles or other items for display
+     */
+    public void randomDisplayTick(World p_149734_1_, int p_149734_2_, int p_149734_3_, int p_149734_4_, Random p_149734_5_)
+    {
+        double var6 = (double)((float)p_149734_2_ + 0.4F + p_149734_5_.nextFloat() * 0.2F);
+        double var8 = (double)((float)p_149734_3_ + 0.7F + p_149734_5_.nextFloat() * 0.3F);
+        double var10 = (double)((float)p_149734_4_ + 0.4F + p_149734_5_.nextFloat() * 0.2F);
+        p_149734_1_.spawnParticle("smoke", var6, var8, var10, 0.0D, 0.0D, 0.0D);
+    }
 
     @Override
     @SideOnly(Side.CLIENT)
@@ -83,4 +97,6 @@ public abstract class BlockBrewingStandBase extends BlockContainer {
         potionIcon = par1IconRegister.registerIcon(DefaultProps.blockKey + ":" + "potion");
         super.registerBlockIcons(par1IconRegister);
     }
+    
+    
 }

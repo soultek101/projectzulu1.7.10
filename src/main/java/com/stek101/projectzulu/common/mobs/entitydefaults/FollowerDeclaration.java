@@ -3,6 +3,7 @@ package com.stek101.projectzulu.common.mobs.entitydefaults;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
+
 import com.stek101.projectzulu.common.api.CustomMobData;
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.core.entitydeclaration.CreatureDeclaration;
@@ -10,6 +11,7 @@ import com.stek101.projectzulu.common.mobs.entity.EntityFollower;
 import com.stek101.projectzulu.common.mobs.models.ModelFollower;
 import com.stek101.projectzulu.common.mobs.renders.RenderGenericLiving;
 import com.stek101.projectzulu.common.mobs.renders.RenderWrapper;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

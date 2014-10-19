@@ -12,9 +12,8 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Point;
 
-import com.stek101.projectzulu.common.core.DefaultProps;
-
 import com.google.common.base.CharMatcher;
+import com.stek101.projectzulu.common.core.DefaultProps;
 
 public class SpawnerFields implements DataFields {
     private boolean isEnabled = true;
@@ -42,7 +41,7 @@ public class SpawnerFields implements DataFields {
     }
 
     public static final ResourceLocation CREATURE_GUI = new ResourceLocation(DefaultProps.dungeonKey,
-            "creaturelistgui.png");
+            "textures/creaturelistgui.png");
 
     @Override
     public DataFields createFields(Minecraft mc, int screenWidth, int screenHeight, Point backgroundSize) {

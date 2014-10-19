@@ -2,7 +2,7 @@ package com.stek101.projectzulu.common.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
+
 import com.stek101.projectzulu.common.ProjectZulu_Core;
 
 public class BlockPalmTreePlank extends Block {

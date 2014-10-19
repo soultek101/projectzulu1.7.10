@@ -1,6 +1,5 @@
 package com.stek101.projectzulu.common.api;
 
-import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
 import com.google.common.base.Optional;
@@ -18,6 +17,7 @@ public enum ItemList {
     public static Optional<? extends Item> coconutItem = Optional.absent();
     public static Optional<? extends Item> coconutSeed = Optional.absent();
     public static Optional<? extends Item> coconutShell = Optional.absent();
+    public static Optional<? extends Item> coconutShellFuel = Optional.absent();
     public static Optional<? extends Item> coconutMilkFragment = Optional.absent();
 
     public static Optional<? extends Item> genericCraftingItems = Optional.absent();
@@ -29,6 +29,14 @@ public enum ItemList {
     public static Optional<? extends Item> customPotions = Optional.absent();
     public static Optional<? extends Item> vanillaPotions = Optional.absent();
     public static Optional<? extends Item> duckEgg = Optional.absent();
+    public static Optional<? extends Item> ostrichEgg = Optional.absent();
+    public static Optional<? extends Item> hammerTool = Optional.absent();
+    public static Optional<? extends Item> hammerToolIron = Optional.absent();
+    public static Optional<? extends Item> hammerToolWood = Optional.absent();
+    public static Optional<? extends Item> hammerToolStone = Optional.absent();
+    public static Optional<? extends Item> hammerToolNether = Optional.absent();
+    public static Optional<? extends Item> hammerToolDiamond = Optional.absent();
+    public static Optional<? extends Item> hammerToolGold = Optional.absent();
 
     /* Armor */
     public static Optional<? extends Item> scaleArmorHead = Optional.absent();

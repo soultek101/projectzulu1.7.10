@@ -7,6 +7,10 @@ public class CommonProxyProjectZulu {
     public int addArmor(String armor) {
         return 0;
     }
+    
+    public int addTool(String tool){
+    	return 0;
+    }
 
     public void bossHealthTicker() {
     }

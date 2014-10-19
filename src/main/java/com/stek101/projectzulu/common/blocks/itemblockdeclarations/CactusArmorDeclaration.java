@@ -1,12 +1,12 @@
 package com.stek101.projectzulu.common.blocks.itemblockdeclarations;
 
 import net.minecraft.item.Item;
+
+import com.google.common.base.Optional;
 import com.stek101.projectzulu.common.ProjectZulu_Core;
 import com.stek101.projectzulu.common.api.ItemList;
 import com.stek101.projectzulu.common.blocks.ItemZuluArmor;
 import com.stek101.projectzulu.common.core.itemblockdeclaration.ItemSetDeclaration;
-
-import com.google.common.base.Optional;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 

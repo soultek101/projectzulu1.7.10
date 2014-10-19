@@ -3,6 +3,7 @@ package com.stek101.projectzulu.common.mobs.entitydefaults;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
+
 import com.stek101.projectzulu.common.api.CustomMobData;
 import com.stek101.projectzulu.common.api.ItemList;
 import com.stek101.projectzulu.common.core.ConfigHelper;
@@ -14,6 +15,7 @@ import com.stek101.projectzulu.common.mobs.entity.EntityMimic;
 import com.stek101.projectzulu.common.mobs.models.ModelMimic;
 import com.stek101.projectzulu.common.mobs.renders.RenderMimic;
 import com.stek101.projectzulu.common.mobs.renders.RenderWrapper;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

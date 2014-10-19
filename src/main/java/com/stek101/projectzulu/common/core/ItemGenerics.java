@@ -7,8 +7,10 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+
 import com.stek101.projectzulu.common.ProjectZulu_Core;
 import com.stek101.projectzulu.common.potion.brewingstands.PotionIngredients.IngredientProperty;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -17,7 +19,7 @@ public class ItemGenerics extends Item implements IngredientProperty {
     public enum Properties {
         /* Generic Items */
         PoisonDroplet("Poison Droplet", 0), Tusk("Tusk", 1), RawFiber("Raw Fiber", 2), LizardSpit("lizardspit", 39), 
-         DuckEgg("DuckEgg", 40),
+         DuckEgg("DuckEgg", 40), OstrichEgg("OstrichEgg", 41),
 
         /* Potion Effect Ingredients */
         BlackLichen("Black Lichen", 20), Pulp("Pulp", 21), Salt("Salt", 22), PlantStalk("Plant Stalk", 26), Antennae(

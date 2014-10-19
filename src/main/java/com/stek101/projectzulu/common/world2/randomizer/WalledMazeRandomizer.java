@@ -4,6 +4,7 @@ import java.util.EnumSet;
 import java.util.Random;
 
 import net.minecraft.world.World;
+
 import com.stek101.projectzulu.common.world2.Direction;
 import com.stek101.projectzulu.common.world2.MazeCell;
 

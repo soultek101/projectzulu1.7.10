@@ -1,14 +1,14 @@
 [
 {
   "modid" : "ProjectZulu|Core",
-  "name" : "Project Zulu 1.7.10",
-  "version" : "1.3a",
+  "name" : "Project Zulu",
+  "version" : "1.3e",
   "url" : "",
   "credits" : "Soultek101, CrudeDragos",
   "authors": [
     "Soultek101, CrudeDragos"
   ],
-  "description": "PZ aka Better Overworld is a mod that aims to create a better overworld by adding unique mobs, plants, items, blocks, structures, and mechanics to each biome.",
+  "description": "Project Zulu (PZ) - Better Overworld is a mod that aims to create a more engaging, interesting and challenging MC Overworld by adding unique mobs, plants, items, blocks, structures, and game mechanics. The primary philosophy behind Better Overworld is to ensure that all elements added by PZ attempt to provide a more balanced gameplay,are in line with the various in-game systems,and to ensure that players enjoy Minecraft to its fullest.",
   "logoFile" : "",
   "parent" : "",
   "screenshots": [

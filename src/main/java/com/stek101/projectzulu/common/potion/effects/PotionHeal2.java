@@ -1,6 +1,5 @@
 package com.stek101.projectzulu.common.potion.effects;
 
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
 

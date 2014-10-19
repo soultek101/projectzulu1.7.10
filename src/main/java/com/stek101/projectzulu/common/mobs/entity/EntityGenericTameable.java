@@ -3,19 +3,18 @@ package com.stek101.projectzulu.common.mobs.entity;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 
-import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityOwnable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 import com.stek101.projectzulu.common.ProjectZulu_Core;
 import com.stek101.projectzulu.common.core.packets.PZPacketTameParticle;
+
+import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 
 /**
  * Contains Breeding Specific Code. Toggled on by returning true from isValidTamingItem() function
@@ -241,9 +240,7 @@ public abstract class EntityGenericTameable extends EntityGenericRideable{
                          if (var2.stackSize <= 0) {
                              par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack)null);
                          }
-                         
-                         //System.out.println("PT3 Owner is " + this.getOwnerName());
-                         //System.out.println("PT3 EntityT is " + this.getEntityTamed());
+
                          return true;
     				}
     			}

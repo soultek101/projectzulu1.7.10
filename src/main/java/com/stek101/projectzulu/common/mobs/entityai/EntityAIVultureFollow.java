@@ -2,13 +2,13 @@ package com.stek101.projectzulu.common.mobs.entityai;
 
 import java.util.EnumSet;
 
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
 import com.stek101.projectzulu.common.mobs.entity.EntityGenericCreature;
 import com.stek101.projectzulu.common.mobs.entity.EntityStates;
 

@@ -3,6 +3,7 @@ package com.stek101.projectzulu.common.mobs.renders;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+
 import com.stek101.projectzulu.common.mobs.entity.EntityGenericAnimal;
 import com.stek101.projectzulu.common.mobs.entity.EntityStates;
 

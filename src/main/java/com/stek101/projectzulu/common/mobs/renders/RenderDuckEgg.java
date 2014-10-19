@@ -15,12 +15,9 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import com.google.common.base.Optional;
 import com.stek101.projectzulu.common.api.ItemList;
-import com.stek101.projectzulu.common.blocks.ItemDuckEgg;
 import com.stek101.projectzulu.common.core.ItemGenerics;
 import com.stek101.projectzulu.common.mobs.entity.EntityDuckEgg;
-import com.stek101.projectzulu.common.mobs.entity.EntityLizardSpit;
 
 public class RenderDuckEgg extends Render implements RenderWrapper  {
 	

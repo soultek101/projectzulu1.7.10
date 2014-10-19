@@ -4,11 +4,11 @@ import java.util.HashSet;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.init.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.config.Configuration;
+
 import com.stek101.projectzulu.common.api.CustomMobData;
 import com.stek101.projectzulu.common.api.ItemList;
 import com.stek101.projectzulu.common.core.ConfigHelper;
@@ -20,6 +20,7 @@ import com.stek101.projectzulu.common.mobs.entity.EntityCrocodile;
 import com.stek101.projectzulu.common.mobs.models.ModelCrocodile;
 import com.stek101.projectzulu.common.mobs.renders.RenderGenericLiving;
 import com.stek101.projectzulu.common.mobs.renders.RenderWrapper;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -43,7 +44,7 @@ public class AlligatorDeclaration extends SpawnableDeclaration {
                 ItemList.genericCraftingItems, ItemGenerics.Properties.Gill.meta(), 4);
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData,
                 ItemList.genericCraftingItems, ItemGenerics.Properties.LargeHeart.meta(), 4);
-        customMobData.entityProperties = new EntityProperties(20f, 3.0f, 0.25f, 0.0f, 0.0f, 32.0f, 60f, 10D).createFromConfig(config, mobName);
+        customMobData.entityProperties = new EntityProperties(20f, 3.0f, 0.25f, 0.0f, 0.0f, 32.0f, 50f, 10D).createFromConfig(config, mobName);
         super.outputDataToList(config, customMobData);
     }
 

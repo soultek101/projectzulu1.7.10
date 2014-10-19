@@ -4,10 +4,10 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
-import com.stek101.projectzulu.common.api.SubItemPotionList;
-import com.stek101.projectzulu.common.potion.PotionParser;
 
 import com.google.common.base.Optional;
+import com.stek101.projectzulu.common.api.SubItemPotionList;
+import com.stek101.projectzulu.common.potion.PotionParser;
 
 public class SubItemPotionJump extends SubItemPotionGeneric {
 

@@ -2,7 +2,6 @@ package com.stek101.projectzulu.common.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
-import net.minecraft.init.Blocks;
 
 public class BlockZuluStairs extends BlockStairs {
     public BlockZuluStairs(Block par2Block, int par3) {

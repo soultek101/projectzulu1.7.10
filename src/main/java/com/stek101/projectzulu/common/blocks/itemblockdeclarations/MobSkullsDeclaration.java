@@ -1,6 +1,8 @@
 package com.stek101.projectzulu.common.blocks.itemblockdeclarations;
 
 import net.minecraft.block.Block;
+
+import com.google.common.base.Optional;
 import com.stek101.projectzulu.common.api.BlockList;
 import com.stek101.projectzulu.common.blocks.heads.BlockMobHeads;
 import com.stek101.projectzulu.common.blocks.heads.ItemMobHeads;
@@ -8,8 +10,6 @@ import com.stek101.projectzulu.common.blocks.heads.TileEntityMobHeads;
 import com.stek101.projectzulu.common.blocks.heads.TileEntityMobHeadsRenderer;
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.core.itemblockdeclaration.BlockDeclaration;
-
-import com.google.common.base.Optional;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;

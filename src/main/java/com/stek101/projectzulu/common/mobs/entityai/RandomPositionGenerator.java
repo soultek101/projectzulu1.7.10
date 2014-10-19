@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
+
 import com.stek101.projectzulu.common.mobs.entity.EntityGenericCreature;
 
 public class RandomPositionGenerator
@@ -47,6 +48,13 @@ public class RandomPositionGenerator
     public static Vec3 flyRandomlyTowardHeightLevel(EntityGenericCreature par0EntityCreature, int par1, int par2, int heightLevel) {
         return flyToRandomTargetBlockAtHeight(par0EntityCreature, par1, par2, (Vec3)null, heightLevel);
     }
+    
+    /**
+     * finds a random target within par1(x,z) and par2 (y) blocks trending towards desired height level above ground
+     */
+    public static Vec3 swimRandomlyTowardHeightLevel(EntityGenericCreature par0EntityCreature, int par1, int par2, int heightLevel) {
+        return swimToRandomTargetBlockAtHeight(par0EntityCreature, par1, par2, (Vec3)null, heightLevel);
+    }
 
     /**
      * searches 10 blocks at random in a within par1(x,z) and par2 (y) distance, ignores those not in the direction of
@@ -82,8 +90,8 @@ public class RandomPositionGenerator
 
                 if (!var10 || par0EntityCreature.isWithinHomeDistance(var12, var17, var14)) {
                     float var15 = par0EntityCreature.getBlockPathWeight(var12, var17, var14);
-
                     if (var15 > var9) {
+                    	
                         var9 = var15;
                         var6 = var12;
                         var7 = var17;
@@ -128,10 +136,11 @@ public class RandomPositionGenerator
         for (int var16 = 0; var16 < 10; ++var16) {
             int var12 = var4.nextInt(2 * par1) - par1;
             int var17;
+             
             if(entity.posY > entity.worldObj.getPrecipitationHeight( (int)entity.posX, (int)entity.posZ) + heightLevel*1.25){
-                var17 = var4.nextInt(2 * par2) - par2*3/2;
+            	var17 = var4.nextInt(2 * par2) - par2*3/2;
             }else if(entity.posY < entity.worldObj.getPrecipitationHeight( (int)entity.posX, (int)entity.posZ) + heightLevel){
-                var17 = var4.nextInt(2 * par2) - par2/2;
+            	var17 = var4.nextInt(2 * par2) - par2/2;
             }else{
                 var17 = var4.nextInt(2 * par2) - par2;
             }
@@ -147,6 +156,79 @@ public class RandomPositionGenerator
                     float var15 = entity.getBlockPathWeight(var12, var17, var14);
                     
                     if (var15 > var9) {
+                        var9 = var15;
+                        var6 = var12;
+                        var7 = var17;
+                        var8 = var14;
+                        var5 = true;
+                    }
+                }
+            }
+        }
+
+        if (var5) {
+            //return entity.worldObj.getWorldVec3Pool().getVecFromPool((double)var6, (double)var7, (double)var8);
+        	return Vec3.createVectorHelper((double)var6, (double)var7, (double)var8);
+        }
+        else {
+            return null;
+        }
+    }
+    
+    /**
+     * searches 10 blocks at random in a within par1(x,z) and par2 (y) distance, ignores those not in the direction of
+     * par3Vec3, then points to the tile for which creature.getBlockPathWeight returns the highest number
+     */
+    private static Vec3 swimToRandomTargetBlockAtHeight(EntityGenericCreature entity, int par1, int par2, Vec3 par3Vec3, int heightLevel) {
+        Random var4 = entity.getRNG();
+        boolean var5 = false;
+        int var6 = 0;
+        int var7 = 0;
+        int var8 = 0;
+        float var9 = -99999.0F;
+        boolean var10;
+
+        if (entity.hasHome()) {
+            double var11 = (double)(entity.getHomePosition().getDistanceSquared(MathHelper.floor_double(entity.posX), MathHelper.floor_double(entity.posY), MathHelper.floor_double(entity.posZ)) + 4.0F);
+            double var13 = (double)(entity.getMaximumHomeDistance() + (float)par1);
+            var10 = var11 < var13 * var13;
+        }
+        else {
+            var10 = false;
+        }
+
+        for (int var16 = 0; var16 < 10; ++var16) {
+            int var12 = var4.nextInt(2 * par1) - par1;
+            int var17;
+           // System.out.println("current PosY of fish " + entity.posY);
+           // System.out.println("value of precipitation height for fish " + entity.worldObj.getPrecipitationHeight( (int)entity.posX, (int)entity.posZ));
+            //System.out.println("value of precipitation height for fish " + (entity.worldObj.getPrecipitationHeight( (int)entity.posX, (int)entity.posZ) - heightLevel*1.25) );
+            
+            //if(entity.posY > entity.worldObj.getPrecipitationHeight( (int)entity.posX, (int)entity.posZ) + heightLevel*1.25){
+            if(entity.posY > 60.0D ){
+               //System.out.println("case 1 var17");
+            	var17 = var4.nextInt(2 * par2) - par2*3/2;
+            //}else if(entity.posY < entity.worldObj.getPrecipitationHeight( (int)entity.posX, (int)entity.posZ) + heightLevel){
+            }else if(entity.posY < 62.0D){	
+            	//System.out.println("case 2 var17");
+            	var17 = var4.nextInt(2 * par2) - par2/2;
+            }else{
+            	//System.out.println("case 1 var17");
+                var17 = var4.nextInt(2 * par2) - par2;
+            }
+            
+            int var14 = var4.nextInt(2 * par1) - par1;
+
+            if (par3Vec3 == null || (double)var12 * par3Vec3.xCoord + (double)var14 * par3Vec3.zCoord >= 0.0D) {
+                var12 += MathHelper.floor_double(entity.posX);
+                var17 += MathHelper.floor_double(entity.posY);
+                var14 += MathHelper.floor_double(entity.posZ);
+
+                if (!var10 || entity.isWithinHomeDistance(var12, var17, var14)) {
+                    float var15 = entity.getBlockPathWeight(var12, var17, var14);
+                    
+                    if (var15 > var9) {
+                    	//System.out.println("Calculated Fish Pos Y " + var17);
                         var9 = var15;
                         var6 = var12;
                         var7 = var17;

@@ -6,8 +6,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
-import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.config.Configuration;
+
 import com.stek101.projectzulu.common.api.CustomMobData;
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.core.entitydeclaration.EntityProperties;
@@ -16,6 +16,7 @@ import com.stek101.projectzulu.common.mobs.entity.EntityMummy;
 import com.stek101.projectzulu.common.mobs.models.ModelMummy;
 import com.stek101.projectzulu.common.mobs.renders.RenderGenericLiving;
 import com.stek101.projectzulu.common.mobs.renders.RenderWrapper;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -23,7 +24,7 @@ public class MummyDeclaration extends SpawnableDeclaration {
 
     public MummyDeclaration() {
         super("Mummy", 5, EntityMummy.class, EnumCreatureType.monster);
-        setSpawnProperties(5, 100, 1, 2);
+        setSpawnProperties(5, 10, 1, 2);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 2);
 
@@ -48,8 +49,7 @@ public class MummyDeclaration extends SpawnableDeclaration {
     public HashSet<String> getDefaultBiomesToSpawn() {
         HashSet<String> defaultBiomesToSpawn = new HashSet<String>();
         defaultBiomesToSpawn.add(BiomeGenBase.desert.biomeName);
-        defaultBiomesToSpawn.add(BiomeGenBase.desertHills.biomeName);
-        defaultBiomesToSpawn.addAll(typeToArray(Type.DESERT));
+        defaultBiomesToSpawn.add(BiomeGenBase.desertHills.biomeName);        
         return defaultBiomesToSpawn;
     }
 }

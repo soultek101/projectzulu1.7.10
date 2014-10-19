@@ -6,6 +6,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.AchievementList;
+
 import com.stek101.projectzulu.common.potion.subitem.SubItemPotionRegistry;
 
 public class SlotBrewingStandSinglePotion extends Slot {

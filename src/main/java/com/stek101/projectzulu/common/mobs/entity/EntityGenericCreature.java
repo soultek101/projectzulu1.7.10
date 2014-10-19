@@ -7,11 +7,14 @@ import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
 import com.stek101.projectzulu.common.api.CustomEntityList;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIMoveTowardsRestriction;
 
 public abstract class EntityGenericCreature extends EntityAerial {
     private PathEntity pathToEntity;
+    
+    public int textureID;
 
     public boolean hasPath() {
         return this.pathToEntity != null;

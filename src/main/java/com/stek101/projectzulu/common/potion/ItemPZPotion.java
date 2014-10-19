@@ -13,10 +13,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+
 import com.stek101.projectzulu.common.ProjectZulu_Core;
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.potion.subitem.SubItemPotion;
 import com.stek101.projectzulu.common.potion.subitem.SubItemPotionRegistry;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

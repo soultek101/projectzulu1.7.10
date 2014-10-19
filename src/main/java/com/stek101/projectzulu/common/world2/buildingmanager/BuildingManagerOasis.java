@@ -4,6 +4,7 @@ import java.awt.Point;
 
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
+
 import com.stek101.projectzulu.common.core.terrain.TerrainFeature.FeatureDirection;
 import com.stek101.projectzulu.common.world2.MazeCell;
 import com.stek101.projectzulu.common.world2.architect.ArchitectOasis;

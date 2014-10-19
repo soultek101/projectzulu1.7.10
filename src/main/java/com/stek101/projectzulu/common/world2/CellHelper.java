@@ -3,6 +3,7 @@ package com.stek101.projectzulu.common.world2;
 import java.awt.Point;
 
 import net.minecraft.util.ChunkCoordinates;
+
 import com.stek101.projectzulu.common.world.CellIndexDirection;
 
 public class CellHelper {

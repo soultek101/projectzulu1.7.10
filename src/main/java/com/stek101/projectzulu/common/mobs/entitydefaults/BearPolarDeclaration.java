@@ -9,6 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.config.Configuration;
+
 import com.stek101.projectzulu.common.api.CustomMobData;
 import com.stek101.projectzulu.common.api.ItemList;
 import com.stek101.projectzulu.common.core.ConfigHelper;
@@ -20,6 +21,7 @@ import com.stek101.projectzulu.common.mobs.entity.EntityPolarBear;
 import com.stek101.projectzulu.common.mobs.models.ModelPolarBear;
 import com.stek101.projectzulu.common.mobs.renders.RenderGenericLiving;
 import com.stek101.projectzulu.common.mobs.renders.RenderWrapper;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -45,7 +47,7 @@ public class BearPolarDeclaration extends SpawnableDeclaration {
                 ItemList.genericCraftingItems, ItemGenerics.Properties.BlackLichen.meta(), 4);
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData,
                 ItemList.genericCraftingItems, ItemGenerics.Properties.LargeHeart.meta(), 4);
-        customMobData.entityProperties = new EntityProperties(25f, 5.0f, 0.3f, 0.0f, 0.5f, 32.0f, 60f, 16D).createFromConfig(config, mobName);
+        customMobData.entityProperties = new EntityProperties(25f, 5.0f, 0.3f, 0.0f, 0.5f, 32.0f, 50f, 16D).createFromConfig(config, mobName);
         super.outputDataToList(config, customMobData);
     }
 

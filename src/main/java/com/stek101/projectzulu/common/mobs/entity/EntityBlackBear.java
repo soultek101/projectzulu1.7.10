@@ -1,6 +1,5 @@
 package com.stek101.projectzulu.common.mobs.entity;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -17,6 +16,14 @@ public class EntityBlackBear extends EntityBear {
         setSize(1.0f, 1.35f);
         tasks.addTask(3, new EntityAIAttackOnCollide(this, 1.0f, false));
         
+    }
+    
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+    @Override
+    protected String getLivingSound() {
+        return DefaultProps.mobKey + ":" + DefaultProps.entitySounds + "blackbearliving";
     }
 
     @Override

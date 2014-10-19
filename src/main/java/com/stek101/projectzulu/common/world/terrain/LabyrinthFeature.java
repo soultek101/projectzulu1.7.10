@@ -13,6 +13,7 @@ import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+
 import com.stek101.projectzulu.common.api.CustomEntityList;
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.core.ProjectZuluLog;
@@ -20,7 +21,6 @@ import com.stek101.projectzulu.common.core.TerrainFeatureHelper;
 import com.stek101.projectzulu.common.core.terrain.BiomeFeature;
 import com.stek101.projectzulu.common.core.terrain.FeatureConfiguration;
 import com.stek101.projectzulu.common.world2.buildingmanager.BuildingManagerLabyrinth;
-import cpw.mods.fml.common.Loader;
 
 public class LabyrinthFeature extends BiomeFeature {
     public static final String LABYRINTH = "Labyrinth";
@@ -46,19 +46,21 @@ public class LabyrinthFeature extends BiomeFeature {
         chunksPerSpawn = 100;
         chestLootChance = 20;
         chestMaxLoot = -1;
-        entityEntries.add(new EntityEntry("EMPTY", 4));
-        if (Loader.isModLoaded(DefaultProps.MobsModId)) {
-            if (CustomEntityList.HAUNTEDARMOR.modData.isPresent()) {
+       // entityEntries.add(new EntityEntry("EMPTY", 4));
+       // if (Loader.isModLoaded(DefaultProps.MobsModId)) {      	
+        	
+           if (CustomEntityList.HAUNTEDARMOR.modData.isPresent()) {
                 entityEntries.add(new EntityEntry(DefaultProps.CoreModId.concat(".").concat(
                         CustomEntityList.HAUNTEDARMOR.modData.get().mobName), 3));
-            }
-            if (CustomEntityList.MINOTAUR.modData.isPresent()) {
+           }
+           if (CustomEntityList.MINOTAUR.modData.isPresent()) {
                 entityEntries.add(new EntityEntry(DefaultProps.CoreModId.concat(".").concat(
                         CustomEntityList.MINOTAUR.modData.get().mobName), 1));
-            }
-        } else {
-            entityEntries.add(new EntityEntry("Zombie", 4));
-        }
+           }
+                entityEntries.add(new EntityEntry("Zombie", 4));
+       // } else {
+       //     entityEntries.add(new EntityEntry("Zombie", 4));
+       // }
     }
 
     @Override

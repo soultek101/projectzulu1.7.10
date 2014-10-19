@@ -10,6 +10,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
@@ -17,26 +18,32 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
 import com.stek101.projectzulu.common.ProjectZulu_Core;
 import com.stek101.projectzulu.common.api.ItemList;
 import com.stek101.projectzulu.common.core.ItemGenerics;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockSpikes extends Block {
 
     public static final String[] imageSuffix = new String[] { "", "_poison", "_sticky" };
+    public int maxDamage;
+    
     @SideOnly(Side.CLIENT)
     private IIcon[] icons;
     public final int renderID;
 
+    
     public BlockSpikes(int renderID) {
         super(Material.iron);
         setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
-        disableStats();
+        disableStats();        
         setBlockBounds(0f, 0.0F, 0.0f, 1.0f, 0.5f, 1.0f);
         setHardness(0.5F);
         setStepSound(Block.soundTypeMetal);
+        this.maxDamage = 5;
         this.renderID = renderID;
     }
 
@@ -171,11 +178,11 @@ public class BlockSpikes extends Block {
 
     @Override
     public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
-
-        if (par5Entity instanceof EntityLiving
+    	if ((par5Entity instanceof EntityLiving || par5Entity instanceof EntityPlayer)        		
                 && ((par5Entity.prevPosY > par3 + this.maxY * 0.9f && par5Entity.posY < par3 + this.maxY * 0.9f)
                         || (par5Entity.prevPosX > par2 + 0.5 && par5Entity.posX < par2 + 0.5) || (par5Entity.prevPosZ > par4 + 0.5 && par5Entity.posZ < par4 + 0.5))) {
-            /* Check if Spikes are Poison, If So Also Apply Posion with Damage */
+
+        	/* Check if Spikes are Poison, If So Also Apply Posion with Damage */
             if (par1World.getBlockMetadata(par2, par3, par4) > 5 && par1World.getBlockMetadata(par2, par3, par4) < 12) {
                 ((EntityLiving) par5Entity).addPotionEffect(new PotionEffect(Potion.poison.id, 40, 1));
             }
@@ -183,8 +190,17 @@ public class BlockSpikes extends Block {
                 ((EntityLiving) par5Entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 40, 4));
             }
             par5Entity.attackEntityFrom(DamageSource.generic, 2);
-        }
 
+            //maxDamage = maxDamage - 1;
+            //System.out.println("spike damage is " + maxDamage);
+           /* if (this.maxDamage <= 0) {
+            	par1World.spawnParticle("blockdust_" + Block.getIdFromBlock(this) + '_' + par1World.getBlockMetadata(par2, par3, par4), 
+            			par2+0.5, par3+1.0, par4+0.5, 0.0D, 0.0D, 0.0D);
+            	par1World.playSoundAtEntity(par5Entity, "random.break", 1.0F, 1.0F);
+            	par1World.setBlockToAir(par2, par3, par4);
+            	this.maxDamage = 5;
+            } */
+        }     
         super.onEntityCollidedWithBlock(par1World, par2, par3, par4, par5Entity);
     }
 
@@ -294,4 +310,6 @@ public class BlockSpikes extends Block {
                     || id == Blocks.piston_head || id == Blocks.sticky_piston;
         }
     }
+    
+  
 }

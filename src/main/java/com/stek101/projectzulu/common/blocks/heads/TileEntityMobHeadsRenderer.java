@@ -83,7 +83,7 @@ public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer {
             this.model = model;
             this.transOffset = offSets;
             this.scale = scale;
-            resourceLocation = new ResourceLocation(DefaultProps.mobKey, this.toString().toLowerCase() + ".png");
+            resourceLocation = new ResourceLocation(DefaultProps.mobKey, "textures/" + this.toString().toLowerCase() + ".png");
         }
 
         public ModelBase getModel() {
@@ -136,7 +136,7 @@ public class TileEntityMobHeadsRenderer extends TileEntitySpecialRenderer {
         int skullType = tile.getSkullType();
         HeadRender mobhead = HeadRender.getByID(skullType);
         float scale = mobhead.scale;
-        String textureLocation = DefaultProps.mobDiretory + mobhead.toString().toLowerCase() + ".png";
+        String textureLocation = DefaultProps.mobDiretory + "textures/" + mobhead.toString().toLowerCase() + ".png";
         int skullState = 0;
         if (meta == 1) {
             switch (mobhead) {

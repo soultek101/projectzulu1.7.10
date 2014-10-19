@@ -1,11 +1,7 @@
 package com.stek101.projectzulu.common.core.itemblockdeclaration;
 
-import net.minecraft.item.Item;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
-
-import com.google.common.base.Optional;
-
 import cpw.mods.fml.relauncher.Side;
 
 public abstract class ItemDeclaration implements ItemBlockDeclaration {

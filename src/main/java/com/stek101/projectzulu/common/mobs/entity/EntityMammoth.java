@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -23,6 +22,7 @@ import net.minecraft.world.World;
 import com.stek101.projectzulu.common.api.BlockList;
 import com.stek101.projectzulu.common.api.CustomEntityList;
 import com.stek101.projectzulu.common.core.DefaultProps;
+import com.stek101.projectzulu.common.mobs.EntityAFightorFlight;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIAvoidEntity;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIFollowOwner;
@@ -40,7 +40,8 @@ import com.stek101.projectzulu.common.mobs.entityai.EntityAIWander;
 import cpw.mods.fml.common.Loader;
 
 public class EntityMammoth extends EntityGenericAnimal implements IAnimals {
-	private boolean isHurt = false;
+	private EntityAFightorFlight EAFF;
+	private CustomEntityList entityEntry;
 	private float aggroLevel;
 	private double aggroRange;
 	
@@ -52,12 +53,17 @@ public class EntityMammoth extends EntityGenericAnimal implements IAnimals {
         super(par1World);
         setSize(4.5f, 5.4f);
         
-        /*Get Aggression rank of entity and range*/
-        CustomEntityList entityEntry = CustomEntityList.getByName(EntityList.getEntityString(this));
-         if (entityEntry != null && entityEntry.modData.get().entityProperties != null) {
-             aggroLevel = entityEntry.modData.get().entityProperties.aggroLevel;
-             aggroRange = entityEntry.modData.get().entityProperties.aggroRange;
+      this.entityEntry = CustomEntityList.getByName(EntityList.getEntityString(this));
+        
+        /* Check if aggroLevel and aggroRange have valid values to activate AFoF */
+   	  if (entityEntry != null && entityEntry.modData.get().entityProperties != null) {
+           this.aggroLevel = entityEntry.modData.get().entityProperties.aggroLevel;
+           this.aggroRange = entityEntry.modData.get().entityProperties.aggroRange;                    
          }
+   	  
+   	  if (Math.round(this.aggroRange) != 0) {
+   		  EAFF = new EntityAFightorFlight().setEntity(this, worldObj, this.aggroLevel, this.aggroRange);
+   	  }
          
         getNavigator().setAvoidsWater(true);
         tasks.addTask(0, new EntityAISwimming(this));
@@ -106,6 +112,11 @@ public class EntityMammoth extends EntityGenericAnimal implements IAnimals {
     }
     
     @Override
+    public int getTalkInterval() {
+        return 160;
+    }
+    
+    @Override
     protected void updateAITick() {    	   	
          super.updateAITick();
     }
@@ -113,40 +124,9 @@ public class EntityMammoth extends EntityGenericAnimal implements IAnimals {
     @Override
     public void onLivingUpdate() {
     	super.onLivingUpdate();
-    	
-     	  if (aggroRange != 0 && aggroLevel != 0) {  /** 0 and 0 means deactivate FoF behaviour **/
-     	        EntityPlayer entityplayer = worldObj.getClosestPlayerToEntity(this, aggroRange);
-     	        
-     	        /* Check if target can be detected, then entity will decide whether to fight or flee, ignore if tamed */
-     	        if (!((EntityGenericTameable)this).isTamed()){
-     	          if(entityplayer != null && canEntityBeSeen(entityplayer)) {
-     	          	
-     	          	Random rand = new Random();         	
-     	          	int dieRoll = rand.nextInt(100);    	
-     	          	
-     	             if ((aggroLevel) >= dieRoll){
-     	          		if (this.getAngerLevel() == 0 && this.getFleeTick() == 0){
-     	          		  this.tasks.removeTask(this.aiEntityAvoidEntity);
-     	          		  this.angerLevel = 400;  //make it angry!!!   	          		  
-     	          		  }
-     	          	} else {
-     	          		if (this.getAngerLevel() == 0 && this.getFleeTick() == 0){ 
-     	          		 this.tasks.addTask(1, this.aiEntityAvoidEntity );
-     	          		 this.setFleeTick(400);   	          		
-     	          		 }
-     	          	}
-     	           } else {
-     	         	 this.angerLevel = 0; // calm down and move on with life
-     	         	 this.setFleeTick(0);
-     	           }          
-     	          }
-     	        
-     	        /* A wounded animal is a very dangerous animal */
-     	     	if (this.getMaxHealth() > this.getHealth() && isHurt == false){
-     	     		aggroLevel = aggroLevel + 25;
-     	     		isHurt = true;
-     	     	}
-     	      }
+    	if (Math.round(this.aggroRange) != 0) {
+    		EAFF.updateEntityAFF(worldObj, Item.getItemFromBlock(Blocks.leaves));
+    	}
     }
 
     @Override

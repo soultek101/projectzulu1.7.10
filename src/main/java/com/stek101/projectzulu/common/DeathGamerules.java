@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
@@ -17,18 +18,18 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.GameRules;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
 import net.minecraftforge.event.world.WorldEvent;
+
+import com.google.common.base.Optional;
 import com.stek101.projectzulu.common.api.BlockList;
 import com.stek101.projectzulu.common.blocks.tombstone.TileEntityTombstone;
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.core.ObfuscationHelper;
 import com.stek101.projectzulu.common.core.ProjectZuluLog;
-import com.google.common.base.Optional;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
@@ -61,6 +62,13 @@ public class DeathGamerules {
     boolean dropInventoryDefault = false;
     boolean dropHotbarDefault = false;
     boolean dropXPDefault = false;
+    
+    /*boolean dropInventory = false;
+    boolean dropHotbar = false;
+    boolean dropArmor = false;
+    boolean dropXP = false;*/
+    
+    
     private ExperienceRedistributor redistributor;
     private ItemBlacklist itemBlacklist;
 
@@ -81,7 +89,7 @@ public class DeathGamerules {
         tombstoneAbsorbDrops = config.get("General Controls", "Tombstone Absorb Drops", tombstoneAbsorbDrops)
                 .getBoolean(tombstoneAbsorbDrops);
         doDropEvent = config.get("General Controls", "doDropEvent", doDropEvent).getBoolean(doDropEvent);
-
+        
         String category = "General Controls.gamerule_settings";
         maxDropXP = config
                 .get(category + ".Experience", "maxDropXP", 100,
@@ -154,10 +162,15 @@ public class DeathGamerules {
         if (createGameruleIfAbsent(gameRule, "pzKeepInventory", keepInventoryDefault)) {
             gameRule.setOrCreateGameRule("keepInventory", Boolean.toString(keepInventoryDefault));
         }
-        createGameruleIfAbsent(gameRule, "dropInventory", dropInventoryDefault);
-        createGameruleIfAbsent(gameRule, "dropHotbar", dropHotbarDefault);
-        createGameruleIfAbsent(gameRule, "dropArmor", dropArmorDefault);
-        createGameruleIfAbsent(gameRule, "dropXP", dropXPDefault);
+        
+        //createGameruleIfAbsent(gameRule, "dropInventory", dropInventoryDefault);
+        //createGameruleIfAbsent(gameRule, "dropHotbar", dropHotbarDefault);
+        //createGameruleIfAbsent(gameRule, "dropArmor", dropArmorDefault);
+        //createGameruleIfAbsent(gameRule, "dropXP", dropXPDefault);
+        gameRule.setOrCreateGameRule("dropInventory", String.valueOf(dropInventoryDefault));
+        gameRule.setOrCreateGameRule("dropHotbar", String.valueOf(dropHotbarDefault));
+        gameRule.setOrCreateGameRule("dropArmor", String.valueOf(dropArmorDefault));
+        gameRule.setOrCreateGameRule("dropXP", String.valueOf(dropXPDefault));
     }
 
     private boolean createGameruleIfAbsent(GameRules gameRule, String gameruleName, boolean value) {
@@ -169,40 +182,53 @@ public class DeathGamerules {
         ProjectZuluLog.info("Gamerule %s is set to %s", gameruleName, gameRule.getGameRuleBooleanValue(gameruleName));
         return added;
     }
-
+    
     @SubscribeEvent
-    public void onPlayerDeath(LivingDeathEvent event) {
+    public void onPlayerDeath(PlayerDropsEvent event) {
+    	ArrayList<EntityItem> drops = event.drops;   	
+    	int minDistance = 0;
+    	
         if (event.entity instanceof EntityPlayerMP) {
             GameRules gameRules = event.entity.worldObj.getGameRules();
+           
              boolean dropInventory = gameRules.getGameRuleBooleanValue("dropInventory");
              boolean dropHotbar = gameRules.getGameRuleBooleanValue("dropHotbar");
              boolean dropArmor = gameRules.getGameRuleBooleanValue("dropArmor");
              boolean dropXP = gameRules.getGameRuleBooleanValue("dropXP");
+             
              String tombmsg ="";
+             EntityPlayer player = (EntityPlayer) event.entity;
+             
+             if (event.source.isExplosion()) {
+            	 minDistance = 10;
+             }
+             
+             TileEntityTombstone tombstone = tombstoneOnDeath ? placeTombstone(player, minDistance) : null;
 
-            EntityPlayer player = (EntityPlayer) event.entity;
-
-            TileEntityTombstone tombstone = tombstoneOnDeath ? placeTombstone(player) : null;
             if (tombstone != null) {
             	//tombstone.setSignString(event.source.func_151519_b((EntityPlayer) event.entity).toString());
             	tombstone.setSignString("HERE LIES " + event.source.func_151519_b((EntityPlayer) event.entity).getUnformattedTextForChat().toUpperCase());
             }
 
+            /* Tombstone will not add drops */ 
             if (!dropInventory && !dropHotbar && !dropArmor && !dropXP) {
                 return;
             }
 
             player.captureDrops = true;
-            player.capturedDrops.clear();
-
+            //player.capturedDrops.clear();
+        	
             /* Get items/XP to drop and clear them from Player */
             int xpDropped = 0;
             if (dropXP) {
                 if (!player.worldObj.isRemote) {
-                    xpDropped = player.experienceTotal;
+                    //xpDropped = player.experienceTotal;
+                    xpDropped = player.experienceTotal * (maxDropXP/100);
+                    int keptXp = (player.experienceTotal - xpDropped) * (percKeptXp / 100);
+                    
                     xpDropped = xpDropped > maxDropXP ? maxDropXP : xpDropped;
-                    int keptXp = (player.experienceTotal - xpDropped) * percKeptXp / 100;
-                    redistributor.addExpereince(player, keptXp >= 0 ? keptXp : 0);
+                    
+                    redistributor.addExperience(player, keptXp >= 0 ? keptXp : 0);
                     player.experienceLevel = 0;
                     player.experienceTotal = 0;
                     player.experience = 0;
@@ -210,6 +236,7 @@ public class DeathGamerules {
             }
 
             List<ItemStack> itemsToDrop = new ArrayList<ItemStack>();
+            
             if (dropArmor) {
                 itemsToDrop.addAll(dropArmor(player));
             }
@@ -223,21 +250,27 @@ public class DeathGamerules {
             }
 
             dropItems(player, itemsToDrop);
+            
             boolean isCancelled = false;
-            if (doDropEvent) {
-                PlayerDropsEvent dropEvent = createPlayerDropEvent(player, event.source, player.capturedDrops);
-                isCancelled = MinecraftForge.EVENT_BUS.post(dropEvent);
-            }
+
+          //  Need to understand this lines more but so far feature repair is working...  
+          //  if (doDropEvent) {
+          //      PlayerDropsEvent dropEvent = createPlayerDropEvent(player, event.source, player.capturedDrops);
+          //      isCancelled = MinecraftForge.EVENT_BUS.post(dropEvent);
+          //  }
+
             player.captureDrops = false;
             if (!isCancelled) {
                 /* Handler actually Dropping Items or Placing them in Tombstone */
                 if (tombstoneAbsorbDrops && tombstone != null) {
                     for (EntityItem entityItem : player.capturedDrops) {
-                        tombstone.addDrop(entityItem.getEntityItem());
-                    }
+                       tombstone.addDrop(entityItem.getEntityItem());
+                   }           	
                     tombstone.experience = xpDropped;
+                    player.capturedDrops.clear();
                 } else {
                     if (tombstoneAbsorbDrops) {
+                    	System.out.println("Tombstone could not be placed so items dropping normally.");
                         ProjectZuluLog.warning("Tombstone could not be placed so items dropping normally.");
                     }
                     while (xpDropped > 0) {
@@ -251,6 +284,7 @@ public class DeathGamerules {
                     }
                 }
             } else {
+            	System.out.println("Tombstone drop event cancelled");
                 ProjectZuluLog.warning("Player drop event was cancelled, so items will not be dropped per convention."
                         + "Results may not desireable, consider disabling 'doDropEvent' in the config.");
             }
@@ -276,8 +310,8 @@ public class DeathGamerules {
         return new PlayerDropsEvent(player, damageSource, player.capturedDrops, recentlyHit > 0);
     }
 
-    private TileEntityTombstone placeTombstone(EntityPlayer player) {
-        Optional<ChunkCoordinates> chunkCoordinate = findValidTombstoneLocation(player);
+    private TileEntityTombstone placeTombstone(EntityPlayer player, int minDistance) {
+        Optional<ChunkCoordinates> chunkCoordinate = findValidTombstoneLocation(player, minDistance);
         if (chunkCoordinate.isPresent()) {
             /* Place a Tombstone */
             player.worldObj.setBlock(chunkCoordinate.get().posX, chunkCoordinate.get().posY,
@@ -300,10 +334,11 @@ public class DeathGamerules {
         return null;
     }
 
-    private Optional<ChunkCoordinates> findValidTombstoneLocation(EntityPlayer player) {
+    private Optional<ChunkCoordinates> findValidTombstoneLocation(EntityPlayer player, int minDistance) {
         final int maxRadius = 100;
+        
         /** Search an increasing square box (only check edge) for a valid location */
-        for (int radius = 0; radius < maxRadius; radius++) {
+        for (int radius = minDistance; radius < maxRadius; radius++) {
             List<ChunkCoordinates> validLocations = new ArrayList<ChunkCoordinates>();
             validLocations.addAll(searchXPlaneAt(-radius, radius, player));
             validLocations.addAll(searchXPlaneAt(radius, radius, player));
@@ -312,7 +347,9 @@ public class DeathGamerules {
             validLocations.addAll(searchYPlaneAt(-radius, radius, player));
             validLocations.addAll(searchYPlaneAt(radius, radius, player));
             ChunkCoordinates closestPoint = null;
+            
             float bestDistance = 0;
+            
             for (ChunkCoordinates chunkCoordinates : validLocations) {
                 if (closestPoint != null) {
                     float distance = chunkCoordinates.getDistanceSquared((int) player.posX, (int) player.posY,
@@ -377,7 +414,9 @@ public class DeathGamerules {
     }
 
     private boolean isLocationValid(EntityPlayer player, int posX, int posY, int posZ) {
-        if (player.worldObj.isAirBlock(posX, posY, posZ) && player.worldObj.getBlock(posX, posY - 1, posZ).isOpaqueCube()) {
+        if ((player.worldObj.isAirBlock(posX, posY, posZ) || player.worldObj.getBlock(posX, posY, posZ).getMaterial().isReplaceable()) && player.worldObj.getBlock(posX, posY - 1, posZ).isOpaqueCube()
+        		&& !player.worldObj.getBlock(posX, posY, posZ).getMaterial().equals(Material.water))
+    	{
             return true;
         }
         return false;
@@ -438,17 +477,20 @@ public class DeathGamerules {
             shuffleArray(placeArray, player.worldObj.rand);
 
             int countDrops = 0;
+
             for (int i = 0; i < placeArray.length; ++i) {
                 int slot = placeArray[i];
                 ItemStack itemStack = player.inventory.mainInventory[slot];
                 if (itemStack == null || itemBlacklist.isItemBlacklisted(itemStack)) {
                     continue;
                 }
+                
                 boolean shouldDrop = false;
                 if ((inventoryMaxDrop == 0 || countDrops < inventoryMaxDrop)
                         && inventoryDropChance - player.worldObj.rand.nextInt(100) >= 1) {
                     shouldDrop = true;
                 }
+                
                 int percentDamage = shouldDrop ? inventoryDeathDamage + inventoryDropDamage : inventoryDeathDamage;
                 percentDamage = percentDamage > 100 ? 100 : percentDamage;
                 itemStack.attemptDamageItem(itemStack.getMaxDamage() * percentDamage / 100, player.worldObj.rand);

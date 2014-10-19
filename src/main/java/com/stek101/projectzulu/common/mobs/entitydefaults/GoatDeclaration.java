@@ -1,12 +1,11 @@
 package com.stek101.projectzulu.common.mobs.entitydefaults;
 
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Random;
+import java.util.List;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.init.Items;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.config.Configuration;
@@ -14,21 +13,20 @@ import net.minecraftforge.common.config.Configuration;
 import com.stek101.projectzulu.common.api.CustomMobData;
 import com.stek101.projectzulu.common.api.ItemList;
 import com.stek101.projectzulu.common.core.ConfigHelper;
-import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.core.ItemGenerics;
 import com.stek101.projectzulu.common.core.entitydeclaration.EntityProperties;
 import com.stek101.projectzulu.common.core.entitydeclaration.SpawnableDeclaration;
 import com.stek101.projectzulu.common.mobs.entity.EntityGoat;
 import com.stek101.projectzulu.common.mobs.models.ModelGoat;
-import com.stek101.projectzulu.common.mobs.renders.RenderGenericLiving;
+import com.stek101.projectzulu.common.mobs.renders.RenderGenericLivingMT;
 import com.stek101.projectzulu.common.mobs.renders.RenderWrapper;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class GoatDeclaration extends SpawnableDeclaration {
-	private static final String[] goatTextures = new String[] {"textures/goat0.png", "textures/goat1.png", "textures/goat2.png", "textures/goat3.png"};
-
+public class GoatDeclaration extends SpawnableDeclaration {	
+	private final List <String> goatTextures = new ArrayList <String>();
+	
     public GoatDeclaration() {
         super("Goat", 45, EntityGoat.class, EnumCreatureType.creature);
         setSpawnProperties(10, 100, 1, 3);
@@ -37,6 +35,10 @@ public class GoatDeclaration extends SpawnableDeclaration {
 
         eggColor1 = (152 << 16) + (152 << 8) + 152;
         eggColor2 = (158 << 16) + (99 << 8) + 22;
+        
+        goatTextures.add("textures/goat0.png");
+        goatTextures.add("textures/goat1.png");
+        goatTextures.add("textures/goat2.png");     
     }
 
     @Override
@@ -54,10 +56,7 @@ public class GoatDeclaration extends SpawnableDeclaration {
     @Override
     @SideOnly(Side.CLIENT)
     public RenderWrapper getEntityrender(Class<? extends EntityLivingBase> entityClass) {
-    	 //int r1 = (int) (Math.random()* goatTextures.length);	 
-    	   
-        return new RenderGenericLiving(new ModelGoat(), 0.5f, new ResourceLocation(DefaultProps.mobKey, 
-        		"textures/goat0.png" /*goatTextures[r1]*/ ));
+    	return new RenderGenericLivingMT(new ModelGoat(), 0.5f, goatTextures);
     }
 
     @Override

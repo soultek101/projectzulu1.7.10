@@ -22,6 +22,7 @@ import com.stek101.projectzulu.common.blocks.itemblockdeclarations.CoconutItem;
 import com.stek101.projectzulu.common.blocks.itemblockdeclarations.CoconutMilkFragmentDeclaration;
 import com.stek101.projectzulu.common.blocks.itemblockdeclarations.CoconutSeedDeclaration;
 import com.stek101.projectzulu.common.blocks.itemblockdeclarations.CoconutShellDeclaration;
+import com.stek101.projectzulu.common.blocks.itemblockdeclarations.CoconutShellFuelDeclaration;
 import com.stek101.projectzulu.common.blocks.itemblockdeclarations.CookedMuttonDeclaration;
 import com.stek101.projectzulu.common.blocks.itemblockdeclarations.CreeperBlossomDeclaration;
 import com.stek101.projectzulu.common.blocks.itemblockdeclarations.DiamondScaleArmorDeclaration;
@@ -30,10 +31,12 @@ import com.stek101.projectzulu.common.blocks.itemblockdeclarations.FurArmorDecla
 import com.stek101.projectzulu.common.blocks.itemblockdeclarations.GenericCraftingItemsDeclaration;
 import com.stek101.projectzulu.common.blocks.itemblockdeclarations.GoldScaleArmorDeclaration;
 import com.stek101.projectzulu.common.blocks.itemblockdeclarations.GreenClothArmorDeclaration;
+import com.stek101.projectzulu.common.blocks.itemblockdeclarations.HammerToolDeclaration;
 import com.stek101.projectzulu.common.blocks.itemblockdeclarations.IronScaleArmorDeclaration;
 import com.stek101.projectzulu.common.blocks.itemblockdeclarations.JasperDeclaration;
 import com.stek101.projectzulu.common.blocks.itemblockdeclarations.MobSkullsDeclaration;
 import com.stek101.projectzulu.common.blocks.itemblockdeclarations.NightBloomDeclaration;
+import com.stek101.projectzulu.common.blocks.itemblockdeclarations.OstrichEggDeclaration;
 import com.stek101.projectzulu.common.blocks.itemblockdeclarations.PalmTreeDoubleSlabDeclaration;
 import com.stek101.projectzulu.common.blocks.itemblockdeclarations.PalmTreeLeavesDeclaration;
 import com.stek101.projectzulu.common.blocks.itemblockdeclarations.PalmTreeLogDeclaration;
@@ -69,13 +72,8 @@ import com.stek101.projectzulu.common.potion.PZExtraPotionDeclaration;
 import com.stek101.projectzulu.common.potion.PZVanillaPotionDeclaration;
 import com.stek101.projectzulu.common.potion.PotionManager;
 
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
 public class ProjectZulu_Blocks extends BaseModule {
@@ -87,7 +85,7 @@ public class ProjectZulu_Blocks extends BaseModule {
 
     @Override
     public void registration(ItemBlockManager manager) {
-        manager.addItemBlock(new PZExtraPotionDeclaration(), new PZVanillaPotionDeclaration());
+        
 
         manager.addItemBlock(new AloeVeraDeclaration(), new WateredDirtDeclaration(), new TumbleweedDeclaration(),
                 new JasperDeclaration(), new PalmTreeLogDeclaration(), new PalmTreePlankDeclaration(),
@@ -102,7 +100,7 @@ public class ProjectZulu_Blocks extends BaseModule {
                 new CoconutMilkFragmentDeclaration(), new CoconutSeedDeclaration(), new CoconutShellDeclaration(),
                 new ScaleItemDeclaration(), new FurPeltDeclaration(), new GenericCraftingItemsDeclaration(),
                 new CoconutItem(), new ScrapMeatDeclaration(), new RawMuttonDeclaration(), new CookedMuttonDeclaration(),
-                new DuckEggDeclaration());
+                new DuckEggDeclaration(), new OstrichEggDeclaration(), new CoconutShellFuelDeclaration());
 
         manager.addItemBlock(new ScaleArmorDeclaration(ProjectZulu_Core.proxy.addArmor("scaleArmor")),
                 new GoldScaleArmorDeclaration(ProjectZulu_Core.proxy.addArmor("goldscale")),
@@ -113,7 +111,10 @@ public class ProjectZulu_Blocks extends BaseModule {
                         ProjectZulu_Core.proxy.addArmor("greendesertcloth")), new BlueClothArmorDeclaration(
                         ProjectZulu_Core.proxy.addArmor("bluedesertcloth")), new CactusArmorDeclaration(
                         ProjectZulu_Core.proxy.addArmor("cactusarmor")),
-                new FurArmorDeclaration(ProjectZulu_Core.proxy.addArmor("mammothfur")));
+                new FurArmorDeclaration(ProjectZulu_Core.proxy.addArmor("mammothfur")),
+                new HammerToolDeclaration(ProjectZulu_Core.proxy.addTool("hammertool")));
+        
+        manager.addItemBlock(new PZExtraPotionDeclaration(), new PZVanillaPotionDeclaration());
     }
 
     @Override
@@ -145,7 +146,7 @@ public class ProjectZulu_Blocks extends BaseModule {
         if (!PotionManager.potionModuleEnabled) {
             ProjectZuluLog.info("Skipping Potion Setup, Potion Module Disabled");
         } else {
-            ProjectZuluLog.info("Starting Potion Setup ");
+            ProjectZuluLog.info("Starting Potion Setup ");            
             PotionManager.setupAndRegisterPotions();
             MinecraftForge.EVENT_BUS.register(new PotionEvents());
             ProjectZuluLog.info("Finished Potion Setup ");

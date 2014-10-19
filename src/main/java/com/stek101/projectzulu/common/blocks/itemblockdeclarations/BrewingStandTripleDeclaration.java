@@ -2,6 +2,8 @@ package com.stek101.projectzulu.common.blocks.itemblockdeclarations;
 
 import net.minecraft.block.Block;
 import net.minecraftforge.common.config.Configuration;
+
+import com.google.common.base.Optional;
 import com.stek101.projectzulu.common.api.BlockList;
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.core.ProjectZuluLog;
@@ -10,8 +12,6 @@ import com.stek101.projectzulu.common.potion.brewingstands.BlockBrewingStandTrip
 import com.stek101.projectzulu.common.potion.brewingstands.RenderBrewingStandSingle;
 import com.stek101.projectzulu.common.potion.brewingstands.TileEntityBrewingStandRenderer;
 import com.stek101.projectzulu.common.potion.brewingstands.TileEntityBrewingTriple;
-
-import com.google.common.base.Optional;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;

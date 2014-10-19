@@ -7,18 +7,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-import com.stek101.projectzulu.common.mobs.BossHealthDisplayTicker;
-import com.stek101.projectzulu.common.mobs.entity.EntityHauntedArmor;
-import com.stek101.projectzulu.common.mobs.entity.EntityMummyPharaoh;
-
 import org.lwjgl.opengl.GL11;
 
-import com.stek101.projectzulu.common.core.DefaultProps;
+import com.stek101.projectzulu.common.mobs.entity.EntityHauntedArmor;
 import com.stek101.projectzulu.common.mobs.models.ModelHauntedArmor;
 
 public class RenderHauntedArmor extends RenderGenericLiving {

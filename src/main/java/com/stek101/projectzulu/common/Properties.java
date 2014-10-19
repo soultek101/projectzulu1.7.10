@@ -3,6 +3,7 @@ package com.stek101.projectzulu.common;
 import java.io.File;
 
 import net.minecraftforge.common.config.Configuration;
+
 import com.stek101.projectzulu.common.core.DefaultProps;
 
 public class Properties {

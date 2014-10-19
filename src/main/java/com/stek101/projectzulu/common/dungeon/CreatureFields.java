@@ -13,11 +13,10 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Point;
 
+import com.google.common.base.CharMatcher;
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.core.ObfuscationHelper;
 import com.stek101.projectzulu.common.core.ProjectZuluLog;
-
-import com.google.common.base.CharMatcher;
 
 public class CreatureFields implements DataFields {
     private boolean isEnabled = true;
@@ -44,7 +43,7 @@ public class CreatureFields implements DataFields {
     Point backgroundSize;
 
     public static final ResourceLocation CREATURE_LIST = new ResourceLocation(DefaultProps.dungeonKey,
-            "/textures/creaturelistgui.png");
+            "textures/creaturelistgui.png");
 
     CreatureFields(Minecraft mc) {
         this.mc = mc;

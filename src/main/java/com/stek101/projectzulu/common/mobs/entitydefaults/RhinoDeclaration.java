@@ -8,6 +8,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.config.Configuration;
+
 import com.stek101.projectzulu.common.api.CustomMobData;
 import com.stek101.projectzulu.common.api.ItemList;
 import com.stek101.projectzulu.common.core.ConfigHelper;
@@ -19,6 +20,7 @@ import com.stek101.projectzulu.common.mobs.entity.EntityRhino;
 import com.stek101.projectzulu.common.mobs.models.ModelRhino;
 import com.stek101.projectzulu.common.mobs.renders.RenderGenericLiving;
 import com.stek101.projectzulu.common.mobs.renders.RenderWrapper;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -41,7 +43,7 @@ public class RhinoDeclaration extends SpawnableDeclaration {
                 ItemList.genericCraftingItems, ItemGenerics.Properties.LargeHeart.meta(), 4);
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData,
                 ItemList.genericCraftingItems, ItemGenerics.Properties.Tusk.meta(), 8);
-        customMobData.entityProperties = new EntityProperties(20f, 3.0f, 0.2f, 100f, 0.5f, 32.0f, 60.0f, 10D).createFromConfig(config, mobName);
+        customMobData.entityProperties = new EntityProperties(20f, 3.0f, 0.2f, 100f, 0.5f, 32.0f, 40.0f, 10D).createFromConfig(config, mobName);
         super.outputDataToList(config, customMobData);
     }
 
@@ -57,11 +59,12 @@ public class RhinoDeclaration extends SpawnableDeclaration {
         HashSet<String> defaultBiomesToSpawn = new HashSet<String>();
         defaultBiomesToSpawn.add(BiomeGenBase.plains.biomeName);
         defaultBiomesToSpawn.add(BiomeGenBase.desert.biomeName);
-        defaultBiomesToSpawn.add("Savanna");
+        defaultBiomesToSpawn.add(BiomeGenBase.savanna.biomeName);
+        defaultBiomesToSpawn.add(BiomeGenBase.savannaPlateau.biomeName);
 
         HashSet<String> nonFrozenForest = new HashSet<String>();
         nonFrozenForest.addAll(typeToArray(Type.PLAINS));
-        defaultBiomesToSpawn.addAll(typeToArray(Type.DESERT));
+        defaultBiomesToSpawn.addAll(typeToArray(Type.DRY));
         nonFrozenForest.removeAll(typeToArray(Type.FROZEN));
         defaultBiomesToSpawn.addAll(nonFrozenForest);
         return defaultBiomesToSpawn;

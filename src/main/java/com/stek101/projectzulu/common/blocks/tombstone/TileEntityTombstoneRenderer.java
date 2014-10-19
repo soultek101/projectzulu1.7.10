@@ -14,6 +14,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.stek101.projectzulu.common.blocks.ModelTombstone;
 import com.stek101.projectzulu.common.core.DefaultProps;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

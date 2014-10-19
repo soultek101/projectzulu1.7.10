@@ -10,11 +10,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
+
+import com.google.common.base.Optional;
 import com.stek101.projectzulu.common.api.CustomMobData;
 import com.stek101.projectzulu.common.blocks.util.StringHelper;
 import com.stek101.projectzulu.common.core.entitydeclaration.SpawnEntry;
-
-import com.google.common.base.Optional;
 
 public class ConfigHelper {
 	

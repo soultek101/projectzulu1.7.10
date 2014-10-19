@@ -8,8 +8,10 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
+
 import com.stek101.projectzulu.common.ProjectZulu_Core;
 import com.stek101.projectzulu.common.mobs.packets.PZPacketFollowerMasterData;
+
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 
 /**

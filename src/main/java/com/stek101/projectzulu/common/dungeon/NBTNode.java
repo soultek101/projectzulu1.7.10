@@ -3,10 +3,10 @@ package com.stek101.projectzulu.common.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.base.Optional;
-
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
+
+import com.google.common.base.Optional;
 import com.stek101.projectzulu.common.core.ProjectZuluLog;
 
 public class NBTNode {

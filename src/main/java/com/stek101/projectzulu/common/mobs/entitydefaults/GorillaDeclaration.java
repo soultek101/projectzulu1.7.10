@@ -9,6 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.config.Configuration;
+
 import com.stek101.projectzulu.common.api.CustomMobData;
 import com.stek101.projectzulu.common.api.ItemList;
 import com.stek101.projectzulu.common.core.ConfigHelper;
@@ -20,6 +21,7 @@ import com.stek101.projectzulu.common.mobs.entity.EntityGorilla;
 import com.stek101.projectzulu.common.mobs.models.ModelGorilla;
 import com.stek101.projectzulu.common.mobs.renders.RenderGenericLiving;
 import com.stek101.projectzulu.common.mobs.renders.RenderWrapper;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -27,7 +29,7 @@ public class GorillaDeclaration extends SpawnableDeclaration {
 
     public GorillaDeclaration() {
         super("Gorilla", 25, EntityGorilla.class, EnumCreatureType.creature);
-        setSpawnProperties(10, 100, 1, 1);
+        setSpawnProperties(10, 100, 1, 2);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 3);
 
@@ -43,7 +45,7 @@ public class GorillaDeclaration extends SpawnableDeclaration {
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData, ItemList.furPelt, 0, 8);
         ConfigHelper.configDropToMobData(config, "MOB CONTROLS." + mobName, customMobData,
                 ItemList.genericCraftingItems, ItemGenerics.Properties.LargeHeart.meta(), 4);
-        customMobData.entityProperties = new EntityProperties(20f, 5.0f, 0.3f, 0.0f, 0.5f, 32.0f , 60f, 16D).createFromConfig(config, mobName);
+        customMobData.entityProperties = new EntityProperties(20f, 5.0f, 0.3f, 0.0f, 0.5f, 32.0f , 40f, 16D).createFromConfig(config, mobName);
 
         super.outputDataToList(config, customMobData);
     }

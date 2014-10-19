@@ -9,6 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.config.Configuration;
+
 import com.stek101.projectzulu.common.api.CustomMobData;
 import com.stek101.projectzulu.common.api.ItemList;
 import com.stek101.projectzulu.common.core.ConfigHelper;
@@ -20,6 +21,7 @@ import com.stek101.projectzulu.common.mobs.entity.EntityHorseBrown;
 import com.stek101.projectzulu.common.mobs.models.ModelHorse;
 import com.stek101.projectzulu.common.mobs.renders.RenderGenericHorse;
 import com.stek101.projectzulu.common.mobs.renders.RenderWrapper;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -50,8 +52,8 @@ public class HorseBrownDeclaration extends SpawnableDeclaration {
     @SideOnly(Side.CLIENT)
     public RenderWrapper getEntityrender(Class<? extends EntityLivingBase> entityClass) {
         return new RenderGenericHorse(new ModelHorse(), 0.5f, new ResourceLocation(DefaultProps.mobKey,
-                "textures/Horse/horse_brown.png"), new ResourceLocation(DefaultProps.mobKey, 
-                		"textures/Horse/horse_brown_saddled.png"));
+                "textures/horse/horse_brown.png"), new ResourceLocation(DefaultProps.mobKey, 
+                		"textures/horse/horse_brown_saddled.png"));
     }
 
     @Override

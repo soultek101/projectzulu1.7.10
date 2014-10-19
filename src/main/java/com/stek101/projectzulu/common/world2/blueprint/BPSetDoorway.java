@@ -3,9 +3,9 @@ package com.stek101.projectzulu.common.world2.blueprint;
 import java.awt.Point;
 import java.util.Random;
 
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ChunkCoordinates;
+
 import com.stek101.projectzulu.common.world.CellIndexDirection;
 import com.stek101.projectzulu.common.world.dataobjects.BlockWithMeta;
 import com.stek101.projectzulu.common.world2.MazeCell;

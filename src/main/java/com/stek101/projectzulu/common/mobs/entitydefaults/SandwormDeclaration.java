@@ -8,6 +8,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.config.Configuration;
+
+import com.google.common.base.Optional;
 import com.stek101.projectzulu.common.api.CustomEntityList;
 import com.stek101.projectzulu.common.api.CustomMobData;
 import com.stek101.projectzulu.common.api.ItemList;
@@ -20,8 +22,6 @@ import com.stek101.projectzulu.common.mobs.entity.EntitySandWorm;
 import com.stek101.projectzulu.common.mobs.models.ModelSandWorm;
 import com.stek101.projectzulu.common.mobs.renders.RenderGenericIdle;
 import com.stek101.projectzulu.common.mobs.renders.RenderWrapper;
-
-import com.google.common.base.Optional;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

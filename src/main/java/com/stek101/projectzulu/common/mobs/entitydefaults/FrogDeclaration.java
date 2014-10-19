@@ -8,6 +8,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.common.config.Configuration;
+
 import com.stek101.projectzulu.common.api.CustomMobData;
 import com.stek101.projectzulu.common.api.ItemList;
 import com.stek101.projectzulu.common.core.ConfigHelper;
@@ -19,6 +20,7 @@ import com.stek101.projectzulu.common.mobs.entity.EntityFrog;
 import com.stek101.projectzulu.common.mobs.models.ModelFrog;
 import com.stek101.projectzulu.common.mobs.renders.RenderGenericLiving;
 import com.stek101.projectzulu.common.mobs.renders.RenderWrapper;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -55,10 +57,19 @@ public class FrogDeclaration extends SpawnableDeclaration {
     @Override
     public HashSet<String> getDefaultBiomesToSpawn() {
         HashSet<String> defaultBiomesToSpawn = new HashSet<String>();
+        defaultBiomesToSpawn.add(BiomeGenBase.river.biomeName);
         defaultBiomesToSpawn.add(BiomeGenBase.swampland.biomeName);
+        
         defaultBiomesToSpawn.add("Green Swamplands");
         defaultBiomesToSpawn.add("Marsh");
         defaultBiomesToSpawn.addAll(typeToArray(Type.SWAMP));
+        
+        HashSet<String> nonFrozenForest = new HashSet<String>();
+        nonFrozenForest.addAll(typeToArray(Type.RIVER));
+        nonFrozenForest.addAll(typeToArray(Type.WET));
+        nonFrozenForest.removeAll(typeToArray(Type.FROZEN));
+        defaultBiomesToSpawn.addAll(nonFrozenForest);
+        
         return defaultBiomesToSpawn;
     }
 }
