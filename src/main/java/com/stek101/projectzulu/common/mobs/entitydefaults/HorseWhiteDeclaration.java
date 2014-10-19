@@ -61,15 +61,6 @@ public class HorseWhiteDeclaration extends SpawnableDeclaration {
         defaultBiomesToSpawn.add(BiomeGenBase.plains.biomeName);
         defaultBiomesToSpawn.add(BiomeGenBase.forest.biomeName);
         defaultBiomesToSpawn.add(BiomeGenBase.forestHills.biomeName);
-        defaultBiomesToSpawn.add("Autumn Woods");
-        defaultBiomesToSpawn.add("Birch Forest");
-        defaultBiomesToSpawn.add("Forested Hills");
-        defaultBiomesToSpawn.add("Forested Island");
-        defaultBiomesToSpawn.add("Green Hills");
-        defaultBiomesToSpawn.add("Redwood Forest");
-        defaultBiomesToSpawn.add("Lush Redwoods");
-        defaultBiomesToSpawn.add("Temperate Rainforest");
-        defaultBiomesToSpawn.add("Woodlands");
 
         HashSet<String> nonFrozenForest = new HashSet<String>();
         nonFrozenForest.addAll(typeToArray(Type.FOREST));

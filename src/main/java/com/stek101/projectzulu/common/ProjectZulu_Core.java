@@ -163,7 +163,8 @@ public class ProjectZulu_Core {
 
         ProjectZuluLog.info("Starting ItemBlock Registration");
         ItemBlockManager.INSTANCE.registerBlocks();
-
+        ProjectZuluLog.info("Completed ItemBlock Registration");
+        
         ProjectZuluLog.info("Registering Entites");
         CustomEntityManager.INSTANCE.registerEntities(modConfigDirectoryFile);      
         

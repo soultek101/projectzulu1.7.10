@@ -32,8 +32,8 @@ public class HorseBlackDeclaration extends SpawnableDeclaration {
 	private final List <String> saddledTextures = new ArrayList <String>();
 
     public HorseBlackDeclaration() {
-        super("Horse Black", 29, EntityHorseBlack.class, EnumCreatureType.creature);
-        setSpawnProperties(5, 100, 1, 2);
+        super("Horse", 29, EntityHorseBlack.class, EnumCreatureType.creature);
+        setSpawnProperties(5, 50, 1, 2);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 3);
 
@@ -44,11 +44,17 @@ public class HorseBlackDeclaration extends SpawnableDeclaration {
         wildTextures.add("textures/horse/horse_grey.png");
         wildTextures.add("textures/horse/horse_white.png");
         wildTextures.add("textures/horse/horse_brown.png");
+        wildTextures.add("textures/horse/horse_beige.png");
+        wildTextures.add("textures/horse/horse_dark_black.png");
+        wildTextures.add("textures/horse/horse_dark_brown.png");
         
         saddledTextures.add("textures/horse/horse_black_saddled.png");
         saddledTextures.add("textures/horse/horse_grey_saddled.png");
         saddledTextures.add("textures/horse/horse_white_saddled.png");
         saddledTextures.add("textures/horse/horse_brown_saddled.png");
+        saddledTextures.add("textures/horse/horse_beige_saddled.png");
+        saddledTextures.add("textures/horse/horse_dark_black_saddled.png");
+        saddledTextures.add("textures/horse/horse_dark_brown_saddled.png");
     }
 
     @Override
@@ -78,15 +84,6 @@ public class HorseBlackDeclaration extends SpawnableDeclaration {
         defaultBiomesToSpawn.add(BiomeGenBase.plains.biomeName);
         defaultBiomesToSpawn.add(BiomeGenBase.forest.biomeName);
         defaultBiomesToSpawn.add(BiomeGenBase.forestHills.biomeName);
-        defaultBiomesToSpawn.add("Autumn Woods");
-        defaultBiomesToSpawn.add("Birch Forest");
-        defaultBiomesToSpawn.add("Forested Hills");
-        defaultBiomesToSpawn.add("Forested Island");
-        defaultBiomesToSpawn.add("Green Hills");
-        defaultBiomesToSpawn.add("Redwood Forest");
-        defaultBiomesToSpawn.add("Lush Redwoods");
-        defaultBiomesToSpawn.add("Temperate Rainforest");
-        defaultBiomesToSpawn.add("Woodlands");
 
         HashSet<String> nonFrozenForest = new HashSet<String>();
         nonFrozenForest.addAll(typeToArray(Type.FOREST));

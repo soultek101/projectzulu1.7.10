@@ -96,14 +96,14 @@ public class ContainerBrewingStandSingle extends Container {
         int hotBarMax = potionSlots + 1 + 3 * 9 + 9; // 40;
         int inventMin = potionSlots + 1; // 4;
         int inventMax = potionSlots + 1 + 3 * 9;// 31;
-
+    
         ItemStack itemstack = null;
         Slot slot = (Slot) this.inventorySlots.get(par2);
-
+        
         if (slot != null && slot.getHasStack()) {
             ItemStack itemstack1 = slot.getStack();
             itemstack = itemstack1.copy();
-            if ((par2 < 0 || par2 > potionMax)) {
+            if ((par2 < 0 || par2 >= potionMax)) {
                 if (!this.theSlot.getHasStack() && this.theSlot.isItemValid(itemstack1)) {
                     if (!this.mergeItemStack(itemstack1, potionMax - 1, potionMax, false)) {
                         return null;
@@ -139,7 +139,6 @@ public class ContainerBrewingStandSingle extends Container {
             if (itemstack1.stackSize == itemstack.stackSize) {
                 return null;
             }
-
             slot.onPickupFromSlot(par1EntityPlayer, itemstack1);
         }
         return itemstack;

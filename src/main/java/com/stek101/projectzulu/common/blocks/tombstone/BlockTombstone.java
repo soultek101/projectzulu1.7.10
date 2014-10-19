@@ -125,64 +125,23 @@ public class BlockTombstone extends BlockContainer {
         if (itemID == Items.wooden_pickaxe || itemID == Items.stone_pickaxe || itemID == Items.golden_pickaxe
                 || itemID == Items.iron_pickaxe || itemID == Items.diamond_pickaxe) {
             return true;
-        }
+        } 
         return false;
     }
     
+  
     /**
      * ejects contained items into the world, and notifies neighbours of an update, as appropriate
      */
     @Override
     public void breakBlock(World par1World, int par2, int par3, int par4, Block par5, int par6) {
-    	TileEntityTombstone var7 = (TileEntityTombstone) par1World.getTileEntity(par2, par3, par4);
-    	
-    	 if (var7 != null)
-         {
-             for (int var8 = 0; var8 < var7.getSizeInventory(); ++var8)
-             {
-                 ItemStack var9 = var7.getStackInSlot(var8);
+    	 TileEntity tileEntity = par1World.getTileEntity(par2, par3, par4);
 
-                 if (var9 != null)
-                 {
-                     float var10 = this.field_149955_b.nextFloat() * 0.8F + 0.1F;
-                     float var11 = this.field_149955_b.nextFloat() * 0.8F + 0.1F;
-                     EntityItem var14;
+         if (tileEntity != null && tileEntity instanceof TileEntityTombstone) {
 
-                     for (float var12 = this.field_149955_b.nextFloat() * 0.8F + 0.1F; var9.stackSize > 0; par1World.spawnEntityInWorld(var14))
-                     {
-                         int var13 = this.field_149955_b.nextInt(21) + 10;
-
-                         if (var13 > var9.stackSize)
-                         {
-                             var13 = var9.stackSize;
-                         }
-
-                         var9.stackSize -= var13;
-                         var14 = new EntityItem(par1World, (double)((float)par2 + var10), (double)((float)par3 + var11), (double)((float)par4 + var12), new ItemStack(var9.getItem(), var13, var9.getItemDamage()));
-                         float var15 = 0.05F;
-                         var14.motionX = (double)((float)this.field_149955_b.nextGaussian() * var15);
-                         var14.motionY = (double)((float)this.field_149955_b.nextGaussian() * var15 + 0.2F);
-                         var14.motionZ = (double)((float)this.field_149955_b.nextGaussian() * var15);
-
-                        // if (var9.hasTagCompound())
-                        // {
-                       //      var14.getEntityItem().setTagCompound((NBTTagCompound)var9.getTagCompound().copy());
-                       //  }                        
-                     }
-                 }
-             }
-
-             par1World.func_147453_f(par2, par3, par4, par5);
+             ((TileEntityTombstone) tileEntity).spawnItemsNearPlayer(par1World, par2, par3, par4);
          }
-
          super.breakBlock(par1World, par2, par3, par4, par5, par6);
-    	
-   //     if (!par1World.isRemote) {
-    //        if ((par6 & 8) == 0) {
-  //              this.dropBlockAsItem(par1World, par2, par3, par4,
-  //                      new ItemStack(this, 1, this.getDamageValue(par1World, par2, par3, par4)));
-  //          }
-  //          super.breakBlock(par1World, par2, par3, par4, par5, par6);
-  //      }
+
     }	
 }

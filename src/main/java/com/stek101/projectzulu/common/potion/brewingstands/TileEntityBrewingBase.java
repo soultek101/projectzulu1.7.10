@@ -132,7 +132,7 @@ public class TileEntityBrewingBase extends TileEntity implements ISidedInventory
                 }
             }
 
-            if (ingredientStack.getItem().hasContainerItem()) {
+            if (ingredientStack.getItem().hasContainerItem(ingredientStack)) {
                 this.brewingItemStacks[brewingItemStacks.length - 1] = ingredientStack.getItem().getContainerItem(
                         brewingItemStacks[brewingItemStacks.length - 1]);
             } else {

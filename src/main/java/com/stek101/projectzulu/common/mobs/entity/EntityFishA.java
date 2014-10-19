@@ -3,8 +3,6 @@ package com.stek101.projectzulu.common.mobs.entity;
 import java.util.Random;
 
 import net.minecraft.entity.EntityList;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
 import com.stek101.projectzulu.common.api.CustomEntityList;
@@ -22,7 +20,7 @@ public class EntityFishA extends EntityGenericWaterMob {
         super(par1World); 
         setSize(1.2f, 0.9f);
         Random rand1 = new Random();
-        this.textureID = rand1.nextInt(3);
+        this.textureID = rand1.nextInt(7);
 
         this.entityEntry = CustomEntityList.getByName(EntityList.getEntityString(this));
         
@@ -38,7 +36,7 @@ public class EntityFishA extends EntityGenericWaterMob {
    	 
         this.maxFlightHeight =5;
         this.tasks.addTask(1, new EntityAIWanderSwim(this, 0.3f, 60D));
-        //this.tasks.addTask(2, new EntityAIPanicSwim(this, 1.25f, 60D));
+        this.tasks.addTask(2, new EntityAIPanicSwim(this, 1.25f, 60D));
     }
 	
     @Override
@@ -66,11 +64,6 @@ public class EntityFishA extends EntityGenericWaterMob {
     protected void updateFallState(double par1, boolean par3) {
     }
 
-   @Override
-    protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
-        return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
-    }
-
     @Override
     public void onLivingUpdate() {
     	super.onLivingUpdate();
@@ -79,52 +72,13 @@ public class EntityFishA extends EntityGenericWaterMob {
     	}
     } 
     
+   
     /**
-     * Returns the sound this mob makes while it's alive.
-     */
-    @Override
-    protected String getLivingSound()
-    {
-        return null;
-    }
-
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    @Override
-    protected String getHurtSound()
-    {
-        return null;
-    }
-
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    @Override
-    protected String getDeathSound()
-    {
-        return null;
-    }
-    
-   // @Override
-  /*  public boolean getCanSpawnHere()
-    {
-		int var1 = MathHelper.floor_double(this.posX);
-		int var2 = MathHelper.floor_double(this.boundingBox.minY);
-		int var3 = MathHelper.floor_double(this.posZ);
-		
-        return this.posY > 45.0D && this.posY < 63.0D && worldObj.canBlockSeeTheSky(var1, var2, var3)
-        		&& this.worldObj.getSavedLightValue(EnumSkyBlock.Block, var1, var2, var3) < 1
-        		&& super.getCanSpawnHere();
-    }*/
-    
-    /**
-     * Checks if the entity's current position is a valid location to spawn this entity.
-     */
-    public boolean getCanSpawnHere()
-    {
-        return this.posY > 45.0D && this.posY < 63.0D && super.getCanSpawnHere();
-    }
-
+	 * Checks if the entity's current position is a valid location to spawn this entity.
+	 */
+	@Override
+	public boolean getCanSpawnHere() {
+		return this.posY > 45.0D && this.posY < 63.0D && this.worldObj.checkNoEntityCollision(this.boundingBox);
+	}
 	   
 }

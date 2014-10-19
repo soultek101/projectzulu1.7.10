@@ -14,7 +14,7 @@ public class EntityHorseBlack extends EntityHorseBase{
 	public EntityHorseBlack(World par1World) {
 		super(par1World);
         Random rand1 = new Random();
-        this.textureID = rand1.nextInt(4);
+        this.textureID = rand1.nextInt(6);
 	}
 	
 	/**

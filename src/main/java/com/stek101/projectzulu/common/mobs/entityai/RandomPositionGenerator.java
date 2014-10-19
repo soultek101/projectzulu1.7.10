@@ -204,10 +204,12 @@ public class RandomPositionGenerator
            // System.out.println("value of precipitation height for fish " + entity.worldObj.getPrecipitationHeight( (int)entity.posX, (int)entity.posZ));
             //System.out.println("value of precipitation height for fish " + (entity.worldObj.getPrecipitationHeight( (int)entity.posX, (int)entity.posZ) - heightLevel*1.25) );
             
-            if(entity.posY > entity.worldObj.getPrecipitationHeight( (int)entity.posX, (int)entity.posZ) + heightLevel*1.25){
+            //if(entity.posY > entity.worldObj.getPrecipitationHeight( (int)entity.posX, (int)entity.posZ) + heightLevel*1.25){
+            if(entity.posY > 60.0D ){
                //System.out.println("case 1 var17");
             	var17 = var4.nextInt(2 * par2) - par2*3/2;
-            }else if(entity.posY < entity.worldObj.getPrecipitationHeight( (int)entity.posX, (int)entity.posZ) + heightLevel){
+            //}else if(entity.posY < entity.worldObj.getPrecipitationHeight( (int)entity.posX, (int)entity.posZ) + heightLevel){
+            }else if(entity.posY < 62.0D){	
             	//System.out.println("case 2 var17");
             	var17 = var4.nextInt(2 * par2) - par2/2;
             }else{

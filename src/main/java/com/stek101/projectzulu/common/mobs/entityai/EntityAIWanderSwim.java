@@ -35,15 +35,8 @@ public class EntityAIWanderSwim extends EntityAIBase{
 				return false;
 			}
 			else {
-				if (var1.yCoord < maxDepth) {
-					this.yPosition = 60.0D;
-				}
-				else
-				{
-					this.yPosition = var1.yCoord;
-				}
 				this.xPosition = var1.xCoord;
-				//this.yPosition = var1.yCoord;
+				this.yPosition = var1.yCoord;
 				this.zPosition = var1.zCoord;
 				return entity.isTargetPositionValid(new ChunkCoordinates( (int)xPosition, (int)yPosition, (int)zPosition));
 			}
@@ -56,8 +49,8 @@ public class EntityAIWanderSwim extends EntityAIBase{
 	public boolean continueExecuting() {
 		/* Continue if I'm not at Target Position or if its invalid block */
 		/* If Target Position is not an Air Block, Target Position = null (i.e. Don't try to go there) */
-		return entity.getRNG().nextInt(100) != 0 && !entity.atTargetPosition() && entity.isTargetPositionValid()
-				&& !this.entity.getNavigator().noPath();
+		return entity.getRNG().nextInt(100) != 0 && !entity.atTargetPosition() && entity.isTargetPositionValid();
+		//		&& !this.entity.getNavigator().noPath();
 		//return !this.entity.getNavigator().noPath();
 	}
 

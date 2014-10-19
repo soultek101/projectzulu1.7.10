@@ -22,7 +22,7 @@ public class PotionRecipies {
 
     public void addResultPotion(Item item, int meta, SubItemPotionList resultPotion) {
         if (resultPotion.isPresent()) {
-            String name = Item.itemRegistry.getNameForObject(item);
+            String name = Item.itemRegistry.getNameForObject(item); 
             ingredientToPotionResult.put(name + "." + Integer.toString(meta), resultPotion.get());
         }
     }

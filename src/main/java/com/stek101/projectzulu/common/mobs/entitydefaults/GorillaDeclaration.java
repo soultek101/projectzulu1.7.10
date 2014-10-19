@@ -29,7 +29,7 @@ public class GorillaDeclaration extends SpawnableDeclaration {
 
     public GorillaDeclaration() {
         super("Gorilla", 25, EntityGorilla.class, EnumCreatureType.creature);
-        setSpawnProperties(10, 100, 1, 1);
+        setSpawnProperties(10, 100, 1, 2);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 3);
 

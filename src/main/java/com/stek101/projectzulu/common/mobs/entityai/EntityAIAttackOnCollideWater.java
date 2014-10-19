@@ -68,8 +68,8 @@ public class EntityAIAttackOnCollideWater extends EntityAIBase
         else{
             this.entityTarget = var1;
             
-            //if(attacker.isEntityGrounded()){
-            if(attacker.isInWater()){
+            if(attacker.isEntityGrounded()){
+            //if(attacker.isInWater()){
                 this.entityPathEntity = this.attacker.getNavigator().getPathToEntityLiving(this.entityTarget);
                 return this.entityPathEntity != null;
             }else{
@@ -86,8 +86,8 @@ public class EntityAIAttackOnCollideWater extends EntityAIBase
         if(var1 == null || !this.entityTarget.isEntityAlive()){
         	return false;
         }else if(!this.continuousPathing){
-        	//if(attacker.isEntityGrounded()){
-        	if(attacker.isInWater()){
+        	if(attacker.isEntityGrounded()){
+        	//if(attacker.isInWater()){
             	return !this.attacker.getNavigator().noPath();
         	}else{
             	return !attacker.atTargetPosition() && attacker.isTargetPositionValid();
@@ -104,8 +104,8 @@ public class EntityAIAttackOnCollideWater extends EntityAIBase
      * Execute a one shot task or start executing a continuous task
      */
     public void startExecuting() {
-    	//if(attacker.isEntityGrounded()){
-    	if(attacker.isInWater()){
+    	if(attacker.isEntityGrounded()){
+    	//if(attacker.isInWater()){
             this.attacker.getNavigator().setPath(this.entityPathEntity, this.moveSpeed);
         }else{
             this.attacker.setTargetPosition(new ChunkCoordinates((int)entityTarget.posX, (int)(entityTarget.posY+1.0), (int)entityTarget.posZ));

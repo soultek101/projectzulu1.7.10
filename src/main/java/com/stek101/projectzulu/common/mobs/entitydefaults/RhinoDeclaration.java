@@ -59,11 +59,12 @@ public class RhinoDeclaration extends SpawnableDeclaration {
         HashSet<String> defaultBiomesToSpawn = new HashSet<String>();
         defaultBiomesToSpawn.add(BiomeGenBase.plains.biomeName);
         defaultBiomesToSpawn.add(BiomeGenBase.desert.biomeName);
-        defaultBiomesToSpawn.add("Savanna");
+        defaultBiomesToSpawn.add(BiomeGenBase.savanna.biomeName);
+        defaultBiomesToSpawn.add(BiomeGenBase.savannaPlateau.biomeName);
 
         HashSet<String> nonFrozenForest = new HashSet<String>();
         nonFrozenForest.addAll(typeToArray(Type.PLAINS));
-        defaultBiomesToSpawn.addAll(typeToArray(Type.DESERT));
+        defaultBiomesToSpawn.addAll(typeToArray(Type.DRY));
         nonFrozenForest.removeAll(typeToArray(Type.FROZEN));
         defaultBiomesToSpawn.addAll(nonFrozenForest);
         return defaultBiomesToSpawn;

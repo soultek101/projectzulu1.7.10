@@ -32,7 +32,17 @@ public class ItemBlockRecipeManager {
         
         /* Misc */
         addSmelting(new OptionalItemStack(ItemList.muttonCooked, 1, 1), 0, new OptionalItemStack(ItemList.muttonRaw));
-
+        addRecipe(new OptionalItemStack(ItemList.hammerToolWood), new String[] { "XSX", " S ", " S " }, new char[] { 'X',
+        'S' }, new OptionalItemStack(Blocks.planks, 1, OreDictionary.WILDCARD_VALUE), new OptionalItemStack(Items.stick));
+        addRecipe(new OptionalItemStack(ItemList.hammerToolStone), new String[] { "XSX", " S ", " S " }, new char[] { 'X',
+        'S' }, new OptionalItemStack(Blocks.stone, 1, OreDictionary.WILDCARD_VALUE), new OptionalItemStack(Items.stick));
+        addRecipe(new OptionalItemStack(ItemList.hammerToolIron), new String[] { "XSX", " S ", " S " }, new char[] { 'X',
+        'S' }, new OptionalItemStack(Items.iron_ingot), new OptionalItemStack(Items.stick));
+        addRecipe(new OptionalItemStack(ItemList.hammerToolGold), new String[] { "XSX", " S ", " S " }, new char[] { 'X',
+        'S' }, new OptionalItemStack(Items.gold_ingot), new OptionalItemStack(Items.stick));
+        addRecipe(new OptionalItemStack(ItemList.hammerToolDiamond), new String[] { "XSX", " S ", " S " }, new char[] { 'X',
+        'S' }, new OptionalItemStack(Items.diamond), new OptionalItemStack(Items.stick));
+        
         /* Tombstone */
         addRecipe(new OptionalItemStack(BlockList.tombstone), new String[] { "CCC", "CSC", "CCC" }, new char[] { 'C',
                 'S' }, new OptionalItemStack(Blocks.cobblestone), new OptionalItemStack(Items.sign));
@@ -41,18 +51,20 @@ public class ItemBlockRecipeManager {
         addSmelting(new OptionalItemStack(Items.coal, 1, 1), 0, new OptionalItemStack(BlockList.palmTreeLog));
         addShapelessRecipe(new OptionalItemStack(BlockList.palmTreePlank, 4), new OptionalItemStack(
                 BlockList.palmTreeLog));
-        addRecipe(new OptionalItemStack(BlockList.palmTreeDoubleSlab), new String[] { "X  ", "X  ", "   " }, 'X',
-                new OptionalItemStack(BlockList.palmTreeSlab));
-        addRecipe(new OptionalItemStack(BlockList.palmTreeDoubleSlab), new String[] { " X ", " X ", "   " }, 'X',
-                new OptionalItemStack(BlockList.palmTreeSlab));
-        addRecipe(new OptionalItemStack(BlockList.palmTreeDoubleSlab), new String[] { "  X", "  X", "   " }, 'X',
-                new OptionalItemStack(BlockList.palmTreeSlab));
-        addRecipe(new OptionalItemStack(BlockList.palmTreeDoubleSlab), new String[] { "   ", "X  ", "X  " }, 'X',
-                new OptionalItemStack(BlockList.palmTreeSlab));
-        addRecipe(new OptionalItemStack(BlockList.palmTreeDoubleSlab), new String[] { "   ", " X ", " X " }, 'X',
-                new OptionalItemStack(BlockList.palmTreeSlab));
-        addRecipe(new OptionalItemStack(BlockList.palmTreeDoubleSlab), new String[] { "   ", "  X", "  X" }, 'X',
-                new OptionalItemStack(BlockList.palmTreeSlab));
+        addRecipe(new OptionalItemStack(BlockList.palmTreeSlab), new String[] { "   ", "   ", "XXX" }, 'X',
+                new OptionalItemStack(BlockList.palmTreePlank));
+        //addRecipe(new OptionalItemStack(BlockList.palmTreeDoubleSlab), new String[] { "X  ", "X  ", "   " }, 'X',
+        //        new OptionalItemStack(BlockList.palmTreeSlab));
+        //addRecipe(new OptionalItemStack(BlockList.palmTreeDoubleSlab), new String[] { " X ", " X ", "   " }, 'X',
+        //        new OptionalItemStack(BlockList.palmTreeSlab));
+        //addRecipe(new OptionalItemStack(BlockList.palmTreeDoubleSlab), new String[] { "  X", "  X", "   " }, 'X',
+        //        new OptionalItemStack(BlockList.palmTreeSlab));
+        //addRecipe(new OptionalItemStack(BlockList.palmTreeDoubleSlab), new String[] { "   ", "X  ", "X  " }, 'X',
+        //        new OptionalItemStack(BlockList.palmTreeSlab));
+        //addRecipe(new OptionalItemStack(BlockList.palmTreeDoubleSlab), new String[] { "   ", " X ", " X " }, 'X',
+        //        new OptionalItemStack(BlockList.palmTreeSlab));
+        //addRecipe(new OptionalItemStack(BlockList.palmTreeDoubleSlab), new String[] { "   ", "  X", "  X" }, 'X',
+        //        new OptionalItemStack(BlockList.palmTreeSlab));
 
         /* Jasper */
         if (BlockList.jasper.isPresent()) {
@@ -70,6 +82,8 @@ public class ItemBlockRecipeManager {
         }
         addRecipe(new OptionalItemStack(Items.bowl), new String[] { "   ", "X X", " X " }, 'X', new OptionalItemStack(
                 ItemList.coconutShell));
+        addShapelessRecipe(new OptionalItemStack(ItemList.coconutShellFuel), new OptionalItemStack(ItemList.coconutShell),
+        		new OptionalItemStack(ItemList.coconutShell), new OptionalItemStack(ItemList.coconutShell), new OptionalItemStack(ItemList.coconutShell));  
         addRecipe(new OptionalItemStack(ItemList.coconutSeed), new String[] { " X ", " Y ", "   " }, new char[] { 'X',
                 'Y' }, new OptionalItemStack(Items.wooden_sword, 1, OreDictionary.WILDCARD_VALUE),
                 new OptionalItemStack(ItemList.coconutItem));
@@ -104,11 +118,14 @@ public class ItemBlockRecipeManager {
         /* Brewing Stand */
         shapedOreRecipe(new OptionalItemStack(BlockList.brewingStandSingle), true,
                 new String[] { "GGG", "CLC", "LLL" }, new char[] { 'G', 'C', 'L' },
-                new OptionalItemStack(Blocks.glass), new OptionalItemStack(Blocks.cobblestone), new OptionalItemStack(
-                        "log"));
-        shapedOreRecipe(new OptionalItemStack(BlockList.brewingStandSingle), true,
+                new OptionalItemStack(Blocks.glass), new OptionalItemStack(Blocks.cobblestone), 
+                new OptionalItemStack(Blocks.log, 1, OreDictionary.WILDCARD_VALUE));
+        
+        shapedOreRecipe(new OptionalItemStack(BlockList.brewingStandTriple), true,
                 new String[] { "GGG", "CLC", "LLL" }, new char[] { 'G', 'C', 'L' },
-                new OptionalItemStack(Blocks.glass), new OptionalItemStack("cobbleRed"), new OptionalItemStack("log"));
+                new OptionalItemStack(Blocks.glass), new OptionalItemStack(Blocks.cobblestone), 
+                new OptionalItemStack(Blocks.planks, 1, OreDictionary.WILDCARD_VALUE));
+       
         shapedOreRecipe(new OptionalItemStack(BlockList.brewingStandTriple), true,
                 new String[] { "GGG", "LNL", "NNN" }, new char[] { 'G', 'L', 'N' },
                 new OptionalItemStack(Blocks.glass), new OptionalItemStack(Items.glowstone_dust),
@@ -176,6 +193,9 @@ public class ItemBlockRecipeManager {
             addShapelessRecipe(new OptionalItemStack(BlockList.universalFlowerPot), new OptionalItemStack(
                     Items.flower_pot));
         }
+        
+        /*PZ Fuel Setup*/
+        GameRegistry.registerFuelHandler(new PZFuelHandler());
     }
 
     private static void setupExtrabiomesXLRecipies() {
@@ -193,20 +213,38 @@ public class ItemBlockRecipeManager {
 
     private static void setupCampfireRecipies() {
 
-        shapedOreRecipe(new OptionalItemStack(BlockList.campfire, 1, 0), true, new String[] { "   ", "LLL", "   " },
-                new char[] { 'L' }, new OptionalItemStack(Blocks.planks, 1, OreDictionary.WILDCARD_VALUE));
-        shapedOreRecipe(new OptionalItemStack(BlockList.campfire, 1, 0), true, new String[] { "   ", "LLL", "   " },
-                new char[] { 'L' }, new OptionalItemStack("log"));
+        shapedOreRecipe(new OptionalItemStack(BlockList.campfire, 1, 0), true, new String[] { "   ", " X ", "LLL" },
+                new char[] { 'X', 'L' }, new OptionalItemStack(Items.coal, 1, OreDictionary.WILDCARD_VALUE), new OptionalItemStack(Blocks.planks, 1, OreDictionary.WILDCARD_VALUE));
+        
+        shapedOreRecipe(new OptionalItemStack(BlockList.campfire, 1, 0), true, new String[] { "   ", " X ", "LLL" },
+                new char[] { 'X', 'L' }, new OptionalItemStack(Items.coal, 1, OreDictionary.WILDCARD_VALUE), new OptionalItemStack(BlockList.palmTreePlank, 1));
+        
+        //shapedOreRecipe(new OptionalItemStack(BlockList.campfire, 1, 0), true, new String[] { "   ", "LLL", "   " },
+        //        new char[] { 'L' }, new OptionalItemStack("log"));
 
-        shapedOreRecipe(new OptionalItemStack(BlockList.campfire, 1, 1), true, new String[] { "   ", "LLL", "CCC" },
-                new char[] { 'L', 'C' }, new OptionalItemStack(Blocks.planks, 1, OreDictionary.WILDCARD_VALUE),
+        shapedOreRecipe(new OptionalItemStack(BlockList.campfire, 1, 1), true, new String[] { "   ", " X ", "CLC" },
+                new char[] {'X', 'L', 'C' }, new OptionalItemStack(Items.coal, 1, OreDictionary.WILDCARD_VALUE), new OptionalItemStack(Blocks.planks, 1, OreDictionary.WILDCARD_VALUE),
                 new OptionalItemStack(Blocks.cobblestone));
-        shapedOreRecipe(new OptionalItemStack(BlockList.campfire, 1, 1), true, new String[] { "   ", "LLL", "CCC" },
-                new char[] { 'L', 'C' }, new OptionalItemStack("log"), new OptionalItemStack(Blocks.cobblestone));
+        
+        shapedOreRecipe(new OptionalItemStack(BlockList.campfire, 1, 1), true, new String[] { "   ", " X ", "CLC" },
+                new char[] {'X', 'L', 'C' }, new OptionalItemStack(Items.coal, 1, OreDictionary.WILDCARD_VALUE), new OptionalItemStack(BlockList.palmTreePlank, 1),
+                new OptionalItemStack(Blocks.cobblestone));
+        
+        shapedOreRecipe(new OptionalItemStack(BlockList.campfire, 1, 1), true, new String[] { "   ", " X ", "CLC" },
+                new char[] {'X', 'L', 'C' }, new OptionalItemStack(Items.coal, 1, OreDictionary.WILDCARD_VALUE), new OptionalItemStack(Blocks.planks, 1, OreDictionary.WILDCARD_VALUE),
+                new OptionalItemStack(Blocks.stone));
+        
+        shapedOreRecipe(new OptionalItemStack(BlockList.campfire, 1, 1), true, new String[] { "   ", " X ", "CLC" },
+                new char[] {'X', 'L', 'C' }, new OptionalItemStack(Items.coal, 1, OreDictionary.WILDCARD_VALUE), new OptionalItemStack(BlockList.palmTreePlank, 1),
+                new OptionalItemStack(Blocks.stone));
+        
+        //shapedOreRecipe(new OptionalItemStack(BlockList.campfire, 1, 1), true, new String[] { "   ", "LLL", "CCC" },
+        //        new char[] { 'L', 'C' }, new OptionalItemStack("log"), new OptionalItemStack(Blocks.cobblestone));
 
-        shapedOreRecipe(new OptionalItemStack(BlockList.campfire, 1, 2), true, new String[] { " S ", "LLL", "   " },
+        /*shapedOreRecipe(new OptionalItemStack(BlockList.campfire, 1, 2), true, new String[] { " S ", "LLL", "   " },
                 new char[] { 'L', 'C', 'S' }, new OptionalItemStack(Blocks.planks, 1, OreDictionary.WILDCARD_VALUE),
                 new OptionalItemStack(Blocks.cobblestone), new OptionalItemStack(Items.stick));
+        
         shapedOreRecipe(new OptionalItemStack(BlockList.campfire, 1, 2), true, new String[] { " S ", "LLL", "   " },
                 new char[] { 'L', 'C', 'S' }, new OptionalItemStack("log"), new OptionalItemStack(Blocks.cobblestone),
                 new OptionalItemStack(Blocks.cobblestone));
@@ -214,9 +252,10 @@ public class ItemBlockRecipeManager {
         shapedOreRecipe(new OptionalItemStack(BlockList.campfire, 1, 3), true, new String[] { " S ", "LLL", "CCC" },
                 new char[] { 'L', 'C', 'S' }, new OptionalItemStack(Blocks.planks, 1, OreDictionary.WILDCARD_VALUE),
                 new OptionalItemStack(Blocks.cobblestone), new OptionalItemStack(Items.stick));
+        
         shapedOreRecipe(new OptionalItemStack(BlockList.campfire, 1, 3), true, new String[] { " S ", "LLL", "CCC" },
                 new char[] { 'L', 'C', 'S' }, new OptionalItemStack("log"), new OptionalItemStack(Blocks.cobblestone),
-                new OptionalItemStack(Blocks.cobblestone));
+                new OptionalItemStack(Blocks.cobblestone));*/
     }
 
     private static void setupArmorRecipies() {

@@ -2,13 +2,8 @@ package com.stek101.projectzulu.common.mobs.entity;
 
 import java.util.EnumSet;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
 import com.stek101.projectzulu.common.api.CustomEntityList;
@@ -16,7 +11,6 @@ import com.stek101.projectzulu.common.mobs.EntityAFightorFlight;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIAttackOnCollideWater;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAINearestAttackableTarget;
-import com.stek101.projectzulu.common.mobs.entityai.EntityAIPanicSwim;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIWanderSwim;
 
 public class EntityRipperFin extends EntityGenericWaterMob  {	
@@ -40,9 +34,8 @@ public class EntityRipperFin extends EntityGenericWaterMob  {
     	 if (Math.round(this.aggroRange) != 0) {
           EAFF = new EntityAFightorFlight().setEntity(this, worldObj, this.aggroLevel, this.aggroRange);
     	 }
-    	  
-        this.maxFlightHeight = -3;
-        this.getNavigator().setCanSwim(true);
+    	
+    	this.maxFlightHeight =5;
         this.tasks.addTask(1, new EntityAIWanderSwim(this, 0.3f, 60D));
         this.tasks.addTask(2, new EntityAIAttackOnCollideWater(this, 1.0f, false));
         
@@ -56,9 +49,10 @@ public class EntityRipperFin extends EntityGenericWaterMob  {
 
     }	
 	
+	
     @Override
     public int getTotalArmorValue() {
-        return 1;
+        return 0;
     }
     
     @Override
@@ -82,52 +76,20 @@ public class EntityRipperFin extends EntityGenericWaterMob  {
     }
 
     @Override
-    protected boolean isValidLocation(World world, int xCoord, int yCoord, int zCoord) {
-        return worldObj.canBlockSeeTheSky(xCoord, yCoord, zCoord);
-    }
-
-    
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
-    @Override
-    protected String getLivingSound()
-    {
-        return null;
-    }
-
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    @Override
-    protected String getHurtSound()
-    {
-        return null;
-    }
-    
-    @Override
     public void onLivingUpdate() {
     	super.onLivingUpdate();
     	if (Math.round(this.aggroRange) != 0) {
     		EAFF.updateEntityAFF(worldObj);
     	}
-    }
-
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    @Override
-    protected String getDeathSound()
-    {
-        return null;
-    }
+    } 
     
+   
     /**
-     * Checks if the entity's current position is a valid location to spawn this entity.
-     */
-    public boolean getCanSpawnHere()
-    {
-        return this.posY > 45.0D && this.posY < 63.0D && super.getCanSpawnHere();
-    }
+	 * Checks if the entity's current position is a valid location to spawn this entity.
+	 */
+	@Override
+	public boolean getCanSpawnHere() {
+		return this.posY > 45.0D && this.posY < 63.0D && this.worldObj.checkNoEntityCollision(this.boundingBox);
+	}
 	
 }

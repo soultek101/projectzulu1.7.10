@@ -198,7 +198,7 @@ public class BlockCampfire extends Block implements ITempBlock {
         if (par5EntityPlayer.getCurrentEquippedItem() != null) {
             /* If Fire is not Lit and Coal is in Hand, Light Fire */
             if (par1World.getBlockMetadata(par2, par3, par4) < 2
-                    && (par5EntityPlayer.getCurrentEquippedItem().getItem() == Items.coal)) {
+                    && (par5EntityPlayer.getCurrentEquippedItem().getItem() == Items.flint_and_steel)) {
                 if (!par5EntityPlayer.capabilities.isCreativeMode) {
                     par5EntityPlayer.getCurrentEquippedItem().stackSize -= 1;
                 }

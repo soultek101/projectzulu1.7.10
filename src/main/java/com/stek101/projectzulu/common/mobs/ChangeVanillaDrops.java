@@ -17,8 +17,6 @@ public class ChangeVanillaDrops {
 @SubscribeEvent(priority=EventPriority.NORMAL, receiveCanceled=true)
 public void onEvent(LivingDropsEvent event)
 {
-	
-	
     if (event.entity instanceof EntitySheep)
     {
         // DEBUG

@@ -3,7 +3,10 @@ package com.stek101.projectzulu.common.mobs.models;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
+
+import com.stek101.projectzulu.common.mobs.entity.EntityFishB;
 
 public class ModelFishB extends ModelBase
 {
@@ -88,6 +91,12 @@ public class ModelFishB extends ModelBase
     //backFinBottom.render(f5);
     //backFinTop.render(f5);
   }
+  
+  @Override
+  public void setLivingAnimations(EntityLivingBase par1EntityLiving, float par2, float par3, float par4) {
+	EntityFishB var5 = (EntityFishB) par1EntityLiving;
+      super.setLivingAnimations(par1EntityLiving, par2, par3, par4);
+  }
     
 	  private void setRotation(ModelRenderer model, float x, float y, float z)
 	  {
@@ -99,7 +108,7 @@ public class ModelFishB extends ModelBase
 	  public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
 	  {
 	    super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-	    this.backFinBase.rotateAngleY = MathHelper.cos(f * 0.4443F) * 0.8F * f1; 
+	    this.backFinBase.rotateAngleY = MathHelper.cos(f3 * 0.3331F) * 0.8F * f;
 	  }
 
 	}

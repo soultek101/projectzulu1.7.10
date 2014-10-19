@@ -57,10 +57,19 @@ public class FrogDeclaration extends SpawnableDeclaration {
     @Override
     public HashSet<String> getDefaultBiomesToSpawn() {
         HashSet<String> defaultBiomesToSpawn = new HashSet<String>();
+        defaultBiomesToSpawn.add(BiomeGenBase.river.biomeName);
         defaultBiomesToSpawn.add(BiomeGenBase.swampland.biomeName);
+        
         defaultBiomesToSpawn.add("Green Swamplands");
         defaultBiomesToSpawn.add("Marsh");
         defaultBiomesToSpawn.addAll(typeToArray(Type.SWAMP));
+        
+        HashSet<String> nonFrozenForest = new HashSet<String>();
+        nonFrozenForest.addAll(typeToArray(Type.RIVER));
+        nonFrozenForest.addAll(typeToArray(Type.WET));
+        nonFrozenForest.removeAll(typeToArray(Type.FROZEN));
+        defaultBiomesToSpawn.addAll(nonFrozenForest);
+        
         return defaultBiomesToSpawn;
     }
 }

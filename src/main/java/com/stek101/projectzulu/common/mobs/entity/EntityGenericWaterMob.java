@@ -1,18 +1,8 @@
 package com.stek101.projectzulu.common.mobs.entity;
 
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget.Sorter;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityFishHook;
-import net.minecraft.stats.StatList;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
@@ -60,7 +50,7 @@ public abstract class EntityGenericWaterMob extends EntityGenericAnimal implemen
 	    @Override
 	    protected boolean canDespawn()
 	    {
-	        return false;
+	        return true;
 	    }
 
 	    /**
@@ -160,7 +150,7 @@ public abstract class EntityGenericWaterMob extends EntityGenericAnimal implemen
 	    /**
 	     * Moves the entity based on the specified heading.  Args: strafe, forward
 	     */
-	    public void moveEntityWithHeading(float p_70612_1_, float p_70612_2_)
+	  /*  public void moveEntityWithHeading(float p_70612_1_, float p_70612_2_)
 	    {
 	        double d0;
 
@@ -267,7 +257,7 @@ public abstract class EntityGenericWaterMob extends EntityGenericAnimal implemen
 
 	        this.limbSwingAmount += (f6 - this.limbSwingAmount) * 0.4F;
 	        this.limbSwing += this.limbSwingAmount;
-	    }
+	    }*/
 	    
 	    @Override
 		public boolean setTargetPosition(ChunkCoordinates targetPosition){

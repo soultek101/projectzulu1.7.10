@@ -172,12 +172,4 @@ public class EntityDuck extends EntityGenericAnimal implements IAnimals {
         }
     }
 
-    @Override
-    protected void dropRareDrop(int par1) {
-        if (Loader.isModLoaded(DefaultProps.BlocksModId) && BlockList.mobHeads.isPresent()) {
-            entityDropItem(new ItemStack(BlockList.mobHeads.get(), 1, 13), 1);
-        }
-        super.dropRareDrop(par1);
-    }
-
 }

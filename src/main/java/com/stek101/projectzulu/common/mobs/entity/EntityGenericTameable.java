@@ -240,9 +240,7 @@ public abstract class EntityGenericTameable extends EntityGenericRideable{
                          if (var2.stackSize <= 0) {
                              par1EntityPlayer.inventory.setInventorySlotContents(par1EntityPlayer.inventory.currentItem, (ItemStack)null);
                          }
-                         
-                         //System.out.println("PT3 Owner is " + this.getOwnerName());
-                         //System.out.println("PT3 EntityT is " + this.getEntityTamed());
+
                          return true;
     				}
     			}
