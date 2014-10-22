@@ -1,8 +1,9 @@
 package com.stek101.projectzulu.common.blocks;
 
+import net.minecraft.item.ItemStack;
+
 import com.stek101.projectzulu.common.api.ItemList;
 
-import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.IFuelHandler;
 
 public class PZFuelHandler implements IFuelHandler {

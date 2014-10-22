@@ -5,8 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import com.stek101.projectzulu.common.ProjectZulu_Core;
-
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,6 +16,9 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+
+import com.stek101.projectzulu.common.ProjectZulu_Core;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -75,13 +76,20 @@ public class TileEntityTombstone extends TileEntity {
         }
     }
     
+    /* Spawn and reset XP amount */
+    public int dropXP(){
+    	int droppedXP = experience;
+    	experience =0;
+    	return droppedXP;
+    }
+    
     /* Spawn items in Tombstone near Player */
     public void spawnItemsNearPlayer(World world, int par1, int par2, int par3) {
     	Random rand = new Random();
     	EntityPlayer player = ProjectZulu_Core.proxy.getClientPlayer();
     	Side side = FMLCommonHandler.instance().getEffectiveSide();
-        player.addExperience(experience);
-        experience = 0;
+        //player.addExperience(experience);
+        //experience = 0;
 
         Iterator<ItemStack> unSortIterator = deathItems.iterator();
         

@@ -1,12 +1,14 @@
 package com.stek101.projectzulu.common.blocks.itemblockdeclarations;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraftforge.common.config.Configuration;
 
 import com.google.common.base.Optional;
 import com.stek101.projectzulu.common.api.BlockList;
 import com.stek101.projectzulu.common.blocks.spike.BlockSpikes;
 import com.stek101.projectzulu.common.blocks.spike.RenderSpike;
+import com.stek101.projectzulu.common.blocks.spike.TileEntitySpikes;
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.core.ProjectZuluLog;
 import com.stek101.projectzulu.common.core.itemblockdeclaration.BlockDeclaration;
@@ -17,9 +19,11 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class SpikesDeclaration extends BlockDeclaration {
 
     private int renderID = -1;
-
-    public SpikesDeclaration() {
-        super("Spikes");
+    private String material;
+    
+    public SpikesDeclaration(String mat) {
+        super("Spikes" + "_" + mat);
+        this.material = mat;
     }
 
     @Override
@@ -30,17 +34,49 @@ public class SpikesDeclaration extends BlockDeclaration {
 
     @Override
     protected boolean createBlock() {
-        BlockList.spike = Optional
-                .of(new BlockSpikes(renderID).setHardness(0.5F).setStepSound(Block.soundTypeMetal)
-                        .setBlockName(name.toLowerCase())
+    	if (material == "Ivory") {
+        BlockList.spike_ivory = Optional
+                .of(new BlockSpikes(renderID).setBlockName(name.toLowerCase())
                         .setBlockTextureName(DefaultProps.blockKey + ":" + name.toLowerCase()));
+    	}
+    	else if (material == "Wood") {
+            BlockList.spike_wood = Optional
+                    .of(new BlockSpikes(renderID, Material.wood, 0).setBlockName(name.toLowerCase())
+                            .setBlockTextureName(DefaultProps.blockKey + ":" + name.toLowerCase()));
+    	}
+    	else if (material == "Stone") {
+            BlockList.spike_stone = Optional
+                    .of(new BlockSpikes(renderID, Material.rock, 0).setBlockName(name.toLowerCase())
+                            .setBlockTextureName(DefaultProps.blockKey + ":" + name.toLowerCase()));
+    	}
+    	else if (material == "Iron") {
+            BlockList.spike_iron = Optional
+                    .of(new BlockSpikes(renderID, Material.iron, 0).setBlockName(name.toLowerCase())
+                            .setBlockTextureName(DefaultProps.blockKey + ":" + name.toLowerCase()));
+    	}
         return true;
     }
 
     @Override
     protected void registerBlock() {
-        Block block = BlockList.spike.get();
-        GameRegistry.registerBlock(block, name.toLowerCase());
+    	if (material == "Ivory") {
+    		Block block = BlockList.spike_ivory.get();
+    		GameRegistry.registerBlock(block, name.toLowerCase());
+    		GameRegistry.registerTileEntity(TileEntitySpikes.class, "PZTileEntitySpikes");
+    	} else if (material == "Wood") {
+    		Block block = BlockList.spike_wood.get();
+    		GameRegistry.registerBlock(block, name.toLowerCase());
+    		GameRegistry.registerTileEntity(TileEntitySpikes.class, "PZTileEntitySpikesW");
+    	} else if (material == "Stone") {
+    		Block block = BlockList.spike_stone.get();
+    		GameRegistry.registerBlock(block, name.toLowerCase());
+    		GameRegistry.registerTileEntity(TileEntitySpikes.class, "PZTileEntitySpikesS");
+    	} else if (material == "Iron") {
+    		Block block = BlockList.spike_iron.get();
+    		GameRegistry.registerBlock(block, name.toLowerCase());
+    		GameRegistry.registerTileEntity(TileEntitySpikes.class, "PZTileEntitySpikesI");
+    	}    		
+    	//GameRegistry.registerTileEntity(TileEntitySpikes.class, "PZTileEntitySpikes");
     }
 
     @Override

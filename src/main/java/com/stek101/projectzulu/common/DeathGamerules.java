@@ -220,13 +220,19 @@ public class DeathGamerules {
         	
             /* Get items/XP to drop and clear them from Player */
             int xpDropped = 0;
+            
             if (dropXP) {
                 if (!player.worldObj.isRemote) {
+                	if (maxDropXP + percKeptXp > 100){
+                        ProjectZuluLog.warning("Warning : The total of MaxDropXP and percKeptXP is greater than 100. Resetting to default");
+                        maxDropXP = 100;
+                	    percKeptXp = 0;
+                	}
                     //xpDropped = player.experienceTotal;
-                    xpDropped = player.experienceTotal * (maxDropXP/100);
-                    int keptXp = (player.experienceTotal - xpDropped) * (percKeptXp / 100);
-                    
-                    xpDropped = xpDropped > maxDropXP ? maxDropXP : xpDropped;
+                    xpDropped = (int) (player.experienceTotal * ((float) maxDropXP/100));
+                   
+                    int keptXp = (int) ((player.experienceTotal - xpDropped) * ((float) percKeptXp / 100));
+                    //xpDropped = xpDropped > maxDropXP ? maxDropXP : xpDropped;
                     
                     redistributor.addExperience(player, keptXp >= 0 ? keptXp : 0);
                     player.experienceLevel = 0;

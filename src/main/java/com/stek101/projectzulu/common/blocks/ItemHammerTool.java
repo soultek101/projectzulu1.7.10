@@ -16,14 +16,10 @@ import net.minecraft.item.ItemTool;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.google.common.base.Optional;
 import com.google.common.collect.Sets;
 import com.stek101.projectzulu.common.ProjectZulu_Core;
 import com.stek101.projectzulu.common.api.BlockList;
-import com.stek101.projectzulu.common.api.ItemList;
 import com.stek101.projectzulu.common.core.DefaultProps;
-import com.stek101.projectzulu.common.core.OptionalItemStack;
-
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -293,11 +289,5 @@ public class ItemHammerTool extends ItemTool {
         }
         return true;
     }
-   
-  //  @Override
-  //  public boolean onBlockStartBreak(ItemStack itemstack, int x, int y, int z, EntityPlayer entityplayer) {
-    	
-    	
-    
-    
+
 }

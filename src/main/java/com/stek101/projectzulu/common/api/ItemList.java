@@ -37,6 +37,7 @@ public enum ItemList {
     public static Optional<? extends Item> hammerToolNether = Optional.absent();
     public static Optional<? extends Item> hammerToolDiamond = Optional.absent();
     public static Optional<? extends Item> hammerToolGold = Optional.absent();
+    public static Optional<? extends Item> xpGem = Optional.absent();
 
     /* Armor */
     public static Optional<? extends Item> scaleArmorHead = Optional.absent();
