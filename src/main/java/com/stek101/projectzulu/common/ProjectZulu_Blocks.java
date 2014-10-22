@@ -92,9 +92,10 @@ public class ProjectZulu_Blocks extends BaseModule {
                 new PalmTreeSlabDeclaration(), new PalmTreeDoubleSlabDeclaration(), new PalmTreeStairsDeclaration(),
                 new PalmTreeLeavesDeclaration(), new PalmTreeSapling(), new CoconutDeclaration(),
                 new QuickSandDeclaration(), new NightBloomDeclaration(), new CreeperBlossomDeclaration(),
-                new SpikesDeclaration(), new CampfireDeclaration(), new MobSkullsDeclaration(),
+                new SpikesDeclaration("Ivory"), new CampfireDeclaration(), new MobSkullsDeclaration(),
                 new TombstoneDeclaration(), new UniversalFlowerPotDeclaration(), new BrewingStandSingleDeclaration(),
-                new BrewingStandTripleDeclaration());
+                new BrewingStandTripleDeclaration(), new SpikesDeclaration("Wood"), new SpikesDeclaration("Stone"),
+                new SpikesDeclaration("Iron"));
 
         manager.addItemBlock(new AnkhDeclaration(), new AloeVeraSeedsDeclaration(), new WaterDropletDeclaration(),
                 new CoconutMilkFragmentDeclaration(), new CoconutSeedDeclaration(), new CoconutShellDeclaration(),

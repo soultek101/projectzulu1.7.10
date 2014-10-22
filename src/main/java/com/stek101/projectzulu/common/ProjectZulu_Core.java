@@ -88,6 +88,11 @@ public class ProjectZulu_Core {
 //    public static PacketPipeline getPipeline() {
 //        return packetPipeline;
 //    }
+    
+	public static String Updates = "";
+	public static boolean modOutDated = false;
+	public static boolean checkForUpdates = true;
+	//UpdateEventHandler UEH = new UpdateEventHandler();
 
     @SidedProxy(clientSide = "com.stek101.projectzulu.common.ClientProxyProjectZulu", serverSide = "com.stek101.projectzulu.common.CommonProxyProjectZulu")
     public static CommonProxyProjectZulu proxy;
@@ -110,6 +115,10 @@ public class ProjectZulu_Core {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        //if (checkForUpdates)
+		//	UpdateMonitor.checkForUpdates();
+        //FMLCommonHandler.instance().bus().register(new UpdateEventHandler());
+
         modConfigDirectoryFile = event.getModConfigurationDirectory();
 
         ProjectZuluLog.configureLogging(modConfigDirectoryFile);
@@ -166,8 +175,7 @@ public class ProjectZulu_Core {
         ProjectZuluLog.info("Completed ItemBlock Registration");
         
         ProjectZuluLog.info("Registering Entites");
-        CustomEntityManager.INSTANCE.registerEntities(modConfigDirectoryFile);      
-        
+        CustomEntityManager.INSTANCE.registerEntities(modConfigDirectoryFile); 
     }
 
     private void attemptLoadModule(String classResourceName) {
@@ -238,5 +246,6 @@ public class ProjectZulu_Core {
                 moduleInfo.module.serverStart(event, modConfigDirectoryFile);
             }
         }
-    }
+    }   
+
 }

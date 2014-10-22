@@ -3,16 +3,19 @@ package com.stek101.projectzulu.common.blocks.spike;
 import java.util.Random;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
@@ -26,25 +29,49 @@ import com.stek101.projectzulu.common.core.ItemGenerics;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockSpikes extends Block {
+public class BlockSpikes extends BlockContainer {
 
-    public static final String[] imageSuffix = new String[] { "", "_poison", "_sticky" };
-    public int maxDamage;
+    public static final String[] imageSuffixB = new String[] { "", "_poison", "_sticky" };
+    Material blockMaterial;
+    int defaultIvory;
     
     @SideOnly(Side.CLIENT)
     private IIcon[] icons;
     public final int renderID;
 
     
-    public BlockSpikes(int renderID) {
-        super(Material.iron);
+    public BlockSpikes(int renderID, Material mat, int defaultIvory) {
+        super(mat);
         setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         disableStats();        
-        setBlockBounds(0f, 0.0F, 0.0f, 1.0f, 0.5f, 1.0f);
-        setHardness(0.5F);
-        setStepSound(Block.soundTypeMetal);
-        this.maxDamage = 5;
+        setBlockBounds(0f, 0.0F, 0.0f, 1.0f, 0.5f, 1.0f);      
+        this.blockMaterial = mat;
+        this.defaultIvory = defaultIvory;
+        if (mat == Material.wood) {
+        	setHardness(1.0F);
+        	setResistance(2.0F);
+        	setStepSound(Block.soundTypeWood);
+        }
+        else if (mat == Material.rock){
+        	setHardness(1.5F);
+        	setStepSound(Block.soundTypeStone);
+        	setResistance(4.0F);
+        }
+        else if (mat == Material.iron){
+        	setHardness(2.5F);
+        	setResistance(6.0F);
+        	setStepSound(Block.soundTypeMetal);
+        }
+        else {
+        	setHardness(1.0F);
+        	setResistance(2.0F);
+        	setStepSound(Block.soundTypeGlass);
+        }
         this.renderID = renderID;
+    }
+    
+    public BlockSpikes(int RenderID){    	
+    	this(RenderID, Material.rock, 1);    	
     }
 
     @Override
@@ -62,15 +89,16 @@ public class BlockSpikes extends Block {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister par1IconRegister) {
-        this.icons = new IIcon[imageSuffix.length];
-        for (int i = 0; i < this.icons.length; ++i) {
-            this.icons[i] = par1IconRegister.registerIcon(getTextureName() + imageSuffix[i]);
-        }
+    	this.icons = new IIcon[imageSuffixB.length];
+	        for (int i = 0; i < this.icons.length; ++i) {
+	            this.icons[i] = par1IconRegister.registerIcon(getTextureName() + imageSuffixB[i]);
+	        }       
     }
 
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess par1iBlockAccess, int par2, int par3, int par4) {
-        if (par1iBlockAccess.getBlock(par2, par3 - 1, par4) == Blocks.fence
+        
+    	if (par1iBlockAccess.getBlock(par2, par3 - 1, par4) == Blocks.fence
                 || par1iBlockAccess.getBlock(par2, par3 - 1, par4) == Blocks.nether_brick_fence) {
             this.setBlockBounds(0.375f, 0.0F, 0.375f, 0.625f, 0.4f, 0.625f);
 
@@ -136,7 +164,6 @@ public class BlockSpikes extends Block {
                 break;
             }
         }
-
     }
 
     @Override
@@ -178,28 +205,62 @@ public class BlockSpikes extends Block {
 
     @Override
     public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
+    	EffectRenderer efrenderer = Minecraft.getMinecraft().effectRenderer;
+    	
     	if ((par5Entity instanceof EntityLiving || par5Entity instanceof EntityPlayer)        		
                 && ((par5Entity.prevPosY > par3 + this.maxY * 0.9f && par5Entity.posY < par3 + this.maxY * 0.9f)
                         || (par5Entity.prevPosX > par2 + 0.5 && par5Entity.posX < par2 + 0.5) || (par5Entity.prevPosZ > par4 + 0.5 && par5Entity.posZ < par4 + 0.5))) {
-
-        	/* Check if Spikes are Poison, If So Also Apply Posion with Damage */
+            
+        	/* Check if Spikes are Poison, If So Also Apply Poison with Damage */
             if (par1World.getBlockMetadata(par2, par3, par4) > 5 && par1World.getBlockMetadata(par2, par3, par4) < 12) {
+             if (par5Entity instanceof EntityLiving)
                 ((EntityLiving) par5Entity).addPotionEffect(new PotionEffect(Potion.poison.id, 40, 1));
+             
+             if (par5Entity instanceof EntityPlayer && !par5Entity.isSneaking())
+            	 ((EntityPlayer) par5Entity).addPotionEffect(new PotionEffect(Potion.poison.id, 40, 1));
             }
+            
             if (par1World.getBlockMetadata(par2, par3, par4) > 11) {
+               if (par5Entity instanceof EntityLiving)
                 ((EntityLiving) par5Entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 40, 4));
+            
+               if (par5Entity instanceof EntityPlayer && !par5Entity.isSneaking())
+            	   ((EntityPlayer) par5Entity).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 40, 4));
             }
-            par5Entity.attackEntityFrom(DamageSource.generic, 2);
+            
+           if (!par5Entity.isSneaking()) {
+        	   
+        	   if (par5Entity.isSprinting()) {
+        		   par5Entity.attackEntityFrom(DamageSource.generic, 6); 
+        	   }
+        	   else
+        	   {
+        		   par5Entity.attackEntityFrom(DamageSource.generic, 2);
+        	   }	   
 
-            //maxDamage = maxDamage - 1;
-            //System.out.println("spike damage is " + maxDamage);
-           /* if (this.maxDamage <= 0) {
-            	par1World.spawnParticle("blockdust_" + Block.getIdFromBlock(this) + '_' + par1World.getBlockMetadata(par2, par3, par4), 
-            			par2+0.5, par3+1.0, par4+0.5, 0.0D, 0.0D, 0.0D);
-            	par1World.playSoundAtEntity(par5Entity, "random.break", 1.0F, 1.0F);
-            	par1World.setBlockToAir(par2, par3, par4);
-            	this.maxDamage = 5;
-            } */
+           if (par1World.isRemote) {
+        	    Random rand = new Random();
+            	par1World.spawnParticle("crit", par5Entity.posX, par5Entity.posY, par5Entity.posZ, 0.0D, 0.0D, 0.0D);  
+            	for (int i = 0; i < 6; i++) {            		
+            		par1World.spawnParticle("crit", par2 + rand.nextDouble(), par3 + 1 + rand.nextDouble()*0.2, par4 + rand.nextDouble(), 0, 0, 0);
+            		}
+                }
+       	 	
+            TileEntity tileEntity = par1World.getTileEntity(par2, par3, par4);
+
+	         if (tileEntity != null && tileEntity instanceof TileEntitySpikes) {	
+	             ((TileEntitySpikes) tileEntity).setDamage(1);
+	             //System.out.println("Spike max damage is "  + ((TileEntitySpikes) tileEntity).getMaxDmg());
+	             //System.out.println("Spike current damage is "  + ((TileEntitySpikes) tileEntity).getCurrDamage());
+	            		 
+	              if (((TileEntitySpikes) tileEntity).getCurrDamage() > ((TileEntitySpikes) tileEntity).getMaxDmg()) {
+	            	efrenderer.addBlockDestroyEffects((int)par2 - 1, (int)par3 + 1, (int)par4, Blocks.iron_block, 0);
+	            	par1World.playSoundAtEntity(par5Entity, "random.break", 1.0F, 1.0F);
+	            	par1World.removeTileEntity(par2, par3, par4);
+	            	par1World.setBlockToAir(par2, par3, par4);
+	            }
+	         }
+    	  }  
         }     
         super.onEntityCollidedWithBlock(par1World, par2, par3, par4, par5Entity);
     }
@@ -207,6 +268,12 @@ public class BlockSpikes extends Block {
     @Override
     public boolean onBlockActivated(World par1World, int par2, int par3, int par4, EntityPlayer par5EntityPlayer,
             int par6, float par7, float par8, float par9) {
+    	int maxSpikeDmg;
+    	int currSpikeDmg;
+    	
+    	TileEntity tileEntityO = par1World.getTileEntity(par2, par3, par4);
+    	maxSpikeDmg = ((TileEntitySpikes) tileEntityO).getMaxDmg();
+    	currSpikeDmg  = ((TileEntitySpikes) tileEntityO).getCurrDamage();
 
         /* Check if Item is Poison Droplet, is so Make Poisonous */
         if (par5EntityPlayer.inventory.getCurrentItem() != null
@@ -223,8 +290,10 @@ public class BlockSpikes extends Block {
 
             /* If not Poison (meta<6) increase by 6, if sticky(>11) reduce by 6 */
             if (par1World.getBlockMetadata(par2, par3, par4) < 6) {
+            	par1World.removeTileEntity(par2, par3, par4);
                 par1World.setBlock(par2, par3, par4, this, par1World.getBlockMetadata(par2, par3, par4) + 6, 3);
             } else {
+            	par1World.removeTileEntity(par2, par3, par4);
                 par1World.setBlock(par2, par3, par4, this, par1World.getBlockMetadata(par2, par3, par4) - 6, 3);
             }
         }
@@ -241,11 +310,18 @@ public class BlockSpikes extends Block {
 
             /* If not Poison or Sticky (meta<6) increase by 12, if Poison(>6 & <11) increase by 6 */
             if (par1World.getBlockMetadata(par2, par3, par4) < 6) {
+            	par1World.removeTileEntity(par2, par3, par4);
                 par1World.setBlock(par2, par3, par4, this, par1World.getBlockMetadata(par2, par3, par4) + 12, 3);
             } else {
+            	par1World.removeTileEntity(par2, par3, par4);
                 par1World.setBlock(par2, par3, par4, this, par1World.getBlockMetadata(par2, par3, par4) + 6, 3);
             }
         }
+        
+        TileEntity tileEntityC = par1World.getTileEntity(par2, par3, par4);
+        ((TileEntitySpikes) tileEntityC).setMaxDmg(maxSpikeDmg);
+        ((TileEntitySpikes) tileEntityC).setCurrDamage(currSpikeDmg);
+        
         return super.onBlockActivated(par1World, par2, par3, par4, par5EntityPlayer, par6, par7, par8, par9);
     }
 
@@ -310,6 +386,38 @@ public class BlockSpikes extends Block {
                     || id == Blocks.piston_head || id == Blocks.sticky_piston;
         }
     }
-    
+
+	@Override
+	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_) {
+	   int maxSpikeDmgCap = 50;
+	   
+	   if (this.blockMaterial == Material.wood)
+	   {
+		   maxSpikeDmgCap = 50;
+       } 
+	   else if (this.blockMaterial == Material.rock)
+	   {
+    	  if (this.defaultIvory == 0){
+    		  maxSpikeDmgCap = 50;
+    	  } else {
+    		  maxSpikeDmgCap = 90;
+    	  }
+        } 
+	   else if (this.blockMaterial == Material.iron)
+	    {
+		   maxSpikeDmgCap = 175;
+        }
+
+		return new TileEntitySpikes(maxSpikeDmgCap);
+	}
+	
+	/**
+     * ejects contained items into the world, and notifies neighbours of an update, as appropriate
+     */
+    @Override
+    public void breakBlock(World par1World, int par2, int par3, int par4, Block par5, int par6) {
+      
+      super.breakBlock(par1World, par2, par3, par4, par5, par6);
+    }
   
 }

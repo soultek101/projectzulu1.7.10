@@ -6,7 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -33,6 +33,7 @@ public class BlockTombstone extends BlockContainer {
         setBlockBounds(0.5F - var4, 0.0F, 0.5F - var4, 0.5F + var4, var5, 0.5F + var4);
         setHardness(0.5F);
         setStepSound(Block.soundTypeMetal);
+        
     }
 
     /**
@@ -138,10 +139,10 @@ public class BlockTombstone extends BlockContainer {
     	 TileEntity tileEntity = par1World.getTileEntity(par2, par3, par4);
 
          if (tileEntity != null && tileEntity instanceof TileEntityTombstone) {
-
+        	 par1World.spawnEntityInWorld(new EntityXPOrb(par1World, (double)par2 + 0.5D, (double)par3 + 0.5D, (double)par4 + 0.5D, ((TileEntityTombstone) tileEntity).dropXP()));
              ((TileEntityTombstone) tileEntity).spawnItemsNearPlayer(par1World, par2, par3, par4);
          }
          super.breakBlock(par1World, par2, par3, par4, par5, par6);
 
-    }	
+    }
 }

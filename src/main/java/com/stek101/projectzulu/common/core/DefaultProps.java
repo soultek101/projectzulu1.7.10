@@ -1,10 +1,12 @@
 package com.stek101.projectzulu.common.core;
 
+
 public class DefaultProps {
 
     /* ModIDs, Dependencies, and Version */
     public static final String DesiredBefore = "after:ExtrabiomesXL@";
-    public static final String VERSION_STRING = "1.7.10-1.3e";
+    public static final String VERSION_STRING = "1.7.10-1.3f";
+    public static final int    Version_Code = 1710135;    
     public static final String CoreModId = "ProjectZulu|Core";
     public static final String BlocksModId = "ProjectZulu|Block";
     public static final String MobsModId = "ProjectZulu|Mob";

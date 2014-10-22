@@ -26,7 +26,10 @@ public enum BlockList {
 	public static Optional<? extends Block>	creeperBlossom = Optional.absent();
 	public static Optional<? extends Block>	quickSand = Optional.absent();
 	
-	public static Optional<? extends Block>	spike = Optional.absent();
+	public static Optional<? extends Block>	spike_ivory = Optional.absent();
+	public static Optional<? extends Block>	spike_wood = Optional.absent();
+	public static Optional<? extends Block>	spike_stone = Optional.absent();
+	public static Optional<? extends Block>	spike_iron = Optional.absent();	
 	public static Optional<? extends Block>	campfire = Optional.absent();
 	public static Optional<? extends Block>	mobHeads = Optional.absent();
 	public static Optional<? extends Block>	tombstone = Optional.absent();

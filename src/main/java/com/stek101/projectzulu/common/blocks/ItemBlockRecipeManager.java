@@ -42,6 +42,8 @@ public class ItemBlockRecipeManager {
         'S' }, new OptionalItemStack(Items.gold_ingot), new OptionalItemStack(Items.stick));
         addRecipe(new OptionalItemStack(ItemList.hammerToolDiamond), new String[] { "XSX", " S ", " S " }, new char[] { 'X',
         'S' }, new OptionalItemStack(Items.diamond), new OptionalItemStack(Items.stick));
+        addRecipe(new OptionalItemStack(ItemList.hammerToolDiamond), new String[] { "XSX", " S ", " S " }, new char[] { 'X',
+        'S' }, new OptionalItemStack(Items.diamond), new OptionalItemStack(Items.stick));
         
         /* Tombstone */
         addRecipe(new OptionalItemStack(BlockList.tombstone), new String[] { "CCC", "CSC", "CCC" }, new char[] { 'C',
@@ -143,8 +145,19 @@ public class ItemBlockRecipeManager {
         addShapelessRecipe(
                 new OptionalItemStack(ItemList.genericCraftingItems, 2, ItemGenerics.Properties.Salt.meta()),
                 new OptionalItemStack(Items.gunpowder));
-        addRecipe(new OptionalItemStack(BlockList.spike), new String[] { "   ", "   ", "TTT" }, 'T',
+        
+        addRecipe(new OptionalItemStack(BlockList.spike_ivory), new String[] { "   ", "   ", "TTT" }, 'T',
                 new OptionalItemStack(ItemList.genericCraftingItems, 1, ItemGenerics.Properties.Tusk.meta()));
+        
+        addRecipe(new OptionalItemStack(BlockList.spike_wood), new String[] { "   ", " X ", "XXX" }, 'X',
+                new OptionalItemStack(Items.stick));
+        
+        addRecipe(new OptionalItemStack(BlockList.spike_iron), new String[] { "   ", " X ", "XXX" }, 'X',
+                new OptionalItemStack(Items.iron_ingot));
+        
+        addRecipe(new OptionalItemStack(BlockList.spike_stone), new String[] { "   ", " X ", "XXX" }, 'X',
+                new OptionalItemStack(Blocks.stone));
+        
         addShapelessRecipe(new OptionalItemStack(Items.string), new OptionalItemStack(ItemList.genericCraftingItems, 1,
                 ItemGenerics.Properties.RawFiber.meta()), new OptionalItemStack(ItemList.genericCraftingItems, 1,
                 ItemGenerics.Properties.RawFiber.meta()), new OptionalItemStack(ItemList.genericCraftingItems, 1,

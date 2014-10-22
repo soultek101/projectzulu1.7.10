@@ -16,7 +16,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import com.google.common.base.Optional;
-import com.stek101.projectzulu.common.api.BlockList;
 import com.stek101.projectzulu.common.api.CustomEntityList;
 import com.stek101.projectzulu.common.api.ItemList;
 import com.stek101.projectzulu.common.core.DefaultProps;
@@ -29,8 +28,6 @@ import com.stek101.projectzulu.common.mobs.entityai.EntityAINearestAttackableTar
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIPanic;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAITempt;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIWander;
-
-import cpw.mods.fml.common.Loader;
 
 public class EntityDuck extends EntityGenericAnimal implements IAnimals {
 	
