@@ -52,7 +52,6 @@ public class PZPacketNameSync implements IMessage, IMessageHandler<PZPacketNameS
 		PacketBuffer buffer = new PacketBuffer(buf);
 		
 		try {
-			
 			  entityIdToBeNamed = buffer.readInt();
 			  int nameLength = buffer.readInt();
 			  RentityName = buffer.readStringFromBuffer(nameLength);		  

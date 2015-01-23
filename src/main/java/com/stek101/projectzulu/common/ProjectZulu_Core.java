@@ -24,6 +24,7 @@ import com.stek101.projectzulu.common.core.ZuluGuiHandler;
 import com.stek101.projectzulu.common.core.network.PZPacketHandler;
 import com.stek101.projectzulu.common.core.terrain.FeatureGenerator;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -115,6 +116,7 @@ public class ProjectZulu_Core {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+    	
         //if (checkForUpdates)
 		//	UpdateMonitor.checkForUpdates();
         //FMLCommonHandler.instance().bus().register(new UpdateEventHandler());
@@ -206,6 +208,11 @@ public class ProjectZulu_Core {
                 moduleInfo.module.init(event, modConfigDirectoryFile);
             }
         }
+        FMLCommonHandler.instance().bus().register(new KeyHandler());
+		//register the reto gen here
+		//FMLCommonHandler.instance().bus().register(new RetroactiveWorldGenerator());
+		//MinecraftForge.EVENT_BUS.register(new RetroactiveWorldGenerator());
+        
     }
 
     @EventHandler

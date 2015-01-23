@@ -12,7 +12,7 @@ import com.stek101.projectzulu.common.core.ModelHelper;
 
 public class ModelHorse extends ModelBase {
 
-    float heightToRaise = 6;   
+    float heightToRaise = 4;   
     ModelRenderer body1;
     ModelRenderer tail;
     ModelRenderer body2;
@@ -134,7 +134,7 @@ public class ModelHorse extends ModelBase {
 
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-	float scale = 0.8f * f5;
+	float scale = 1.2f * f5;
 	super.render(entity, f, f1, f2, f3, f4, scale);
 	setRotationAngles(f, f1, f2, f3, f4, scale, entity);
 

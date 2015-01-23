@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
+import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAINearestAttackableTarget;
@@ -65,7 +66,28 @@ public class EntityCentipede extends EntityMaster implements IMob {
 
     @Override
     public int getTotalArmorValue() {
-        return 2;
+        return 3;
+    }
+    
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+    @Override
+    protected String getLivingSound() {
+        return DefaultProps.mobKey + ":" + DefaultProps.entitySounds + "centlivingsound";
+    }
+
+    /**
+     * Returns the sound this mob makes when it is hurt.
+     */
+    @Override
+    protected String getHurtSound() {
+        return DefaultProps.mobKey + ":" + DefaultProps.entitySounds + "centhurtsound";
+    }   
+    
+    @Override
+    public int getTalkInterval() {
+        return 160;
     }
 
     @Override

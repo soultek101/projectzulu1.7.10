@@ -56,12 +56,13 @@ public class ArmadilloDeclaration extends SpawnableDeclaration {
     @Override
     public HashSet<String> getDefaultBiomesToSpawn() {
         HashSet<String> defaultBiomesToSpawn = new HashSet<String>();
-        defaultBiomesToSpawn.add(BiomeGenBase.desert.biomeName);
-        defaultBiomesToSpawn.add(BiomeGenBase.desertHills.biomeName);
-        defaultBiomesToSpawn.add("Mountainous Desert");
-        defaultBiomesToSpawn.add("Savanna");
-        defaultBiomesToSpawn.add("Mountain Ridge");
-        defaultBiomesToSpawn.addAll(typeToArray(Type.DESERT));
+        defaultBiomesToSpawn.add(BiomeGenBase.jungle.biomeName);
+        defaultBiomesToSpawn.add(BiomeGenBase.jungleHills.biomeName);
+        defaultBiomesToSpawn.add(BiomeGenBase.jungleEdge.biomeName);
+        defaultBiomesToSpawn.add(BiomeGenBase.savanna.biomeName);
+        defaultBiomesToSpawn.add(BiomeGenBase.plains.biomeName);
+        defaultBiomesToSpawn.addAll(typeToArray(Type.JUNGLE));
+        defaultBiomesToSpawn.addAll(typeToArray(Type.SAVANNA));
         return defaultBiomesToSpawn;
     }
 }

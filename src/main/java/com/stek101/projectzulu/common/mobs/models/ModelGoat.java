@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 public class ModelGoat extends ModelBase
 {
-    float heightToRaise = 4f;
+    float heightToRaise = 2f;
     float renderScale = 1.0f;
   //fields
     ModelRenderer HEADROT;

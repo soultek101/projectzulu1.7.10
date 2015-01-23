@@ -51,6 +51,7 @@ import com.stek101.projectzulu.common.blocks.itemblockdeclarations.ScaleArmorDec
 import com.stek101.projectzulu.common.blocks.itemblockdeclarations.ScaleItemDeclaration;
 import com.stek101.projectzulu.common.blocks.itemblockdeclarations.ScrapMeatDeclaration;
 import com.stek101.projectzulu.common.blocks.itemblockdeclarations.SpikesDeclaration;
+import com.stek101.projectzulu.common.blocks.itemblockdeclarations.ThrowingRockDeclaration;
 import com.stek101.projectzulu.common.blocks.itemblockdeclarations.TombstoneDeclaration;
 import com.stek101.projectzulu.common.blocks.itemblockdeclarations.TumbleweedDeclaration;
 import com.stek101.projectzulu.common.blocks.itemblockdeclarations.UniversalFlowerPotDeclaration;
@@ -85,8 +86,7 @@ public class ProjectZulu_Blocks extends BaseModule {
 
     @Override
     public void registration(ItemBlockManager manager) {
-        
-
+    	
         manager.addItemBlock(new AloeVeraDeclaration(), new WateredDirtDeclaration(), new TumbleweedDeclaration(),
                 new JasperDeclaration(), new PalmTreeLogDeclaration(), new PalmTreePlankDeclaration(),
                 new PalmTreeSlabDeclaration(), new PalmTreeDoubleSlabDeclaration(), new PalmTreeStairsDeclaration(),
@@ -101,7 +101,7 @@ public class ProjectZulu_Blocks extends BaseModule {
                 new CoconutMilkFragmentDeclaration(), new CoconutSeedDeclaration(), new CoconutShellDeclaration(),
                 new ScaleItemDeclaration(), new FurPeltDeclaration(), new GenericCraftingItemsDeclaration(),
                 new CoconutItem(), new ScrapMeatDeclaration(), new RawMuttonDeclaration(), new CookedMuttonDeclaration(),
-                new DuckEggDeclaration(), new OstrichEggDeclaration(), new CoconutShellFuelDeclaration());
+                new DuckEggDeclaration(), new OstrichEggDeclaration(), new CoconutShellFuelDeclaration(), new ThrowingRockDeclaration());
 
         manager.addItemBlock(new ScaleArmorDeclaration(ProjectZulu_Core.proxy.addArmor("scaleArmor")),
                 new GoldScaleArmorDeclaration(ProjectZulu_Core.proxy.addArmor("goldscale")),

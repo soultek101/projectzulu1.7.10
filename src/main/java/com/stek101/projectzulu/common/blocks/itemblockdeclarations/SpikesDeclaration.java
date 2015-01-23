@@ -20,6 +20,7 @@ public class SpikesDeclaration extends BlockDeclaration {
 
     private int renderID = -1;
     private String material;
+    private boolean spikesInvulnerable = false;
     
     public SpikesDeclaration(String mat) {
         super("Spikes" + "_" + mat);
@@ -30,28 +31,29 @@ public class SpikesDeclaration extends BlockDeclaration {
     protected void preCreateLoadConfig(Configuration config) {
         renderID = config.get("Do Not Touch", "Spike Render ID", renderID).getInt(renderID);
         renderID = renderID == -1 ? RenderingRegistry.getNextAvailableRenderId() : renderID;
+        spikesInvulnerable = config.get("Misc Game Settings", "Spikes Invulnerable", this.spikesInvulnerable).getBoolean(spikesInvulnerable);
     }
 
     @Override
     protected boolean createBlock() {
     	if (material == "Ivory") {
         BlockList.spike_ivory = Optional
-                .of(new BlockSpikes(renderID).setBlockName(name.toLowerCase())
+                .of(new BlockSpikes(renderID, this.spikesInvulnerable).setBlockName(name.toLowerCase())
                         .setBlockTextureName(DefaultProps.blockKey + ":" + name.toLowerCase()));
     	}
     	else if (material == "Wood") {
             BlockList.spike_wood = Optional
-                    .of(new BlockSpikes(renderID, Material.wood, 0).setBlockName(name.toLowerCase())
+                    .of(new BlockSpikes(renderID, Material.wood, 0, this.spikesInvulnerable).setBlockName(name.toLowerCase())
                             .setBlockTextureName(DefaultProps.blockKey + ":" + name.toLowerCase()));
     	}
     	else if (material == "Stone") {
             BlockList.spike_stone = Optional
-                    .of(new BlockSpikes(renderID, Material.rock, 0).setBlockName(name.toLowerCase())
+                    .of(new BlockSpikes(renderID, Material.rock, 0, this.spikesInvulnerable).setBlockName(name.toLowerCase())
                             .setBlockTextureName(DefaultProps.blockKey + ":" + name.toLowerCase()));
     	}
     	else if (material == "Iron") {
             BlockList.spike_iron = Optional
-                    .of(new BlockSpikes(renderID, Material.iron, 0).setBlockName(name.toLowerCase())
+                    .of(new BlockSpikes(renderID, Material.iron, 0, this.spikesInvulnerable).setBlockName(name.toLowerCase())
                             .setBlockTextureName(DefaultProps.blockKey + ":" + name.toLowerCase()));
     	}
         return true;

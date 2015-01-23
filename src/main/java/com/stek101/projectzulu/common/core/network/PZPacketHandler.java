@@ -9,6 +9,7 @@ import com.stek101.projectzulu.common.core.packets.PZPacketTameParticle;
 import com.stek101.projectzulu.common.dungeon.packets.PZPacketMobSpawner;
 import com.stek101.projectzulu.common.mobs.packets.PZPacketAnimTime;
 import com.stek101.projectzulu.common.mobs.packets.PZPacketFollowerMasterData;
+import com.stek101.projectzulu.common.mobs.packets.PZPacketKeyBind;
 import com.stek101.projectzulu.common.mobs.packets.PZPacketNameSync;
 import com.stek101.projectzulu.common.mobs.packets.PZPacketTileText;
 
@@ -35,20 +36,19 @@ public class PZPacketHandler {
 		public void init() {
 			int messageID = 0;
 			
-			// Server to Client:
-			
+			// Server to Client:			
 			this.network.registerMessage(PZPacketPlaySound.class, PZPacketPlaySound.class, messageID++, Side.CLIENT);
 			this.network.registerMessage(PZPacketStreamSound.class, PZPacketStreamSound.class, messageID++, Side.CLIENT);
 			this.network.registerMessage(PZPacketTameParticle.class, PZPacketTameParticle.class, messageID++, Side.CLIENT);
 			this.network.registerMessage(PZPacketAnimTime.class, PZPacketAnimTime.class, messageID++, Side.CLIENT);
 			this.network.registerMessage(PZPacketFollowerMasterData.class, PZPacketFollowerMasterData.class, messageID++, Side.CLIENT);
 			this.network.registerMessage(PZPacketMobSpawner.class, PZPacketMobSpawner.class, messageID++, Side.CLIENT);
-			
-			// Client to Server:
-			 
+						
+			// Client to Server:			 
 			this.network.registerMessage(PZPacketNameSync.class, PZPacketNameSync.class, messageID++, Side.SERVER);
 			this.network.registerMessage(PZPacketTileText.class, PZPacketTileText.class, messageID++, Side.SERVER);
 			this.network.registerMessage(PZPacketMobSpawner.class, PZPacketMobSpawner.class, messageID++, Side.SERVER);
+			this.network.registerMessage(PZPacketKeyBind.class, PZPacketKeyBind.class, messageID++, Side.SERVER);
 		
 		}
 	

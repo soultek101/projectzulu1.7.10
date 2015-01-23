@@ -146,7 +146,7 @@ public class ModelRabbit extends ModelBase {
 	} else {
 	    /* Walking On The Ground */
 	    leg1.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f) * 1.8F * par3;
-	    leg2.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f + (float) Math.PI) * 1.8F * par3;
+	    leg2.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f) * 1.8F * par3; //MathHelper.cos(par2 * 0.6662F * 2f + (float) Math.PI) * 1.8F * par3;
 
 	    LEGLEFROT.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f) * 1.8F * par3;
 	    LEGLEFROT.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f) * 1.8F * par3;

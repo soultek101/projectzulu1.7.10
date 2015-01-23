@@ -15,7 +15,7 @@ public class RenderSnow extends RenderGenericLiving {
         this.snowTexture = snowTexture;
     }
 
-    @Override
+ 	@Override
     protected ResourceLocation getEntityTexture(Entity entity) {
         if (BiomeDictionary.isBiomeOfType(entity.worldObj.getBiomeGenForCoords((int) entity.posX, (int) entity.posZ),
                 Type.FROZEN)) {

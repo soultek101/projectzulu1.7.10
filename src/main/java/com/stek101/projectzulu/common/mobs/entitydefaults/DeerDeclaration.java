@@ -28,7 +28,7 @@ public class DeerDeclaration extends SpawnableDeclaration {
 	
     public DeerDeclaration() {
         super("Deer", 49, EntityDeer.class, EnumCreatureType.creature);
-        setSpawnProperties(12, 100, 1, 4);
+        setSpawnProperties(8, 100, 1, 4);
         setRegistrationProperties(128, 3, true);
         setDropAmount(0, 2);
 

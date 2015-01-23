@@ -41,7 +41,7 @@ public class EntityGoat extends EntityGenericAnimal implements IAnimals {
         setSize(1.2f, 0.9f);
         
         milkCounter = 0;
-        giveMilk = false;
+        giveMilk = true;
         Random rand1 = new Random();
         this.textureID = rand1.nextInt(3);
         this.timeUntilNextMilking = this.rand.nextInt(6000) + 6000;
@@ -63,7 +63,7 @@ public class EntityGoat extends EntityGenericAnimal implements IAnimals {
         tasks.addTask(2, new EntityAIAttackOnCollide(this, 1.0f, false));       
         tasks.addTask(3, new EntityAILookIdle(this));
         tasks.addTask(4, new EntityAIMate(this, 0.8f));
-        tasks.addTask(5, new EntityAITempt(this, 0.9f, Items.apple, false));
+        tasks.addTask(5, new EntityAITempt(this, 0.9f, Items.wheat, false));
         tasks.addTask(6, new EntityAIFollowParent(this, 0.9f));
         tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         tasks.addTask(8, new EntityAIWander(this, 0.8f, 120));
@@ -84,7 +84,7 @@ public class EntityGoat extends EntityGenericAnimal implements IAnimals {
     public void onLivingUpdate() {
     	super.onLivingUpdate();
     	if (Math.round(this.aggroRange) != 0) {
-    		EAFF.updateEntityAFF(worldObj, Items.apple);
+    		EAFF.updateEntityAFF(worldObj, Items.wheat);
     	}
     	
     	/* Basic timer to determine whether entity can be milked or not */
@@ -128,7 +128,7 @@ public class EntityGoat extends EntityGenericAnimal implements IAnimals {
 
     @Override
     public boolean isValidBreedingItem(ItemStack itemStack) {
-        if (itemStack != null && itemStack.getItem() == Items.apple) {
+        if (itemStack != null && itemStack.getItem() == Items.wheat) {
         	this.setAngerLevel(0);
         	this.setFleeTick(0);
             return true;
@@ -137,14 +137,6 @@ public class EntityGoat extends EntityGenericAnimal implements IAnimals {
             return super.isValidBreedingItem(itemStack);
         }
     }
-
-//    @Override
-//    protected void dropRareDrop(int par1) {
-//        if (Loader.isModLoaded(DefaultProps.BlocksModId) && BlockList.mobHeads.isPresent()) {
-//            entityDropItem(new ItemStack(BlockList.mobHeads.get(), 1, 7), 1);
-//        }
-//        super.dropRareDrop(par1);
-//    }
     
     /**
      * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
@@ -164,8 +156,8 @@ public class EntityGoat extends EntityGenericAnimal implements IAnimals {
             {
                 p_70085_1_.dropPlayerItemWithRandomChoice(new ItemStack(Items.milk_bucket, 1, 0), false);
             }            
-            this.giveMilk = false;      
-            this.timeUntilNextMilking = this.rand.nextInt(6000) + 6000;
+            //this.giveMilk = false;      
+            //this.timeUntilNextMilking = this.rand.nextInt(6000) + 6000;
             return true;
         }
         else

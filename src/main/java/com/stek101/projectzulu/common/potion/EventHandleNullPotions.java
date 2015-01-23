@@ -22,11 +22,13 @@ public class EventHandleNullPotions {
             Iterator iterator = potionEffects.iterator();
             while (iterator.hasNext()) {
                 PotionEffect potionEffectToRemove = (PotionEffect) iterator.next();
+                
                 if (Potion.potionTypes[potionEffectToRemove.getPotionID()] == null) {
                     ProjectZuluLog.info("Found Invalid Potion Effect. Removing Effect with ID %s.",
                             potionEffectToRemove.getPotionID());
                     iterator.remove();
                 }
+                
             }
         }
     }

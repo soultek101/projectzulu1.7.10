@@ -13,8 +13,12 @@ import com.stek101.projectzulu.common.mobs.entitydefaults.BearBlackDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.BearBrownDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.BearPolarDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.BeaverDeclaration;
+import com.stek101.projectzulu.common.mobs.entitydefaults.BeetleASDeclaration;
+import com.stek101.projectzulu.common.mobs.entitydefaults.BeetleBSDeclaration;
+import com.stek101.projectzulu.common.mobs.entitydefaults.BloomDoomDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.BlueFinchDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.BoarDeclaration;
+import com.stek101.projectzulu.common.mobs.entitydefaults.CamelDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.CentipedeDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.CrowDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.DeerDeclaration;
@@ -35,15 +39,16 @@ import com.stek101.projectzulu.common.mobs.entitydefaults.GreenFinchDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.HauntedArmorDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.HornbillDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.HorseBlackDeclaration;
-import com.stek101.projectzulu.common.mobs.entitydefaults.HorseRandomDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.LizardDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.LizardSpitDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.MammothDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.MimicDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.MinotaurDeclaration;
+import com.stek101.projectzulu.common.mobs.entitydefaults.MonkeyDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.MummyDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.OstrichDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.OstrichEggDeclaration;
+import com.stek101.projectzulu.common.mobs.entitydefaults.PZBatDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.PelicanDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.PenguinDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.PharaohDeclaration;
@@ -53,6 +58,7 @@ import com.stek101.projectzulu.common.mobs.entitydefaults.RhinoDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.RipperFinDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.SandwormDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.SkeletonnDeclaration;
+import com.stek101.projectzulu.common.mobs.entitydefaults.ThrowingRockDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.TreeEntDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.VultureDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.YellowFinchDeclaration;
@@ -81,10 +87,11 @@ public class ProjectZulu_Mobs extends BaseModule {
                 //new HorseDarkBrownDeclaration(), new HorseGreyDeclaration(), new HorseWhiteDeclaration(),
                 new EagleDeclaration(), new HornbillDeclaration(), new PelicanDeclaration(), new MinotaurDeclaration(),
                 new HauntedArmorDeclaration(), new CentipedeDeclaration(), new FollowerDeclaration(),
-                new HorseRandomDeclaration(), new YellowFinchDeclaration(), new GoatDeclaration(), new DuckDeclaration(),
+                new YellowFinchDeclaration(), new GoatDeclaration(), new DuckDeclaration(),
                 new DuckEggDeclaration(), new DeerDeclaration(), new SkeletonnDeclaration(), new FishADeclaration(),
                 new RipperFinDeclaration(), new OstrichEggDeclaration(), new GiantRatDeclaration(), new FishBDeclaration(),
-                new CrowDeclaration());
+                new CrowDeclaration(), new CamelDeclaration(), new MonkeyDeclaration(), new ThrowingRockDeclaration(), // new AntRavegerDeclaration(),
+                new BeetleASDeclaration(), new BeetleBSDeclaration(), new BloomDoomDeclaration(), new PZBatDeclaration());
     }
     
     @Override

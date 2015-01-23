@@ -12,6 +12,7 @@ import net.minecraft.util.Vec3;
 
 import com.stek101.projectzulu.common.mobs.entity.EntityGenericCreature;
 import com.stek101.projectzulu.common.mobs.entity.EntityGenericTameable;
+import com.stek101.projectzulu.common.mobs.entity.EntityStates;
 
 public class EntityAIAvoidEntity extends EntityAIBase{
 
@@ -44,6 +45,9 @@ public class EntityAIAvoidEntity extends EntityAIBase{
     private Class targetEntityClass;
     //private static final String __OBFID = "CL_00001574";
     
+    private boolean shouldHop = false;
+    private int slimeJumpDelay = 0; 
+    
     public EntityAIAvoidEntity(EntityGenericCreature par1, Class par2, float par3, double par4, double par5)
     {
         this.theEntity = par1;
@@ -53,6 +57,12 @@ public class EntityAIAvoidEntity extends EntityAIBase{
         this.nearSpeed = par5;
         this.entityPathNavigate = par1.getNavigator();
         this.setMutexBits(1);
+    }
+    
+    public EntityAIAvoidEntity(EntityGenericCreature par1, Class par2, float par3, double par4, double par5, boolean shouldHop)
+    {
+        this(par1, par2, par3, par4, par5);
+        this.shouldHop = shouldHop;
     }
 
     /**
@@ -108,6 +118,10 @@ public class EntityAIAvoidEntity extends EntityAIBase{
      */
     public boolean continueExecuting()
     {
+    	if(shouldHop){
+            tryToHop();
+        }
+    	
         return !this.entityPathNavigate.noPath();
     }
 
@@ -117,6 +131,9 @@ public class EntityAIAvoidEntity extends EntityAIBase{
     public void startExecuting()
     {
         this.entityPathNavigate.setPath(this.entityPathEntity, this.farSpeed);
+        if(shouldHop){
+            tryToHop();
+        }
     }
 
     /**
@@ -142,7 +159,31 @@ public class EntityAIAvoidEntity extends EntityAIBase{
         }
     }
 
+    public void tryToHop(){
+ 		if (theEntity.onGround && this.slimeJumpDelay-- <= 0){
+ 			this.slimeJumpDelay = this.getJumpDelay();
 
+ 			theEntity.getJumpHelper().setJumping();
+ 			theEntity.getNavigator().setSpeed(this.nearSpeed);
+ 		}
+ 		else{
+ 			theEntity.getNavigator().setSpeed(0);
+ 		}
+     }
+     
+ 	/**
+ 	 * Gets the amount of time the slime needs to wait between jumps.
+ 	 */
+    
+ 	protected int getJumpDelay(){
+ 		if (this.theEntity.getEntityState() == EntityStates.fleeing){
+ 			return theEntity.getRNG().nextInt(3);
+ 		}
+ 		else
+ 		{
+ 			return theEntity.getRNG().nextInt(5) + 2;
+ 		}
+ 	}
 
 
 

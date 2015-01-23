@@ -11,12 +11,12 @@ import net.minecraft.world.World;
 public abstract class EntityMaster extends EntityGenericAnimal {
 
     List<EntityFollower> followerList = new ArrayList();
-    int numberOfFollowers = 9;
+    int numberOfFollowers = 5;
 
     boolean spawnFollowers = true;
 
     /* Represents the increments between each slave-Piece, used to determine number of locations needed to track */
-    int distanceIncrements = 10;
+    int distanceIncrements = 5;
     float distancePerIncrement;
 
     boolean isPositionListSetup = false;
@@ -25,7 +25,7 @@ public abstract class EntityMaster extends EntityGenericAnimal {
     public EntityMaster(World par1World) {
         super(par1World);
 
-        distancePerIncrement = width / distanceIncrements;
+        distancePerIncrement = (width/2) / distanceIncrements;
         while (followerList.size() < numberOfFollowers) {
             followerList.add(null);
         }

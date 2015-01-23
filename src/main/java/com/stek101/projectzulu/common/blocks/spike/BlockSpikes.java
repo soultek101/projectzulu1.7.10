@@ -5,8 +5,6 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -34,13 +32,14 @@ public class BlockSpikes extends BlockContainer {
     public static final String[] imageSuffixB = new String[] { "", "_poison", "_sticky" };
     Material blockMaterial;
     int defaultIvory;
+    private boolean isSpikeInvulnerable;
     
     @SideOnly(Side.CLIENT)
     private IIcon[] icons;
     public final int renderID;
 
     
-    public BlockSpikes(int renderID, Material mat, int defaultIvory) {
+    public BlockSpikes(int renderID, Material mat, int defaultIvory, boolean spikesInvulnerable) {
         super(mat);
         setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         disableStats();        
@@ -68,10 +67,11 @@ public class BlockSpikes extends BlockContainer {
         	setStepSound(Block.soundTypeGlass);
         }
         this.renderID = renderID;
+        this.isSpikeInvulnerable = spikesInvulnerable;
     }
     
-    public BlockSpikes(int RenderID){    	
-    	this(RenderID, Material.rock, 1);    	
+    public BlockSpikes(int RenderID, boolean spikesInvulnerable){    	
+    	this(RenderID, Material.rock, 1, spikesInvulnerable);    	
     }
 
     @Override
@@ -205,7 +205,12 @@ public class BlockSpikes extends BlockContainer {
 
     @Override
     public void onEntityCollidedWithBlock(World par1World, int par2, int par3, int par4, Entity par5Entity) {
-    	EffectRenderer efrenderer = Minecraft.getMinecraft().effectRenderer;
+    	//EffectRenderer efrenderer;
+    	
+    	//if (!par1World.isRemote){
+    	 
+    	//	EffectRenderer efrenderer = Minecraft.getMinecraft().effectRenderer;
+    	//}
     	
     	if ((par5Entity instanceof EntityLiving || par5Entity instanceof EntityPlayer)        		
                 && ((par5Entity.prevPosY > par3 + this.maxY * 0.9f && par5Entity.posY < par3 + this.maxY * 0.9f)
@@ -247,19 +252,27 @@ public class BlockSpikes extends BlockContainer {
                 }
        	 	
             TileEntity tileEntity = par1World.getTileEntity(par2, par3, par4);
-
-	         if (tileEntity != null && tileEntity instanceof TileEntitySpikes) {	
+                       
+            if (!this.isSpikeInvulnerable){ 
+	         if (tileEntity != null && tileEntity instanceof TileEntitySpikes) {
 	             ((TileEntitySpikes) tileEntity).setDamage(1);
-	             //System.out.println("Spike max damage is "  + ((TileEntitySpikes) tileEntity).getMaxDmg());
-	             //System.out.println("Spike current damage is "  + ((TileEntitySpikes) tileEntity).getCurrDamage());
 	            		 
 	              if (((TileEntitySpikes) tileEntity).getCurrDamage() > ((TileEntitySpikes) tileEntity).getMaxDmg()) {
-	            	efrenderer.addBlockDestroyEffects((int)par2 - 1, (int)par3 + 1, (int)par4, Blocks.iron_block, 0);
+	            	  
+	            	  if (par1World.isRemote) {
+	              	    Random rand = new Random();
+	                  	par1World.spawnParticle("crit", par5Entity.posX, par5Entity.posY, par5Entity.posZ, 0.0D, 0.0D, 0.0D);  
+	                  	for (int i = 0; i < 6; i++) {            		
+	                  		par1World.spawnParticle("crit", par2 + rand.nextDouble(), par3 + 1 + rand.nextDouble()*0.2, par4 + rand.nextDouble(), 0, 0, 0);
+	                  		}
+	                      }
+	            	  
 	            	par1World.playSoundAtEntity(par5Entity, "random.break", 1.0F, 1.0F);
 	            	par1World.removeTileEntity(par2, par3, par4);
 	            	par1World.setBlockToAir(par2, par3, par4);
 	            }
 	         }
+           }
     	  }  
         }     
         super.onEntityCollidedWithBlock(par1World, par2, par3, par4, par5Entity);

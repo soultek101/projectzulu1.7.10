@@ -245,10 +245,7 @@ public class ModelDeer extends ModelBase
 			    leg3.render(renderScale * f5);
 			    leg4.render(renderScale * f5);
 			    tail.render(renderScale * f5);
-
-		    }    
-		    
-		    
+		    }  
 		  }
 		  
 		  @Override

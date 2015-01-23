@@ -33,10 +33,10 @@ public class EntityHorseBase extends EntityGenericAnimal {
 
         tasks.addTask(1, aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.34F));
 
-        tasks.addTask(2, new EntityAIPanic(this, 1.25f));
+        tasks.addTask(2, new EntityAIPanic(this, 1.0f));
         tasks.addTask(3, new EntityAIMate(this, 1.0f));
-        tasks.addTask(4, new EntityAITempt(this, 1.2f, Items.apple, false));
-        tasks.addTask(5, new EntityAIFollowParent(this, 1.1f));
+        tasks.addTask(4, new EntityAITempt(this, 1.0f, Items.apple, false));
+        tasks.addTask(5, new EntityAIFollowParent(this, 1.0f));
 
         tasks.addTask(6, new EntityAIAttackOnCollide(this, 1.0f, false));
         tasks.addTask(8, new EntityAIWander(this, 1.0f, 20));

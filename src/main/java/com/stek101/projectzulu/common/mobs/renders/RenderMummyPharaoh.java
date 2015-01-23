@@ -82,7 +82,7 @@ public class RenderMummyPharaoh extends RenderGenericLiving {
 
     @Override
     public void doRender(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8,
-            float par9) {
+            float par9) {    	
         this.renderMummyPharaoh((EntityMummyPharaoh) par1EntityLiving, par2, par4, par6, par8, par9);
     }
 
