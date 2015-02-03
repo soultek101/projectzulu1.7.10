@@ -28,6 +28,7 @@ public class BossHealthDisplayTicker {
     static EntityPlayer player;
     private Configuration config; 
     private boolean displayBossHealth = true;
+    private boolean bugRelease = true;
     
   //  public BossHealthDisplayTicker (EntityGenericAnimal mobEntity) {
   //  	this.targetBoss = mobEntity;
@@ -49,6 +50,7 @@ public class BossHealthDisplayTicker {
     
     @SubscribeEvent
     public void TickEvent(RenderTickEvent event) {
+    	
     	config = new Configuration(new File( "." + "/config/", DefaultProps.configDirectory
                 + DefaultProps.defaultConfigFile));
         config.load();                

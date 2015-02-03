@@ -18,8 +18,8 @@ public class EntityCentipede extends EntityMaster implements IMob {
     public EntityCentipede(World par1World) {
         super(par1World);
         setSize(0.65f, 0.5f);
-
-        tasks.addTask(3, new EntityAIAttackOnCollide(this, 1.0f, false, 2.5f * 2.5f));
+        this.setPosition(this.posX, this.posY, this.posZ);
+        tasks.addTask(3, new EntityAIAttackOnCollide(this, 1.0f, false));
         // tasks.addTask(4, new EntityAIFollowOwner(this, moveSpeed, 10.0F, 2.0F));
 
         // tasks.addTask(5, new EntityAIMate(this, moveSpeed));

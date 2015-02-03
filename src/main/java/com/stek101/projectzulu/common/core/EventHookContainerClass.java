@@ -1,5 +1,6 @@
 package com.stek101.projectzulu.common.core;
 
+import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -17,11 +18,13 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 
+import com.stek101.projectzulu.common.api.CustomEntityList;
 import com.stek101.projectzulu.common.api.ItemList;
 import com.stek101.projectzulu.common.mobs.entity.EntityBeetleAS;
 import com.stek101.projectzulu.common.mobs.entity.EntityBeetleBS;
@@ -35,8 +38,14 @@ public class EventHookContainerClass {
     // zLevel is protected float copied from GUI along with drawTexturedModelRect
     protected float zLevel = 0.0F;
     boolean nearBossTriggered = false;
-
+    private Configuration config; 
+	private boolean bugRelease = false;
+	private boolean stickSpawn = true;
+	private int bugReleaseRate = 5;
+	private int stickSpawnRate = 5;
     Random classRand = new Random();
+
+
 
     @SubscribeEvent
     public void onPlayerUpdateStarve(LivingUpdateEvent event) {
@@ -167,49 +176,55 @@ public class EventHookContainerClass {
 	public void onBreakBlock(BreakEvent event) 
 	{
     	Random rand1 = new Random();
+    	
+    	config = new Configuration(new File( "." + "/config/", DefaultProps.configDirectory
+                + DefaultProps.defaultConfigFile));
+    	
+        config.load();  
         
-		//TileEntity entity = event.world.getTileEntity(event.x, event.y, event.z);
-	    if (event.block == Blocks.tallgrass || event.block == Blocks.grass || event.block == Blocks.vine
-	    		 || event.block == Blocks.brown_mushroom_block || event.block ==  Blocks.yellow_flower 
-	    		 || event.block == Blocks.red_flower || event.block == Blocks.deadbush || event.block == Blocks.double_plant
-	    		 || event.block == Blocks.leaves || event.block == Blocks.leaves2)
-	    {
-	    // Makes sure to only run on server, entity spawns must be done on server
-	        if (!event.world.isRemote && rand1.nextInt(15) == 0) {
-	        	int bugType = rand1.nextInt(10);
-	        	int bugCount1 = rand1.nextInt(2);
-	        	int bugCount2 = rand1.nextInt(2);
-	        	int bugCount3 = rand1.nextInt(2);
-	        	
-                if (bugType <= 2 ) {  
-                  for (int i=0; i <= bugCount1; i++) {	
-		            EntityBeetleAS entity = new EntityBeetleAS(event.world);
-	
-		            // Places the entity close to the coords of the block (par2 = x, par3 = y, par4 = z)
-		            entity.setLocationAndAngles((double)event.x + 0.5D, (double)event.y, (double)event.z + 0.5D, 0.0F, 0.0F);
-	
-		            // Insert the bug in the world
-		            event.world.spawnEntityInWorld(entity);
-	
-		            // Creates the "puff" effect
-		            entity.spawnExplosionParticle(); 
-                  }
-                  
-                  for (int i=0; i <= bugCount2; i++) {	
-	 		            EntityBeetleBS entity = new EntityBeetleBS(event.world);
-	 	
-	 		            // Places the entity close to the coords of the block (par2 = x, par3 = y, par4 = z)
-	 		            entity.setLocationAndAngles((double)event.x + 0.5D, (double)event.y, (double)event.z + 0.5D, 0.0F, 0.0F);
-	 	
-	 		            // Insert the bug in the world
-	 		            event.world.spawnEntityInWorld(entity);
-	 	
-	 		            // Creates the "puff" effect
-	 		            entity.spawnExplosionParticle(); 
-	                   }
-                  
-	            } else if ((bugType >= 3) && (bugType <= 5) ) {
-	            	for (int i=0; i <= bugCount1; i++) {	
+        bugRelease = config.get("mob controls", "Spawn Ambient Bugs on Block Break", this.bugRelease).getBoolean(bugRelease);
+        bugReleaseRate = config.get("mob controls", "Spawn Rate of Ambient Bugs on Block Break", this.bugReleaseRate).getInt(bugReleaseRate);
+        stickSpawn = config.get("mob controls", "Spawn Wood Sticks on Block Break", this.stickSpawn).getBoolean(stickSpawn);
+        stickSpawnRate = config.get("mob controls", "Spawn Rate of Wood Sticks on Block Break", this.stickSpawnRate).getInt(stickSpawnRate);
+        
+        config.save();
+        
+        //System.out.println("***** Done setting up the config for spawned bugs");
+     if (stickSpawn == true) {
+	    if (event.block == Blocks.leaves || event.block == Blocks.leaves2){
+	       int stickDrop = rand1.nextInt(101);
+	       
+	       if (stickDrop <= stickSpawnRate) {
+	    	ItemStack itemstack1 = new ItemStack(Items.stick, 1); 
+	    	
+	    	double xrand = (double) (event.world.rand.nextFloat() * 0.7F) + (double) (0.3F) * 0.5D;
+	    	double yrand = (double) (event.world.rand.nextFloat() * 0.7F) + (double) (0.3F) * 0.5D;
+	    	double zrand = (double) (event.world.rand.nextFloat() * 0.7F) + (double) (0.3F) * 0.5D;
+    		EntityItem itemDrop1 = new EntityItem(event.world, (double) event.x + xrand, (double) event.y + yrand, (double) event.z + zrand, itemstack1);
+    		itemDrop1.delayBeforeCanPickup = 10;	    	
+    		event.world.spawnEntityInWorld(itemDrop1);    
+    		
+	       }
+	    }
+	}
+	   if (CustomEntityList.BEETLEAS.modData.isPresent() && CustomEntityList.BEETLEAS.modData.isPresent() && CustomEntityList.CENTIPEDE.modData.isPresent()) {
+        if (bugRelease == true) {    	
+
+			//TileEntity entity = event.world.getTileEntity(event.x, event.y, event.z);
+		    if (event.block == Blocks.tallgrass || event.block == Blocks.vine
+		    		 || event.block == Blocks.brown_mushroom_block || event.block ==  Blocks.yellow_flower 
+		    		 || event.block == Blocks.red_flower || event.block == Blocks.deadbush || event.block == Blocks.double_plant
+		    		 || event.block == Blocks.leaves || event.block == Blocks.leaves2)
+		    {
+		    // Makes sure to only run on server, entity spawns must be done on server
+		        if (!event.world.isRemote && rand1.nextInt(101) <= bugReleaseRate) {
+		        	int bugType = rand1.nextInt(10);	        	
+	            	int bugCount1 = rand1.nextInt(2);
+		        	int bugCount2 = rand1.nextInt(2);
+		        	int bugCount3 = rand1.nextInt(2);
+		        	
+	                if (bugType <= 2 ) { 
+	                  for (int i=0; i <= bugCount1; i++) {	
 			            EntityBeetleAS entity = new EntityBeetleAS(event.world);
 		
 			            // Places the entity close to the coords of the block (par2 = x, par3 = y, par4 = z)
@@ -221,51 +236,64 @@ public class EventHookContainerClass {
 			            // Creates the "puff" effect
 			            entity.spawnExplosionParticle(); 
 	                  }
-	            } else if ((bugType >= 6) && (bugType <= 8) ) {
-	            	for (int i=0; i <= bugCount1; i++) {	
-			            EntityBeetleBS entity = new EntityBeetleBS(event.world);
-		
-			            // Places the entity close to the coords of the block (par2 = x, par3 = y, par4 = z)
-			            entity.setLocationAndAngles((double)event.x + 0.5D, (double)event.y, (double)event.z + 0.5D, 0.0F, 0.0F);
-		
-			            // Insert the bug in the world
-			            event.world.spawnEntityInWorld(entity);
-		
-			            // Creates the "puff" effect
-			            entity.spawnExplosionParticle(); 
-	                  }
-	            } else {
-	            		 for (int i=0; i <= bugCount3; i++) {	
-	 	 		            EntityCentipede entity = new EntityCentipede(event.world);
-	 	 	
-	 	 		            // Places the entity close to the coords of the block (par2 = x, par3 = y, par4 = z)
-	 	 		            entity.setLocationAndAngles((double)event.x + 0.5D, (double)event.y, (double)event.z + 0.5D, 0.0F, 0.0F);
-	 	 	
-	 	 		            // Insert the bug in the world
-	 	 		            event.world.spawnEntityInWorld(entity);
-	 	 	
-	 	 		            // Creates the "puff" effect
-	 	 		            entity.spawnExplosionParticle(); 
-	 	                   }
-	            } 
-                
-        	    if (event.block == Blocks.leaves || event.block == Blocks.leaves2){
-        	       int stickDrop = rand1.nextInt(3);
-        	       
-        	       if (stickDrop == 2) {
-        	    	ItemStack itemstack1 = new ItemStack(Items.stick, 1); 
-        	    	
-        	    	double xrand = (double) (event.world.rand.nextFloat() * 0.7F) + (double) (0.3F) * 0.5D;
-        	    	double yrand = (double) (event.world.rand.nextFloat() * 0.7F) + (double) (0.3F) * 0.5D;
-        	    	double zrand = (double) (event.world.rand.nextFloat() * 0.7F) + (double) (0.3F) * 0.5D;
-    	    		EntityItem itemDrop1 = new EntityItem(event.world, (double) event.x + xrand, (double) event.y + yrand, (double) event.z + zrand, itemstack1);
-    	    		itemDrop1.delayBeforeCanPickup = 10;	    	
-    	    		event.world.spawnEntityInWorld(itemDrop1);    
-    	    		
-        	       }
-        	    }
-	        }
-	    }
+	                  
+	                  for (int i=0; i <= bugCount2; i++) {	
+		 		            EntityBeetleBS entity = new EntityBeetleBS(event.world);
+		 	
+		 		            // Places the entity close to the coords of the block (par2 = x, par3 = y, par4 = z)
+		 		            entity.setLocationAndAngles((double)event.x + 0.5D, (double)event.y, (double)event.z + 0.5D, 0.0F, 0.0F);
+		 	
+		 		            // Insert the bug in the world
+		 		            event.world.spawnEntityInWorld(entity);
+		 	
+		 		            // Creates the "puff" effect
+		 		            entity.spawnExplosionParticle(); 
+		                   }
+	                  
+		            } else if ((bugType >= 3) && (bugType <= 5) ) {
+		            	for (int i=0; i <= bugCount1; i++) {	
+				            EntityBeetleAS entity = new EntityBeetleAS(event.world);
+			
+				            // Places the entity close to the coords of the block (par2 = x, par3 = y, par4 = z)
+				            entity.setLocationAndAngles((double)event.x + 0.5D, (double)event.y, (double)event.z + 0.5D, 0.0F, 0.0F);
+			
+				            // Insert the bug in the world
+				            event.world.spawnEntityInWorld(entity);
+			
+				            // Creates the "puff" effect
+				            entity.spawnExplosionParticle(); 
+		                  }
+		            } else if ((bugType >= 6) && (bugType <= 8) ) {
+		            	for (int i=0; i <= bugCount1; i++) {	
+				            EntityBeetleBS entity = new EntityBeetleBS(event.world);
+			
+				            // Places the entity close to the coords of the block (par2 = x, par3 = y, par4 = z)
+				            entity.setLocationAndAngles((double)event.x + 0.5D, (double)event.y, (double)event.z + 0.5D, 0.0F, 0.0F);
+			
+				            // Insert the bug in the world
+				            event.world.spawnEntityInWorld(entity);
+			
+				            // Creates the "puff" effect
+				            entity.spawnExplosionParticle(); 
+		                  }
+		            } else {
+		            		 for (int i=0; i <= bugCount3; i++) {	
+		 	 		            EntityCentipede entity = new EntityCentipede(event.world);
+		 	 	
+		 	 		            // Places the entity close to the coords of the block (par2 = x, par3 = y, par4 = z)
+		 	 		            entity.setLocationAndAngles((double)event.x + 0.5D, (double)event.y, (double)event.z + 0.5D, 0.0F, 0.0F);
+		 	 	
+		 	 		            // Insert the bug in the world
+		 	 		            event.world.spawnEntityInWorld(entity);
+		 	 	
+		 	 		            // Creates the "puff" effect
+		 	 		            entity.spawnExplosionParticle(); 
+		 	                   }
+		            } 
+		        }
+		    }
+        }
+	  } 
 	}
 
 }

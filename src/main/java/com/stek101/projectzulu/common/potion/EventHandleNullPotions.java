@@ -20,6 +20,7 @@ public class EventHandleNullPotions {
         if (entityLiving.ticksExisted < 20) {
             Collection potionEffects = entityLiving.getActivePotionEffects();
             Iterator iterator = potionEffects.iterator();
+         try    {
             while (iterator.hasNext()) {
                 PotionEffect potionEffectToRemove = (PotionEffect) iterator.next();
                 
@@ -30,6 +31,10 @@ public class EventHandleNullPotions {
                 }
                 
             }
+        }
+         catch(ArrayIndexOutOfBoundsException exception) {
+        	 ProjectZuluLog.info("Error encountered when removing Effect");
+        	}
         }
     }
 }

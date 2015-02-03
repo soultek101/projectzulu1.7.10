@@ -163,10 +163,6 @@ public class ModelFollower extends ModelBase {
 		    scale = f5 * 0.58f;
 		}
 
-	//    float var8 = 2.0F;
-	//    GL11.glPushMatrix();
-	//    GL11.glScalef(1.0F / var8, 1.0F / var8, 1.0F / var8);
-	//    GL11.glTranslatef(0.0F, 24.0F * f5, 0.0F);
 		sidebody2.render(renderScale * f5);
 		body.render(renderScale * f5);
 		sidebody3.render(renderScale * f5);
@@ -177,15 +173,7 @@ public class ModelFollower extends ModelBase {
 		LEG21ROT.render(renderScale * f5);
 		LEG31ROT.render(renderScale * f5);
 		LEG41ROT.render(renderScale * f5);
-	 //   GL11.glPopMatrix();
-	/*	sidebody2.render(scale);
-		body.render(scale);
-		sidebody3.render(scale);
-		sidebody1.render(scale);
-		LEG11ROT.render(scale);
-		LEG21ROT.render(scale);
-		LEG31ROT.render(scale);
-		LEG41ROT.render(scale);*/
+
 	    }
 
     @Override

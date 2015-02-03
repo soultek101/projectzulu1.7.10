@@ -1,0 +1,295 @@
+package com.stek101.projectzulu.common.core;
+
+import java.io.File;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.Vec3;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
+import net.minecraftforge.event.world.BlockEvent.BreakEvent;
+
+import com.stek101.projectzulu.common.api.CustomEntityList;
+import com.stek101.projectzulu.common.api.ItemList;
+import com.stek101.projectzulu.common.mobs.entity.EntityBeetleAS;
+import com.stek101.projectzulu.common.mobs.entity.EntityBeetleBS;
+import com.stek101.projectzulu.common.mobs.entity.EntityCentipede;
+import com.stek101.projectzulu.common.mobs.entity.EntityTreeEnt;
+
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+
+public class EventHookContainerClass {
+    // zLevel is protected float copied from GUI along with drawTexturedModelRect
+    protected float zLevel = 0.0F;
+    boolean nearBossTriggered = false;
+    private Configuration config; 
+	private boolean bugRelease = false;
+	private boolean stickSpawn = true;
+    Random classRand = new Random();
+
+
+
+    @SubscribeEvent
+    public void onPlayerUpdateStarve(LivingUpdateEvent event) {
+        World worldObj = event.entity.worldObj;
+        if (worldObj != null && event.entity != null && event.entity instanceof EntityPlayer) {
+
+            EntityPlayer thePlayer = (EntityPlayer) event.entity;
+
+            int var1 = MathHelper.floor_double(thePlayer.posX);
+            int var2 = MathHelper.floor_double(thePlayer.boundingBox.minY);
+            int var3 = MathHelper.floor_double(thePlayer.posZ);
+            BiomeGenBase currentBiome = worldObj.getBiomeGenForCoords(var1, var3);
+            boolean isDesertSun = worldObj.canBlockSeeTheSky(var1, var2, var3) && worldObj.isDaytime() == true
+                    && (currentBiome == BiomeGenBase.desert || currentBiome == BiomeGenBase.desertHills);
+
+            /* Armor Effect Only Occurs When Block/Item Package is Installed */
+            if (!thePlayer.capabilities.isCreativeMode && isDesertSun == true
+                    && Loader.isModLoaded(DefaultProps.BlocksModId)) {
+                float exhaustion = 0.0032f;
+                switch (worldObj.difficultySetting) {
+                case PEACEFUL:
+                    exhaustion = 0.0f;
+                    break;
+                case EASY:
+                    exhaustion = 0.0032f * 1;
+                    break;
+                case NORMAL:
+                    exhaustion = 0.0032f * 2;
+                    break;
+                case HARD:
+                    exhaustion = 0.0032f * 3;
+                default:
+                    break;
+                }
+
+                for (int i = 0; i < 4; i++) {
+                    if (thePlayer.inventory.armorInventory[i] == null) {
+                        exhaustion -= (exhaustion - exhaustion * 0.4) / 4f;
+                        break;
+                    }
+                }
+                thePlayer.addExhaustion(Math.max(exhaustion, 0));
+            }
+        }
+    }
+
+    /* Armor Effect Only Occurs When Block/Item Package is Installed */
+    @SubscribeEvent
+    public void cactusArmorDamage(LivingHurtEvent event) {
+        if (Loader.isModLoaded(DefaultProps.BlocksModId) && event.entity != null
+                && event.entity instanceof EntityPlayer && event.source.getSourceOfDamage() instanceof EntityLiving) {
+            EntityPlayer hurtEntity = (EntityPlayer) event.entity;
+            EntityLiving attackingEntity = (EntityLiving) event.source.getSourceOfDamage();
+            if (attackingEntity != null && event.source.getDamageType() == "mob") {
+
+                double cactusDamage = 0;
+                if (hurtEntity.inventory.armorInventory[3] != null && ItemList.cactusArmorHead.isPresent()
+                        && hurtEntity.inventory.armorInventory[3].getItem() == ItemList.cactusArmorHead.get()) {
+                    cactusDamage += 0.5;
+                }
+                if (hurtEntity.inventory.armorInventory[2] != null && ItemList.cactusArmorChest.isPresent()
+                        && hurtEntity.inventory.armorInventory[2].getItem() == ItemList.cactusArmorChest.get()) {
+                    cactusDamage += 0.5;
+                }
+                if (hurtEntity.inventory.armorInventory[1] != null && ItemList.cactusArmorLeg.isPresent()
+                        && hurtEntity.inventory.armorInventory[1].getItem() == ItemList.cactusArmorLeg.get()) {
+                    cactusDamage += 0.5;
+                }
+                if (hurtEntity.inventory.armorInventory[0] != null && ItemList.cactusArmorBoots.isPresent()
+                        && hurtEntity.inventory.armorInventory[0].getItem() == ItemList.cactusArmorBoots.get()) {
+                    cactusDamage += 0.5;
+                }
+
+                if (cactusDamage > 0) {
+                    attackingEntity.attackEntityFrom(DamageSource.causeThornsDamage(hurtEntity),
+                            MathHelper.ceiling_double_int(cactusDamage));
+                }
+
+            }
+        }
+    }
+
+    /**
+     * Used to Notify nearby Treeents they should be attacking this Player. Triggered by the Player breaking Wood Only
+     * notifies TreeEnts that are looking at the Player
+     */
+    @SubscribeEvent
+    public void treeEntDefendForest(BreakSpeed event) {
+        if (Loader.isModLoaded(DefaultProps.MobsModId)) {
+            if (event.entity != null && event.entity instanceof EntityPlayer
+                    && (event.block == Blocks.log || event.block == Blocks.log2)) {
+                EntityPlayer player = (EntityPlayer) (event.entity);
+                World worldObj = player.worldObj;
+                AxisAlignedBB playerBounding = player.boundingBox.copy();
+                playerBounding = playerBounding.expand(24, 24, 24);
+                List<Entity> listOfTreeEnts = player.worldObj
+                        .getEntitiesWithinAABB(EntityTreeEnt.class, playerBounding);
+                if (!listOfTreeEnts.isEmpty()) {
+                    Iterator entIterator = listOfTreeEnts.iterator();
+                    while (entIterator.hasNext()) {
+                        Entity entity = (Entity) entIterator.next();
+                        if (((EntityTreeEnt) entity).getAngerLevel() <= 0
+                                && worldObj.rayTraceBlocks(
+                                      //  worldObj.getWorldVec3Pool().getVecFromPool(player.posX,
+                                      //          player.posY + player.getEyeHeight(), player.posZ),
+                                      //  worldObj.getWorldVec3Pool().getVecFromPool(entity.posX, entity.posY,
+                                       //         entity.posZ)) == null) {
+                                	    // worldObj.getWorldVec3Pool().getVecFromPool(player.posX,
+                                        //         player.posY + player.getEyeHeight(), player.posZ),
+                                 		Vec3.createVectorHelper((double)player.posX, (double)player.posY + player.getEyeHeight(), (double)player.posZ),
+                                        // worldObj.getWorldVec3Pool().getVecFromPool(entity.posX, entity.posY,
+                                        //         entity.posZ)
+                                 		Vec3.createVectorHelper((double)entity.posX, (double)entity.posY, (double)  entity.posZ)
+                                 		) == null) {
+                            if (!worldObj.isRemote) {
+                                ((EntityTreeEnt) entity).setAttackTarget(player);
+                            }
+                            ((EntityTreeEnt) entity).setAngerLevel(60);
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+    
+    @SubscribeEvent
+	public void onBreakBlock(BreakEvent event) 
+	{
+    	Random rand1 = new Random();
+    	
+    	config = new Configuration(new File( "." + "/config/", DefaultProps.configDirectory
+                + DefaultProps.defaultConfigFile));
+    	
+        config.load();  
+        
+        bugRelease = config.get("mob controls", "Spawn Ambient Bugs on Block Break", this.bugRelease).getBoolean(bugRelease);
+        stickSpawn = config.get("mob controls", "Spawn Wood Sticks on Block Break", this.stickSpawn).getBoolean(stickSpawn);
+        
+        config.save();
+        
+        //System.out.println("***** Done setting up the config for spawned bugs");
+     if (stickSpawn == true) {
+	    if (event.block == Blocks.leaves || event.block == Blocks.leaves2){
+	       int stickDrop = rand1.nextInt(10);
+	       
+	       if (stickDrop == 0) {
+	    	ItemStack itemstack1 = new ItemStack(Items.stick, 1); 
+	    	
+	    	double xrand = (double) (event.world.rand.nextFloat() * 0.7F) + (double) (0.3F) * 0.5D;
+	    	double yrand = (double) (event.world.rand.nextFloat() * 0.7F) + (double) (0.3F) * 0.5D;
+	    	double zrand = (double) (event.world.rand.nextFloat() * 0.7F) + (double) (0.3F) * 0.5D;
+    		EntityItem itemDrop1 = new EntityItem(event.world, (double) event.x + xrand, (double) event.y + yrand, (double) event.z + zrand, itemstack1);
+    		itemDrop1.delayBeforeCanPickup = 10;	    	
+    		event.world.spawnEntityInWorld(itemDrop1);    
+    		
+	       }
+	    }
+	}
+	   if (CustomEntityList.BEETLEAS.modData.isPresent() && CustomEntityList.BEETLEAS.modData.isPresent() && CustomEntityList.CENTIPEDE.modData.isPresent()) {
+        if (bugRelease == true) {    	
+	        
+			//TileEntity entity = event.world.getTileEntity(event.x, event.y, event.z);
+		    if (event.block == Blocks.tallgrass || event.block == Blocks.vine
+		    		 || event.block == Blocks.brown_mushroom_block || event.block ==  Blocks.yellow_flower 
+		    		 || event.block == Blocks.red_flower || event.block == Blocks.deadbush || event.block == Blocks.double_plant
+		    		 || event.block == Blocks.leaves || event.block == Blocks.leaves2)
+		    {
+		    // Makes sure to only run on server, entity spawns must be done on server
+		        if (!event.world.isRemote && rand1.nextInt(2) == 0) {
+		        	int bugType = rand1.nextInt(10);	        	
+	            	int bugCount1 = rand1.nextInt(2);
+		        	int bugCount2 = rand1.nextInt(2);
+		        	int bugCount3 = rand1.nextInt(2);
+		        	
+	                if (bugType <= 2 ) { 
+	                  for (int i=0; i <= bugCount1; i++) {	
+			            EntityBeetleAS entity = new EntityBeetleAS(event.world);
+		
+			            // Places the entity close to the coords of the block (par2 = x, par3 = y, par4 = z)
+			            entity.setLocationAndAngles((double)event.x + 0.5D, (double)event.y, (double)event.z + 0.5D, 0.0F, 0.0F);
+		
+			            // Insert the bug in the world
+			            event.world.spawnEntityInWorld(entity);
+		
+			            // Creates the "puff" effect
+			            entity.spawnExplosionParticle(); 
+	                  }
+	                  
+	                  for (int i=0; i <= bugCount2; i++) {	
+		 		            EntityBeetleBS entity = new EntityBeetleBS(event.world);
+		 	
+		 		            // Places the entity close to the coords of the block (par2 = x, par3 = y, par4 = z)
+		 		            entity.setLocationAndAngles((double)event.x + 0.5D, (double)event.y, (double)event.z + 0.5D, 0.0F, 0.0F);
+		 	
+		 		            // Insert the bug in the world
+		 		            event.world.spawnEntityInWorld(entity);
+		 	
+		 		            // Creates the "puff" effect
+		 		            entity.spawnExplosionParticle(); 
+		                   }
+	                  
+		            } else if ((bugType >= 3) && (bugType <= 5) ) {
+		            	for (int i=0; i <= bugCount1; i++) {	
+				            EntityBeetleAS entity = new EntityBeetleAS(event.world);
+			
+				            // Places the entity close to the coords of the block (par2 = x, par3 = y, par4 = z)
+				            entity.setLocationAndAngles((double)event.x + 0.5D, (double)event.y, (double)event.z + 0.5D, 0.0F, 0.0F);
+			
+				            // Insert the bug in the world
+				            event.world.spawnEntityInWorld(entity);
+			
+				            // Creates the "puff" effect
+				            entity.spawnExplosionParticle(); 
+		                  }
+		            } else if ((bugType >= 6) && (bugType <= 8) ) {
+		            	for (int i=0; i <= bugCount1; i++) {	
+				            EntityBeetleBS entity = new EntityBeetleBS(event.world);
+			
+				            // Places the entity close to the coords of the block (par2 = x, par3 = y, par4 = z)
+				            entity.setLocationAndAngles((double)event.x + 0.5D, (double)event.y, (double)event.z + 0.5D, 0.0F, 0.0F);
+			
+				            // Insert the bug in the world
+				            event.world.spawnEntityInWorld(entity);
+			
+				            // Creates the "puff" effect
+				            entity.spawnExplosionParticle(); 
+		                  }
+		            } else {
+		            		 for (int i=0; i <= bugCount3; i++) {	
+		 	 		            EntityCentipede entity = new EntityCentipede(event.world);
+		 	 	
+		 	 		            // Places the entity close to the coords of the block (par2 = x, par3 = y, par4 = z)
+		 	 		            entity.setLocationAndAngles((double)event.x + 0.5D, (double)event.y, (double)event.z + 0.5D, 0.0F, 0.0F);
+		 	 	
+		 	 		            // Insert the bug in the world
+		 	 		            event.world.spawnEntityInWorld(entity);
+		 	 	
+		 	 		            // Creates the "puff" effect
+		 	 		            entity.spawnExplosionParticle(); 
+		 	                   }
+		            } 
+		        }
+		    }
+        }
+	  } 
+	}
+
+}

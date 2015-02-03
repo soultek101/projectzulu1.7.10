@@ -3,6 +3,7 @@ package com.stek101.projectzulu.common;
 import java.io.File;
 
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
 
 import com.stek101.projectzulu.common.core.CustomEntityManager;
 import com.stek101.projectzulu.common.core.DefaultProps;
@@ -64,9 +65,16 @@ import com.stek101.projectzulu.common.mobs.entitydefaults.VultureDeclaration;
 import com.stek101.projectzulu.common.mobs.entitydefaults.YellowFinchDeclaration;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class ProjectZulu_Mobs extends BaseModule {
-
+	private Configuration config;
+	private boolean bugRelease = false;
+	private boolean stickSpawn = true;
+	private int bugReleaseRate = 5;
+	private int stickSpawnRate = 5;
+	
+	
     @Override
     public String getIdentifier() {
         return DefaultProps.MobsModId;
@@ -92,6 +100,19 @@ public class ProjectZulu_Mobs extends BaseModule {
                 new RipperFinDeclaration(), new OstrichEggDeclaration(), new GiantRatDeclaration(), new FishBDeclaration(),
                 new CrowDeclaration(), new CamelDeclaration(), new MonkeyDeclaration(), new ThrowingRockDeclaration(), // new AntRavegerDeclaration(),
                 new BeetleASDeclaration(), new BeetleBSDeclaration(), new BloomDoomDeclaration(), new PZBatDeclaration());
+    }
+    
+    @Override
+    public void preInit(FMLPreInitializationEvent event, File configDirectory) {
+    	config = new Configuration(new File( "." + "/config/", DefaultProps.configDirectory
+                + DefaultProps.defaultConfigFile));
+        config.load();                
+        //displayBossHealth = config.get("mob controls", "Display PZBoss HealthBar", this.displayBossHealth).getBoolean(displayBossHealth);
+        bugRelease = config.get("mob controls", "Spawn Ambient Bugs on Block Break", this.bugRelease).getBoolean(bugRelease);
+        bugReleaseRate = config.get("mob controls", "Spawn Rate of Ambient Bugs on Block Break", this.bugReleaseRate).getInt(bugReleaseRate);
+        stickSpawn = config.get("mob controls", "Spawn Wood Sticks on Block Break", this.stickSpawn).getBoolean(stickSpawn);
+        stickSpawnRate = config.get("mob controls", "Spawn Rate of Wood Sticks on Block Break", this.stickSpawnRate).getInt(stickSpawnRate);
+        config.save();
     }
     
     @Override

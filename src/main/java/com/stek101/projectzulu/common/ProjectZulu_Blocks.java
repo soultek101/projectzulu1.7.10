@@ -142,6 +142,7 @@ public class ProjectZulu_Blocks extends BaseModule {
 
     @Override
     public void postInit(FMLPostInitializationEvent event, File configDirectory) {
+      	
         ItemBlockRecipeManager.setupBlockModuleRecipies();
 
         if (!PotionManager.potionModuleEnabled) {
@@ -157,6 +158,7 @@ public class ProjectZulu_Blocks extends BaseModule {
         if (PotionManager.enableNullPotionHandler) {
             MinecraftForge.EVENT_BUS.register(new EventHandleNullPotions());
         }
+
     }
 
     @Override

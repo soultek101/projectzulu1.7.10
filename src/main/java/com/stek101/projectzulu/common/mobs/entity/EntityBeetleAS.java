@@ -70,23 +70,23 @@ public class EntityBeetleAS extends EntityGenericAnimal implements IAnimals {
 	 /**
      * Returns the sound this mob makes while it's alive.
      */
-    @Override
-    protected String getLivingSound() {
-        return DefaultProps.mobKey + ":" + DefaultProps.entitySounds + "beetlelivingsound";
-    }
+  //  @Override
+ //   protected String getLivingSound() {
+  //      return DefaultProps.mobKey + ":" + DefaultProps.entitySounds + "beetlelivingsound";
+  //  }
 
     /**
      * Returns the sound this mob makes when it is hurt.
      */
-    @Override
-    protected String getHurtSound() {
-        return DefaultProps.mobKey + ":" + DefaultProps.entitySounds + "beetlehurtsound";
-    }
+ //   @Override
+//    protected String getHurtSound() {
+//        return DefaultProps.mobKey + ":" + DefaultProps.entitySounds + "beetlehurtsound";
+//    }
     
-    @Override
-    public int getTalkInterval() {
-        return 160;
-    }
+//    @Override
+//    public int getTalkInterval() {
+//        return 160;
+//    }
 
     @Override
     public void onLivingUpdate() {
