@@ -147,6 +147,7 @@ public class ModelFox extends ModelBase {
 	    TAILROT.rotateAngleX = (float) (-23 * Math.PI / 180);
 	    LEG1ROT.rotateAngleX = (float) (MathHelper.cos(par2 * 0.6662F) * 1.8F * ModelHelper.abs(Math.log(par3 + 1)));
 	    LEG1ROT.setRotationPoint(-1.5F, 2.5F, 7F);
+	    
 	    LEG2ROT.rotateAngleX = (float) (MathHelper.cos(par2 * 0.6662F + (float) Math.PI) * 1.8F * ModelHelper
 		    .abs(Math.log(par3 + 1)));
 	    LEG2ROT.setRotationPoint(1.5F, 2.5F, 7F);

@@ -101,20 +101,7 @@ public class ProjectZulu_Mobs extends BaseModule {
                 new CrowDeclaration(), new CamelDeclaration(), new MonkeyDeclaration(), new ThrowingRockDeclaration(), // new AntRavegerDeclaration(),
                 new BeetleASDeclaration(), new BeetleBSDeclaration(), new BloomDoomDeclaration(), new PZBatDeclaration());
     }
-    
-    @Override
-    public void preInit(FMLPreInitializationEvent event, File configDirectory) {
-    	config = new Configuration(new File( "." + "/config/", DefaultProps.configDirectory
-                + DefaultProps.defaultConfigFile));
-        config.load();                
-        //displayBossHealth = config.get("mob controls", "Display PZBoss HealthBar", this.displayBossHealth).getBoolean(displayBossHealth);
-        bugRelease = config.get("mob controls", "Spawn Ambient Bugs on Block Break", this.bugRelease).getBoolean(bugRelease);
-        bugReleaseRate = config.get("mob controls", "Spawn Rate of Ambient Bugs on Block Break", this.bugReleaseRate).getInt(bugReleaseRate);
-        stickSpawn = config.get("mob controls", "Spawn Wood Sticks on Block Break", this.stickSpawn).getBoolean(stickSpawn);
-        stickSpawnRate = config.get("mob controls", "Spawn Rate of Wood Sticks on Block Break", this.stickSpawnRate).getInt(stickSpawnRate);
-        config.save();
-    }
-    
+  
     @Override
     public void init(FMLInitializationEvent event, File configDirectory) {
     	MinecraftForge.EVENT_BUS.register(new ChangeVanillaDrops());    	

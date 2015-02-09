@@ -222,16 +222,7 @@ public class ModelMonkeyTailed extends ModelBase {
 
 	rightTopArm.rotateAngleX = (float) (MathHelper.cos(par2 * 0.6662F) * 1.8F * ModelHelper.abs(Math.log(par3 + 1)));
 	
-	//leftBotArm.rotateAngleX = (float) Math.abs(MathHelper.cos(par2 * 0.6662F / 2 + (float) Math.PI) * 1.8F
-	//	* ModelHelper.abs(Math.log(par3 + 1)));
-	///leftBotArm.rotateAngleX = (float) (MathHelper.cos(par2 * 0.6662F + (float) Math.PI) * 1.8F * ModelHelper
-	///		.abs(Math.log(par3 + 1)));
 	
-	//rightBotArm.rotateAngleX = (float) Math.abs(MathHelper.cos(par2 * 0.6662F / 2) * 1.8F
-	//	* ModelHelper.abs(Math.log(par3 + 1)));
-
-	///rightBotArm.rotateAngleX = (float) (MathHelper.cos(par2 * 0.6662F) * 1.8F * ModelHelper.abs(Math.log(par3 + 1)));
-			
 	leftTopLeg.rotateAngleX = (float) (MathHelper.cos(par2 * 0.6662F + (float) Math.PI) * 1.8F * ModelHelper
 			.abs(Math.log(par3 + 1)));
 	
@@ -256,7 +247,5 @@ public class ModelMonkeyTailed extends ModelBase {
     super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
     HEAD.rotateAngleY = f3 / (180F / (float)Math.PI);
     HEAD.rotateAngleX = f3 / (180F / (float)Math.PI);
-    //HEAD.rotateAngleX = Math.min(Math.max(f4, -14), +15) * (float) (Math.PI / 180f);
-	//HEAD.rotateAngleY = Math.min(Math.max(f3, -15), +15) * (float) (Math.PI / 180f);
   }
 }

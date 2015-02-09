@@ -167,9 +167,9 @@ public class ModelGoat extends ModelBase
   public void setLivingAnimations(EntityLivingBase par1EntityLiving, float par2, float par3, float par4) {
 	/* Constant Animation Rotations */
 	leg1.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f) * 1.2F * par3;
-	leg3.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f) * 1.2F * par3;
+	leg3.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f + (float) Math.PI) * 1.2F * par3;
 	leg2.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f + (float) Math.PI) * 1.2F * par3;
-	leg4.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f + (float) Math.PI) * 1.2F * par3;
+	leg4.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f) * 1.2F * par3;
 	super.setLivingAnimations(par1EntityLiving, par2, par3, par4);
   }
   

@@ -52,6 +52,7 @@ public class ProjectZulu_Core {
 
     public static final CreativeTabs projectZuluCreativeTab = new CreativePZGeneralTab(
             CreativeTabs.creativeTabArray.length, "projectZuluTab");
+    
     public static final CreativeTabs projectZuluPotionTab = new CreativePZPotionTab(
             CreativeTabs.creativeTabArray.length, "projectZuluPotionTab");
 

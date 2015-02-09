@@ -160,9 +160,9 @@ public class ModelBear extends ModelBase {
     public void setLivingAnimations(EntityLivingBase par1EntityLiving, float par2, float par3, float par4) {
 	EntityBear var5 = (EntityBear) par1EntityLiving;
 	LEG1ROT2.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f) * 1.2F * par3;
-	LEG3ROT2.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f) * 1.2F * par3;
+	LEG3ROT2.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f + (float) Math.PI) * 1.2F * par3;
 	LEG2ROT2.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f + (float) Math.PI) * 1.2F * par3;
-	LEG4ROT2.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f + (float) Math.PI) * 1.2F * par3;
+	LEG4ROT2.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f) * 1.2F * par3;
 	super.setLivingAnimations(par1EntityLiving, par2, par3, par4);
     }
 

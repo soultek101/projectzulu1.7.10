@@ -111,9 +111,9 @@ public class ModelBoar extends ModelBase {
     @Override
     public void setLivingAnimations(EntityLivingBase par1EntityLiving, float par2, float par3, float par4) {
         LEGROT1.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f) * 1.8F * par3;
-        LEGROT3.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f) * 1.8F * par3;
+        LEGROT3.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f + (float) Math.PI) * 1.8F * par3;
         LEGROT2.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f + (float) Math.PI) * 1.8F * par3;
-        LEGROT4.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f + (float) Math.PI) * 1.8F * par3;
+        LEGROT4.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f) * 1.8F * par3;
         super.setLivingAnimations(par1EntityLiving, par2, par3, par4);
     }
 
