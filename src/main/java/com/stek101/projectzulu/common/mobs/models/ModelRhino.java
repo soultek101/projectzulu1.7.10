@@ -151,9 +151,9 @@ public class ModelRhino extends ModelBase {
     public void setLivingAnimations(EntityLivingBase par1EntityLiving, float par2, float par3, float par4) {
 	/* Constant Animation Rotations */
 	LEG1ROT.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f) * 1.2F * par3;
-	LEG3ROT.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f) * 1.2F * par3;
+	LEG3ROT.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f + (float) Math.PI) * 1.2F * par3;
 	LEG2ROT.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f + (float) Math.PI) * 1.2F * par3;
-	LEG4ROT.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f + (float) Math.PI) * 1.2F * par3;
+	LEG4ROT.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f) * 1.2F * par3;
 	TAILROT.rotateAngleX = (float) (-90 * Math.PI / 180);
 	super.setLivingAnimations(par1EntityLiving, par2, par3, par4);
     }

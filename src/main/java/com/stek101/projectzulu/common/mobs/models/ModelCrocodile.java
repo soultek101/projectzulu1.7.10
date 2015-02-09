@@ -487,9 +487,9 @@ public class ModelCrocodile extends ModelBase {
     @Override
     public void setLivingAnimations(EntityLivingBase par1EntityLiving, float par2, float par3, float par4) {
 	LEG2TOPROT.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f) * 1.8F * par3;
-	LEG4TOPROT.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f) * 1.8F * par3;
+	LEG4TOPROT.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f + (float) Math.PI) * 1.8F * par3;
 	LEG1TOPROT.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f + (float) Math.PI) * 1.8F * par3;
-	LEG3TOPROT.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f + (float) Math.PI) * 1.8F * par3;
+	LEG3TOPROT.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f) * 1.8F * par3;
 
 	BODY1ROT.rotateAngleY = MathHelper.cos(par2 * 0.6662F * 2f + 0 / 4 * (float) Math.PI) * 0.1F * par3;
 	BODY2ROT.rotateAngleY = MathHelper.cos(par2 * 0.6662F * 2f + 1 / 4 * (float) Math.PI) * 0.1F * par3;

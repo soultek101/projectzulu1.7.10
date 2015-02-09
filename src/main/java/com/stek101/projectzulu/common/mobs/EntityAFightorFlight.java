@@ -36,6 +36,16 @@ public class EntityAFightorFlight {
 	  return this;	
 	}
 	
+	public EntityAFightorFlight setEntity(EntityGenericCreature par1, World par2, float par3, double par4, boolean shouldHop) {
+		  this.entity = par1;			
+		  this.worldObj = par2;
+		  this.aggroLevel = par3;
+		  this.aggroRange = par4;	  
+		  this.aiEntityAvoidEntity = new EntityAIAvoidEntity(entity, EntityPlayer.class, 16.0f, 1.3D, 1.2D, shouldHop);	  
+		  return this;	
+	}
+	
+	
 	public void updateEntityAFF(World worldobj, Item temptItem){
 		ItemStack var1 = null;
 		//ItemStack var1 = this.entityplayer.getCurrentEquippedItem();
@@ -53,6 +63,8 @@ public class EntityAFightorFlight {
         	  }
           }
         }
+        
+     
         
         if (this.aggroRange != 0 && temptingItem == false ){  /** 0 means deactivate FoF behavior or entity player is too far**/
  

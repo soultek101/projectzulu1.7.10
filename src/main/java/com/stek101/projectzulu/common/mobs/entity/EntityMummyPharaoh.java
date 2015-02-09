@@ -28,7 +28,7 @@ import com.stek101.projectzulu.common.mobs.entityai.EntityAIWander;
 
 import cpw.mods.fml.common.Loader;
 
-public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
+public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob{
 
     Vec3 startingPosition;
     int stage = 1;
@@ -423,4 +423,5 @@ public class EntityMummyPharaoh extends EntityGenericAnimal implements IMob {
     public int getTalkInterval() {
         return 160;
     }
+    
 }

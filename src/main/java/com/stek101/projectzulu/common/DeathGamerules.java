@@ -159,14 +159,18 @@ public class DeathGamerules {
     @SubscribeEvent
     public void worldLoad(WorldEvent.Load event) {
         GameRules gameRule = event.world.getGameRules();
-        if (createGameruleIfAbsent(gameRule, "pzKeepInventory", keepInventoryDefault)) {
-            gameRule.setOrCreateGameRule("keepInventory", Boolean.toString(keepInventoryDefault));
-        }
+        
+       // if (createGameruleIfAbsent(gameRule, "pzKeepInventory", keepInventoryDefault)) {
+       // 	System.out.println("******** pzKeepInventory rule is not present, creating it.....");
+       // 	
+       //     gameRule.setOrCreateGameRule("keepInventory", Boolean.toString(keepInventoryDefault));
+      //  }
         
         //createGameruleIfAbsent(gameRule, "dropInventory", dropInventoryDefault);
         //createGameruleIfAbsent(gameRule, "dropHotbar", dropHotbarDefault);
         //createGameruleIfAbsent(gameRule, "dropArmor", dropArmorDefault);
         //createGameruleIfAbsent(gameRule, "dropXP", dropXPDefault);
+        gameRule.setOrCreateGameRule("keepInventory", Boolean.toString(keepInventoryDefault));
         gameRule.setOrCreateGameRule("dropInventory", String.valueOf(dropInventoryDefault));
         gameRule.setOrCreateGameRule("dropHotbar", String.valueOf(dropHotbarDefault));
         gameRule.setOrCreateGameRule("dropArmor", String.valueOf(dropArmorDefault));
@@ -187,114 +191,130 @@ public class DeathGamerules {
     public void onPlayerDeath(PlayerDropsEvent event) {
     	ArrayList<EntityItem> drops = event.drops;   	
     	int minDistance = 0;
+    	Optional<?> tombStoneBlock = BlockList.tombstone;
     	
-        if (event.entity instanceof EntityPlayerMP) {
-            GameRules gameRules = event.entity.worldObj.getGameRules();
-           
-             boolean dropInventory = gameRules.getGameRuleBooleanValue("dropInventory");
-             boolean dropHotbar = gameRules.getGameRuleBooleanValue("dropHotbar");
-             boolean dropArmor = gameRules.getGameRuleBooleanValue("dropArmor");
-             boolean dropXP = gameRules.getGameRuleBooleanValue("dropXP");
-             
-             String tombmsg ="";
-             EntityPlayer player = (EntityPlayer) event.entity;
-             
-             if (event.source.isExplosion()) {
-            	 minDistance = 10;
-             }
-             
-             TileEntityTombstone tombstone = tombstoneOnDeath ? placeTombstone(player, minDistance) : null;
-
-            if (tombstone != null) {
-            	//tombstone.setSignString(event.source.func_151519_b((EntityPlayer) event.entity).toString());
-            	tombstone.setSignString("HERE LIES " + event.source.func_151519_b((EntityPlayer) event.entity).getUnformattedTextForChat().toUpperCase());
-            }
-
-            /* Tombstone will not add drops */ 
-            if (!dropInventory && !dropHotbar && !dropArmor && !dropXP) {
-                return;
-            }
-
-            player.captureDrops = true;
-            //player.capturedDrops.clear();
-        	
-            /* Get items/XP to drop and clear them from Player */
-            int xpDropped = 0;
-            
-            if (dropXP) {
-                if (!player.worldObj.isRemote) {
-                	if (maxDropXP + percKeptXp > 100){
-                        ProjectZuluLog.warning("Warning : The total of MaxDropXP and percKeptXP is greater than 100. Resetting to default");
-                        maxDropXP = 100;
-                	    percKeptXp = 0;
-                	}
-                    //xpDropped = player.experienceTotal;
-                    xpDropped = (int) (player.experienceTotal * ((float) maxDropXP/100));
-                   
-                    int keptXp = (int) ((player.experienceTotal - xpDropped) * ((float) percKeptXp / 100));
-                    //xpDropped = xpDropped > maxDropXP ? maxDropXP : xpDropped;
-                    
-                    redistributor.addExperience(player, keptXp >= 0 ? keptXp : 0);
-                    player.experienceLevel = 0;
-                    player.experienceTotal = 0;
-                    player.experience = 0;
-                }
-            }
-
-            List<ItemStack> itemsToDrop = new ArrayList<ItemStack>();
-            
-            if (dropArmor) {
-                itemsToDrop.addAll(dropArmor(player));
-            }
-
-            if (dropInventory) {
-                itemsToDrop.addAll(dropInventory(player));
-            }
-
-            if (dropHotbar) {
-                itemsToDrop.addAll(dropHotbar(player));
-            }
-
-            dropItems(player, itemsToDrop);
-            
-            boolean isCancelled = false;
-
-          //  Need to understand this lines more but so far feature repair is working...  
-          //  if (doDropEvent) {
-          //      PlayerDropsEvent dropEvent = createPlayerDropEvent(player, event.source, player.capturedDrops);
-          //      isCancelled = MinecraftForge.EVENT_BUS.post(dropEvent);
-          //  }
-
-            player.captureDrops = false;
-            if (!isCancelled) {
-                /* Handler actually Dropping Items or Placing them in Tombstone */
-                if (tombstoneAbsorbDrops && tombstone != null) {
-                    for (EntityItem entityItem : player.capturedDrops) {
-                       tombstone.addDrop(entityItem.getEntityItem());
-                   }           	
-                    tombstone.experience = xpDropped;
-                    player.capturedDrops.clear();
-                } else {
-                    if (tombstoneAbsorbDrops) {
-                    	System.out.println("Tombstone could not be placed so items dropping normally.");
-                        ProjectZuluLog.warning("Tombstone could not be placed so items dropping normally.");
-                    }
-                    while (xpDropped > 0) {
-                        int j = EntityXPOrb.getXPSplit(xpDropped);
-                        xpDropped -= j;
-                        player.worldObj.spawnEntityInWorld(new EntityXPOrb(player.worldObj, player.posX, player.posY,
-                                player.posZ, j));
-                    }
-                    for (EntityItem item : player.capturedDrops) {
-                        player.joinEntityItemWithWorld(item);
-                    }
-                }
-            } else {
-            	System.out.println("Tombstone drop event cancelled");
-                ProjectZuluLog.warning("Player drop event was cancelled, so items will not be dropped per convention."
-                        + "Results may not desireable, consider disabling 'doDropEvent' in the config.");
-            }
-        }
+    	if (tombStoneBlock.isPresent()) {
+	        if (event.entity instanceof EntityPlayerMP) {
+	            GameRules gameRules = event.entity.worldObj.getGameRules();
+	           
+	             boolean dropInventory = gameRules.getGameRuleBooleanValue("dropInventory");
+	             boolean dropHotbar = gameRules.getGameRuleBooleanValue("dropHotbar");
+	             boolean dropArmor = gameRules.getGameRuleBooleanValue("dropArmor");
+	             boolean dropXP = gameRules.getGameRuleBooleanValue("dropXP");
+	             
+	             String tombmsg ="";
+	             EntityPlayer player = (EntityPlayer) event.entity;
+	             
+	             if (event.source.isExplosion()) {
+	            	 minDistance = 10;
+	             }
+	             
+	             TileEntityTombstone tombstone = tombstoneOnDeath ? placeTombstone(player, minDistance) : null;
+	
+	            if (tombstone != null) {
+	            	//tombstone.setSignString(event.source.func_151519_b((EntityPlayer) event.entity).toString());
+	            	tombstone.setSignString("HERE LIES " + event.source.func_151519_b((EntityPlayer) event.entity).getUnformattedTextForChat().toUpperCase());
+	            }
+	
+	            /* Tombstone will not add drops */ 
+	            if (!dropInventory && !dropHotbar && !dropArmor && !dropXP) {
+	                return;
+	            }
+	
+	            player.captureDrops = true;
+	            //player.capturedDrops.clear();
+	        	
+	            /* Get items/XP to drop and clear them from Player */
+	            int xpDropped = 0;
+	            
+	            if (dropXP) {
+	                if (!player.worldObj.isRemote) {
+	                	if ((maxDropXP > 100) && (maxDropXP < 0)){
+	                        ProjectZuluLog.warning("Warning : The value of MaxDropXP is INVALID. Resetting to default value of 100");
+	                        maxDropXP = 100;	                	    
+	                	}
+	                	
+	                	if ((percKeptXp > 100) && (percKeptXp < 0)){
+	                        ProjectZuluLog.warning("Warning : The value of percKeptXp is INVALID. Resetting to default value of 0");
+	                        percKeptXp = 0;	                	    
+	                	}
+	                	
+	                    //xpDropped = player.experienceTotal;
+	                	//System.out.println("total player xp on death : " + player.experienceTotal);
+	                    
+	                	xpDropped = (int) (player.experienceTotal * ((float) maxDropXP/100));
+	                   
+	                	//System.out.println("total player xp to drop : " + xpDropped );
+	                	//System.out.println("subtotal player xp minus xpDropped : " + (player.experienceTotal - xpDropped));
+	                	//System.out.println("player kepXp percent : " + ((float) percKeptXp / 100));
+	                	
+	                    int keptXp = (int) ((player.experienceTotal - xpDropped) * ((float) percKeptXp / 100));
+	                    //xpDropped = xpDropped > maxDropXP ? maxDropXP : xpDropped;
+	                    
+	                    //System.out.println("total player xp to keep : " + keptXp );
+	                    
+	                    redistributor.addExperience(player, keptXp >= 0 ? keptXp : 0);
+	                    player.experienceLevel = 0;
+	                    player.experienceTotal = 0;
+	                    player.experience = 0;
+	                }
+	            }
+	
+	            List<ItemStack> itemsToDrop = new ArrayList<ItemStack>();
+	            
+	            if (dropArmor) {
+	                itemsToDrop.addAll(dropArmor(player));
+	            }
+	
+	            if (dropInventory) {
+	                itemsToDrop.addAll(dropInventory(player));
+	            }
+	
+	            if (dropHotbar) {
+	                itemsToDrop.addAll(dropHotbar(player));
+	            }
+	
+	            dropItems(player, itemsToDrop);
+	            
+	            boolean isCancelled = false;
+	
+	          //  Need to understand this lines more but so far feature repair is working...  
+	          //  if (doDropEvent) {
+	          //      PlayerDropsEvent dropEvent = createPlayerDropEvent(player, event.source, player.capturedDrops);
+	          //      isCancelled = MinecraftForge.EVENT_BUS.post(dropEvent);
+	          //  }
+	
+	            player.captureDrops = false;
+	            if (!isCancelled) {
+	                /* Handler actually Dropping Items or Placing them in Tombstone */
+	                if (tombstoneAbsorbDrops && tombstone != null) {
+	                    for (EntityItem entityItem : player.capturedDrops) {
+	                       tombstone.addDrop(entityItem.getEntityItem());
+	                   }           	
+	                    tombstone.experience = xpDropped;
+	                    player.capturedDrops.clear();
+	                } else {
+	                    if (tombstoneAbsorbDrops) {
+	                    	System.out.println("Tombstone could not be placed so items dropping normally.");
+	                        ProjectZuluLog.warning("Tombstone could not be placed so items dropping normally.");
+	                    }
+	                    while (xpDropped > 0) {
+	                        int j = EntityXPOrb.getXPSplit(xpDropped);
+	                        xpDropped -= j;
+	                        player.worldObj.spawnEntityInWorld(new EntityXPOrb(player.worldObj, player.posX, player.posY,
+	                                player.posZ, j));
+	                    }
+	                    for (EntityItem item : player.capturedDrops) {
+	                        player.joinEntityItemWithWorld(item);
+	                    }
+	                }
+	            } else {
+	            	System.out.println("Tombstone drop event cancelled");
+	                ProjectZuluLog.warning("Player drop event was cancelled, so items will not be dropped per convention."
+	                        + "Results may not desireable, consider disabling 'doDropEvent' in the config.");
+	            }
+	        }
+      }
     }
 
     private void dropItems(EntityPlayer player, List<ItemStack> drops) {
@@ -514,7 +534,6 @@ public class DeathGamerules {
                     player.inventory.mainInventory[slot] = null;
                     countDrops++;
                 }
-
             }
         }
         return itemsToDrop;

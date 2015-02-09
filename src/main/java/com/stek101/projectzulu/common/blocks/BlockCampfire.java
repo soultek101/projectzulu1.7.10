@@ -70,7 +70,7 @@ public class BlockCampfire extends Block implements ITempBlock {
     public final int renderID;
 
     public BlockCampfire(int renderID) {
-        super(Material.wood);
+        super(Material.wood);       
         setCreativeTab(ProjectZulu_Core.projectZuluCreativeTab);
         setTickRandomly(true);
         setBlockBounds(0f, 0.0F, 0.0f, 1.0f, 0.35f, 1.0f);
@@ -198,7 +198,11 @@ public class BlockCampfire extends Block implements ITempBlock {
         if (par5EntityPlayer.getCurrentEquippedItem() != null) {
             /* If Fire is not Lit and Coal is in Hand, Light Fire */
             if (par1World.getBlockMetadata(par2, par3, par4) < 2
-                    && (par5EntityPlayer.getCurrentEquippedItem().getItem() == Items.flint_and_steel)) {
+                    && (
+        					(par5EntityPlayer.getCurrentEquippedItem().getItem() ==  Item.getItemFromBlock(Blocks.torch))
+        					|| 
+        					(par5EntityPlayer.getCurrentEquippedItem().getItem() ==  Items.flint_and_steel)
+        					)) {
                 if (!par5EntityPlayer.capabilities.isCreativeMode) {
                     par5EntityPlayer.getCurrentEquippedItem().stackSize -= 1;
                 }

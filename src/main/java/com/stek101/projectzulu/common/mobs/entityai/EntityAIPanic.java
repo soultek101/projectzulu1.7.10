@@ -89,7 +89,14 @@ public class EntityAIPanic extends EntityAIBase {
  	/**
  	 * Gets the amount of time the slime needs to wait between jumps.
  	 */
+    
  	protected int getJumpDelay(){
- 		return theEntityCreature.getRNG().nextInt(5) + 2;
+ 		if (this.theEntityCreature.getEntityState() == EntityStates.fleeing){
+ 			return theEntityCreature.getRNG().nextInt(3);
+ 		}
+ 		else
+ 		{
+ 			return theEntityCreature.getRNG().nextInt(5) + 2;
+ 		}
  	}
 }

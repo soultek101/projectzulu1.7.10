@@ -7,6 +7,7 @@ public enum GuiID {
 	AnimalName(2),
 	MobSpawner(3),
 	BrewingStand(4),
+	CamelChest(5),
 	Unknown(-1);
 	
 	private int iD;

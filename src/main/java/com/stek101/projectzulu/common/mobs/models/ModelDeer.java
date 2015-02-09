@@ -245,19 +245,16 @@ public class ModelDeer extends ModelBase
 			    leg3.render(renderScale * f5);
 			    leg4.render(renderScale * f5);
 			    tail.render(renderScale * f5);
-
-		    }    
-		    
-		    
+		    }  
 		  }
 		  
 		  @Override
 		  public void setLivingAnimations(EntityLivingBase par1EntityLiving, float par2, float par3, float par4) {
 			/* Constant Animation Rotations */
 			leg1.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f) * 1.2F * par3;
-			leg3.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f) * 1.2F * par3;
+			leg3.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f + (float) Math.PI) * 1.2F * par3;
 			leg2.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f + (float) Math.PI) * 1.2F * par3;
-			leg4.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f + (float) Math.PI) * 1.2F * par3;
+			leg4.rotateAngleX = MathHelper.cos(par2 * 0.6662F * 2f) * 1.2F * par3; 
 			
 			/*tail.rotateAngleZ = (float) (MathHelper.cos(par2 * 0.6662F + (float) Math.PI) * 1.8F * ModelHelper.abs(Math
 					.log(par3 + 1)));
@@ -281,9 +278,10 @@ public class ModelDeer extends ModelBase
 		  public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity)
 		  {
 		    super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-		    HEADROT.rotateAngleX = Math.min(Math.max(f4, -14), +15) * (float) (Math.PI / 180f);
-			HEADROT.rotateAngleY = Math.min(Math.max(f3, -15), +15) * (float) (Math.PI / 180f);
-			
+		    //HEADROT.rotateAngleX = Math.min(Math.max(f4, -14), +45) * (float) (Math.PI / 180f);
+			//HEADROT.rotateAngleY = Math.min(Math.max(f3, -15), +45) * (float) (Math.PI / 180f);
+		    HEADROT.rotateAngleX = f4 / (180F / (float)Math.PI); //Math.min(Math.max(f4, -14), +35) * (float) (Math.PI / 180f);
+			HEADROT.rotateAngleY = f3 / (180F / (float)Math.PI);
 		  }
 
 

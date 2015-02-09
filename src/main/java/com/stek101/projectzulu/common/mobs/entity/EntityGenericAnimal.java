@@ -54,8 +54,10 @@ public class EntityGenericAnimal extends EntityGenericTameable {
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
+        
         CustomEntityList entityEntry = CustomEntityList.getByName(EntityList.getEntityString(this));
         if (entityEntry != null && entityEntry.modData.get().entityProperties != null) {
+        	
             // Register Damage Attribute
             this.getAttributeMap().registerAttribute(SharedMonsterAttributes.attackDamage);
             
@@ -166,7 +168,7 @@ public class EntityGenericAnimal extends EntityGenericTameable {
             	PZPacketAnimTime message = new PZPacketAnimTime().setPacketData(getEntityId(), animTime);
             	ProjectZulu_Core.packetHandler.sendToAllAround(message, new TargetPoint(dimension, posX, posY, posZ, 30));
             }
-
+            
             float damage = (float) this.getEntityAttribute(SharedMonsterAttributes.attackDamage).getAttributeValue();
             int knockbackScale = 0;
 

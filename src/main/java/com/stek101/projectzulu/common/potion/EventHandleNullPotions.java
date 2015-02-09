@@ -20,14 +20,21 @@ public class EventHandleNullPotions {
         if (entityLiving.ticksExisted < 20) {
             Collection potionEffects = entityLiving.getActivePotionEffects();
             Iterator iterator = potionEffects.iterator();
+         try    {
             while (iterator.hasNext()) {
                 PotionEffect potionEffectToRemove = (PotionEffect) iterator.next();
+                
                 if (Potion.potionTypes[potionEffectToRemove.getPotionID()] == null) {
                     ProjectZuluLog.info("Found Invalid Potion Effect. Removing Effect with ID %s.",
                             potionEffectToRemove.getPotionID());
                     iterator.remove();
                 }
+                
             }
+        }
+         catch(ArrayIndexOutOfBoundsException exception) {
+        	 ProjectZuluLog.info("Error encountered when removing Effect");
+        	}
         }
     }
 }

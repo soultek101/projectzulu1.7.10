@@ -99,7 +99,7 @@ public class ItemZuluArmor extends ItemArmor implements ITempArmor {
 
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
-        return DefaultProps.blockKey + ":armor_sets/" + RenderBiped.bipedArmorFilenamePrefix[renderIndex] + "_"
+        return DefaultProps.blockKey + ":textures/armor_sets/" + RenderBiped.bipedArmorFilenamePrefix[renderIndex] + "_"
                 + (armorType == 2 ? 2 : 1) + ".png";
     }
 }

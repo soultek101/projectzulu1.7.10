@@ -1,14 +1,18 @@
 package com.stek101.projectzulu.common.mobs;
 
+import java.io.File;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.config.Configuration;
 
 import org.lwjgl.opengl.GL11;
 
+import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.mobs.entity.EntityGenericAnimal;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -17,30 +21,43 @@ import cpw.mods.fml.common.gameevent.TickEvent.RenderTickEvent;
 
 public class BossHealthDisplayTicker {
        
-    
-	public static EntityGenericAnimal targetBoss;	
+	public static final ResourceLocation icons = new ResourceLocation("textures/gui/icons.png");
+	public static EntityGenericAnimal targetBoss;
+	protected Minecraft mc = Minecraft.getMinecraft();
     protected float zLevel = 0.0F;
     static EntityPlayer player;
+    private Configuration config; 
+    private boolean displayBossHealth = true;
+    private boolean bugRelease = true;
     
   //  public BossHealthDisplayTicker (EntityGenericAnimal mobEntity) {
   //  	this.targetBoss = mobEntity;
   //  }
 
-    public static void registerEntity(EntityGenericAnimal newTicker) {
+	public static void registerEntity(EntityGenericAnimal newTicker) {
         targetBoss = newTicker;
     }
 
     public static boolean validTargetPresent(EntityGenericAnimal targetBoss) {
     	if (Minecraft.getMinecraft().thePlayer != null){
-         return targetBoss != null && !targetBoss.isDead && targetBoss.canEntityBeSeen(Minecraft.getMinecraft().thePlayer);
-         }
-    	else
+         //return targetBoss != null && !targetBoss.isDead && targetBoss.canEntityBeSeen(Minecraft.getMinecraft().thePlayer);
+    	 return targetBoss != null && !targetBoss.isDead && Minecraft.getMinecraft().thePlayer.canEntityBeSeen(targetBoss)
+    				&& (targetBoss.getDistanceToEntity(Minecraft.getMinecraft().thePlayer) < 16.0f);
+    	}
+    		else
     	 return false;
     }
     
     @SubscribeEvent
     public void TickEvent(RenderTickEvent event) {
-        if (event.phase == Phase.END) {
+    	
+    	config = new Configuration(new File( "." + "/config/", DefaultProps.configDirectory
+                + DefaultProps.defaultConfigFile));
+        config.load();                
+        displayBossHealth = config.get("mob controls", "Display PZBoss HealthBar", this.displayBossHealth).getBoolean(displayBossHealth);
+        config.save();
+       
+        if (event.phase == Phase.END && displayBossHealth) {
             if (validTargetPresent(targetBoss) && Minecraft.getMinecraft().thePlayer != null) {
                 renderBossHealthBar(targetBoss, targetBoss.getDefaultEntityName() + " Health");
             }
@@ -49,7 +66,7 @@ public class BossHealthDisplayTicker {
     }
 
     public void renderBossHealthBar(EntityGenericAnimal boss, String healthBarTitle) {
-        Minecraft mc = Minecraft.getMinecraft();
+        
         FontRenderer fontRenderer = mc.fontRenderer;
 
         /* Draw Title */
@@ -59,8 +76,8 @@ public class BossHealthDisplayTicker {
         fontRenderer.drawStringWithShadow(healthBarTitle, screenWidth / 2 - fontRenderer.getStringWidth(healthBarTitle)
                 / 2, healthBarHeight - 10, 16711935);
 
-        /* Draw Health Bar */
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, mc.renderEngine.getTexture(Gui.icons).getGlTextureId());
+        /* Draw Health Bar    */
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, mc.renderEngine.getTexture(icons).getGlTextureId());
         short fullHealthBarWidth = 182;
         int healthBarOffset = screenWidth / 2 - fullHealthBarWidth / 2;
         int currHealthBarWidth = (int) ((float) boss.getHealth() / (float) boss.getMaxHealth() * (fullHealthBarWidth + 1));
@@ -70,10 +87,10 @@ public class BossHealthDisplayTicker {
             this.drawTexturedModalRect(healthBarOffset, healthBarHeight, 0, 79, currHealthBarWidth, 5);
         }
 
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F); 
     }
-
-    public void drawTexturedModalRect(int par1, int par2, int par3, int par4, int par5, int par6) {
+    
+   public void drawTexturedModalRect(int par1, int par2, int par3, int par4, int par5, int par6) {
         float var7 = 0.00390625F;
         float var8 = 0.00390625F;
 

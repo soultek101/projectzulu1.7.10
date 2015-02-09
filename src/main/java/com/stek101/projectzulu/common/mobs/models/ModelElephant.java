@@ -252,19 +252,21 @@ public class ModelElephant extends ModelBase {
     public void setLivingAnimations(EntityLivingBase par1EntityLiving, float par2, float par3, float par4) {
 	LEG1TOPROT.rotateAngleX = (float) (MathHelper.cos(par2 * 0.6662F + (float) Math.PI) * 1.8F * ModelHelper
 		.abs(Math.log(par3 + 1)));
+	
 	LEG2TOPROT.rotateAngleX = (float) (MathHelper.cos(par2 * 0.6662F) * 1.8F * ModelHelper.abs(Math.log(par3 + 1)));
+	
 	LEG1BOTROT.rotateAngleX = (float) Math.abs(MathHelper.cos(par2 * 0.6662F / 2 + (float) Math.PI) * 1.8F
 		* ModelHelper.abs(Math.log(par3 + 1)));
-	LEG2BOTROT.rotateAngleX = (float) Math.abs(MathHelper.cos(par2 * 0.6662F / 2) * 1.8F
-		* ModelHelper.abs(Math.log(par3 + 1)));
+	LEG2BOTROT.rotateAngleX = 
 
-	LEG3TOPROT.rotateAngleX = (float) (MathHelper.cos(par2 * 0.6662F + (float) Math.PI) * 1.8F * ModelHelper
-		.abs(Math.log(par3 + 1)));
-	LEG4TOPROT.rotateAngleX = (float) (MathHelper.cos(par2 * 0.6662F) * 1.8F * ModelHelper.abs(Math.log(par3 + 1)));
-	LEG3BOTROT.rotateAngleX = (float) Math.abs(MathHelper.cos(par2 * 0.6662F / 2 + (float) Math.PI) * 1.8F
-		* ModelHelper.abs(Math.log(par3 + 1)));
-	LEG4BOTROT.rotateAngleX = (float) Math.abs(MathHelper.cos(par2 * 0.6662F / 2) * 1.8F
-		* ModelHelper.abs(Math.log(par3 + 1)));
+	LEG3TOPROT.rotateAngleX = (float) (MathHelper.cos(par2 * 0.6662F) * 1.8F * ModelHelper.abs(Math.log(par3 + 1)));
+	LEG4TOPROT.rotateAngleX = (float) (MathHelper.cos(par2 * 0.6662F + (float) Math.PI) * 1.8F * ModelHelper
+			.abs(Math.log(par3 + 1)));
+	
+	LEG3BOTROT.rotateAngleX = (float) Math.abs(MathHelper.cos(par2 * 0.6662F / 2) * 1.8F
+			* ModelHelper.abs(Math.log(par3 + 1)));
+	LEG4BOTROT.rotateAngleX = (float) Math.abs(MathHelper.cos(par2 * 0.6662F / 2 + (float) Math.PI) * 1.8F
+			* ModelHelper.abs(Math.log(par3 + 1)));
 
 	tail.rotateAngleZ = (float) (MathHelper.cos(par2 * 0.6662F + (float) Math.PI) * 1.8F * ModelHelper.abs(Math
 		.log(par3 + 1)));

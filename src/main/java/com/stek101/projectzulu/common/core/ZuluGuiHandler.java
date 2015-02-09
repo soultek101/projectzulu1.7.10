@@ -12,6 +12,8 @@ import com.stek101.projectzulu.common.blocks.universalpot.GuiContainerUniversalF
 import com.stek101.projectzulu.common.blocks.universalpot.TileEntityUniversalFlowerPot;
 import com.stek101.projectzulu.common.dungeon.GuiLimitedMobSpawner;
 import com.stek101.projectzulu.common.dungeon.TileEntityLimitedMobSpawner;
+import com.stek101.projectzulu.common.mobs.ContainerCamelInventory;
+import com.stek101.projectzulu.common.mobs.GuiScreenCamelInventory;
 import com.stek101.projectzulu.common.potion.brewingstands.ContainerBrewingStandSingle;
 import com.stek101.projectzulu.common.potion.brewingstands.GuiBrewingStandSingle;
 import com.stek101.projectzulu.common.potion.brewingstands.TileEntityBrewingBase;
@@ -36,6 +38,9 @@ public class ZuluGuiHandler implements IGuiHandler {
             if (tileEntityServer instanceof TileEntityBrewingBase) {
                 return new ContainerBrewingStandSingle(player.inventory, (TileEntityBrewingBase) tileEntityServer);
             }
+        case CamelChest:       	
+        	return new ContainerCamelInventory(player.inventory, x, world);
+            //return new GuiScreenCamelInventory(world, player.inventory, x); 
         case Unknown:
             throw new IllegalStateException("GuiID cannot be Found" + guiID);
         default:
@@ -74,11 +79,13 @@ public class ZuluGuiHandler implements IGuiHandler {
             if (tileEntityClient instanceof TileEntityBrewingBase) {
                 return new GuiBrewingStandSingle(player.inventory, (TileEntityBrewingBase) tileEntityClient);
             }
+        case CamelChest:       
+            return new GuiScreenCamelInventory(world, player.inventory, x);    
         case Unknown:
             throw new IllegalStateException("GuiID cannot be Found" + guiID);
         }
 
         return null;
-    }
+    }  
 
 }

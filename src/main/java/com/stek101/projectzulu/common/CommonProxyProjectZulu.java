@@ -1,5 +1,7 @@
 package com.stek101.projectzulu.common;
 
+import java.io.File;
+
 import net.minecraft.entity.player.EntityPlayer;
 
 public class CommonProxyProjectZulu {
@@ -19,4 +21,9 @@ public class CommonProxyProjectZulu {
     }
     
     public EntityPlayer getClientPlayer() { return null; }
+    
+    // ========== Get Minecraft Directory ==========
+    public File getMinecraftDir() {
+    	return new File(".");
+    }
 }

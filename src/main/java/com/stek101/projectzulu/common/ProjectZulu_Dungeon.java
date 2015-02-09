@@ -4,6 +4,8 @@ import java.io.File;
 
 import net.minecraftforge.common.MinecraftForge;
 
+import com.google.common.base.Optional;
+import com.stek101.projectzulu.common.api.BlockList;
 import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.core.ItemBlockManager;
 import com.stek101.projectzulu.common.dungeon.commands.CommandPlaceBlock;
@@ -16,7 +18,8 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 
 public class ProjectZulu_Dungeon extends BaseModule {
-
+	Optional<?> itemBlock = BlockList.tombstone;
+	
     @Override
     public String getIdentifier() {
         return DefaultProps.DungeonModId;

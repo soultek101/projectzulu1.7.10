@@ -8,19 +8,21 @@ import net.minecraft.world.World;
 
 public class EntityDuckEgg extends EntityThrowable
 {
-	
 		public EntityDuckEgg(World par1World)
 		{
-		super(par1World);
+			super(par1World);
 		}
+		
 		public EntityDuckEgg(World par1World, EntityLivingBase par2EntityLivingBase)
 		{
-		super(par1World, par2EntityLivingBase);
+			super(par1World, par2EntityLivingBase);
 		}
+		
 		public EntityDuckEgg(World par1World, double par2, double par4, double par6)
 		{
-		super(par1World, par2, par4, par6);
+			super(par1World, par2, par4, par6);
 		}
+		
 		/**
 		* Called when this EntityThrowable hits a block or entity.
 		*/
@@ -42,7 +44,6 @@ public class EntityDuckEgg extends EntityThrowable
 
 	            for (int i = 0; i < b0; ++i)
 	            {
-	                //EntityChicken entitychicken = new EntityChicken(this.worldObj);
 	            	EntityDuck entityduck = new EntityDuck(this.worldObj);
 	                entityduck.setGrowingAge(-24000);
 	                entityduck.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, 0.0F);

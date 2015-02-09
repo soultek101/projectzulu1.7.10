@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
+import com.stek101.projectzulu.common.core.DefaultProps;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIAttackOnCollide;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAIHurtByTarget;
 import com.stek101.projectzulu.common.mobs.entityai.EntityAINearestAttackableTarget;
@@ -17,8 +18,8 @@ public class EntityCentipede extends EntityMaster implements IMob {
     public EntityCentipede(World par1World) {
         super(par1World);
         setSize(0.65f, 0.5f);
-
-        tasks.addTask(3, new EntityAIAttackOnCollide(this, 1.0f, false, 2.5f * 2.5f));
+        this.setPosition(this.posX, this.posY, this.posZ);
+        tasks.addTask(3, new EntityAIAttackOnCollide(this, 1.0f, false));
         // tasks.addTask(4, new EntityAIFollowOwner(this, moveSpeed, 10.0F, 2.0F));
 
         // tasks.addTask(5, new EntityAIMate(this, moveSpeed));
@@ -65,7 +66,28 @@ public class EntityCentipede extends EntityMaster implements IMob {
 
     @Override
     public int getTotalArmorValue() {
-        return 2;
+        return 3;
+    }
+    
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+    @Override
+    protected String getLivingSound() {
+        return DefaultProps.mobKey + ":" + DefaultProps.entitySounds + "centlivingsound";
+    }
+
+    /**
+     * Returns the sound this mob makes when it is hurt.
+     */
+    @Override
+    protected String getHurtSound() {
+        return DefaultProps.mobKey + ":" + DefaultProps.entitySounds + "centhurtsound";
+    }   
+    
+    @Override
+    public int getTalkInterval() {
+        return 160;
     }
 
     @Override

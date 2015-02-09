@@ -39,6 +39,12 @@ public class RabbitDeclaration extends SpawnableDeclaration {
         entityTextures.add("textures/rabbit0.png");
         entityTextures.add("textures/rabbit1.png");
         entityTextures.add("textures/rabbit2.png");
+        entityTextures.add("textures/rabbit3.png");
+        entityTextures.add("textures/rabbit4.png");
+        entityTextures.add("textures/rabbit5.png");
+        entityTextures.add("textures/rabbit6.png");
+        entityTextures.add("textures/rabbit7.png");
+        entityTextures.add("textures/rabbit8.png");
     }
 
     @Override
@@ -82,6 +88,7 @@ public class RabbitDeclaration extends SpawnableDeclaration {
         HashSet<String> nonFrozenForest = new HashSet<String>();
         nonFrozenForest.addAll(typeToArray(Type.FOREST));
         nonFrozenForest.addAll(typeToArray(Type.PLAINS));
+        nonFrozenForest.addAll(typeToArray(Type.SAVANNA));
         nonFrozenForest.removeAll(typeToArray(Type.SNOWY));        
         defaultBiomesToSpawn.addAll(nonFrozenForest);
         return defaultBiomesToSpawn;

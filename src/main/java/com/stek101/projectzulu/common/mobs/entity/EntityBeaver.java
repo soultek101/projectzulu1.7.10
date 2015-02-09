@@ -74,7 +74,7 @@ public class EntityBeaver extends EntityGenericAnimal implements IAnimals {
     	super.onLivingUpdate();    	
     	if (Math.round(this.aggroRange) != 0) {
     		EAFF.updateEntityAFF(worldObj);
-    	}    	EAFF.updateEntityAFF(worldObj);
+    	}    	
     }
     
     /**

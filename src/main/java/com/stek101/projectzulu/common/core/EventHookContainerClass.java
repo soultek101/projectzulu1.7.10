@@ -1,24 +1,34 @@
 package com.stek101.projectzulu.common.core;
 
+import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
+import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 
+import com.stek101.projectzulu.common.api.CustomEntityList;
 import com.stek101.projectzulu.common.api.ItemList;
+import com.stek101.projectzulu.common.mobs.entity.EntityBeetleAS;
+import com.stek101.projectzulu.common.mobs.entity.EntityBeetleBS;
+import com.stek101.projectzulu.common.mobs.entity.EntityCentipede;
 import com.stek101.projectzulu.common.mobs.entity.EntityTreeEnt;
 
 import cpw.mods.fml.common.Loader;
@@ -28,8 +38,6 @@ public class EventHookContainerClass {
     // zLevel is protected float copied from GUI along with drawTexturedModelRect
     protected float zLevel = 0.0F;
     boolean nearBossTriggered = false;
-
-    Random classRand = new Random();
 
     @SubscribeEvent
     public void onPlayerUpdateStarve(LivingUpdateEvent event) {
@@ -155,5 +163,4 @@ public class EventHookContainerClass {
         }
 
     }
-
 }

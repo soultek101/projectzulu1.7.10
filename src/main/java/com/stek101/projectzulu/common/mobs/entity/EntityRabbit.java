@@ -34,7 +34,7 @@ public class EntityRabbit extends EntityGenericAnimal implements IAnimals {
         setSize(0.5f, 0.5f);
         
         Random rand1 = new Random();
-        this.textureID = rand1.nextInt(3);
+        this.textureID = rand1.nextInt(9);
         
       this.entityEntry = CustomEntityList.getByName(EntityList.getEntityString(this));
         
@@ -45,7 +45,7 @@ public class EntityRabbit extends EntityGenericAnimal implements IAnimals {
          }
    	  
    	  if (Math.round(this.aggroRange) != 0) {
-   		  EAFF = new EntityAFightorFlight().setEntity(this, worldObj, this.aggroLevel, this.aggroRange);
+   		  EAFF = new EntityAFightorFlight().setEntity(this, worldObj, this.aggroLevel, this.aggroRange, true);
    	  }
    	  
         getNavigator().setAvoidsWater(true);

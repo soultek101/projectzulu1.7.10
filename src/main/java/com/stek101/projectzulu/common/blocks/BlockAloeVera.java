@@ -20,8 +20,9 @@ import com.stek101.projectzulu.common.api.ItemList;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockAloeVera extends BlockBush {
-    public static final String[] imageSuffix = new String[] { "_b0", "_b1", "_b2", "_b3", "_t0", "_t1", "_t2", "_t3",
+public class BlockAloeVera extends BlockBush{
+   
+	public static final String[] imageSuffix = new String[] { "_b0", "_b1", "_b2", "_b3", "_t0", "_t1", "_t2", "_t3",
             "_t4" };
     @SideOnly(Side.CLIENT)
     private IIcon[] blockIcons;
@@ -30,7 +31,7 @@ public class BlockAloeVera extends BlockBush {
         super(Material.plants);
         setTickRandomly(true);
         disableStats();
-        setHardness(0);
+        setHardness(0.0F);
         setStepSound(Block.soundTypeGrass);
     }
 
@@ -262,4 +263,5 @@ public class BlockAloeVera extends BlockBush {
         return block == Blocks.grass || block == Blocks.dirt || block == Blocks.farmland || block == Blocks.sand
                 || block == BlockList.aloeVera.get();
     }
+
 }
